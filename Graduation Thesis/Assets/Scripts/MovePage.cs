@@ -6,8 +6,15 @@ public class MovePage : MonoBehaviour
     [SerializeField] GameObject currentPage;
     [SerializeField] GameObject targetPage;
 
+    [Header("Check if u want keep current Page")]
+    public bool isKeepCurrentPage;
+
     public void SetPage(){
-        currentPage.gameObject.SetActive(false);
+        if(!isKeepCurrentPage){
+            currentPage.gameObject.SetActive(false);
+        } else {
+            currentPage.gameObject.SetActive(true);
+        }
         targetPage.gameObject.SetActive(true);
     }
 }

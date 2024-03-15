@@ -30,6 +30,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-vi
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef59a17a704cb4f41a4c30404121bac3
+    m_Address: Menu_Setting_vi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-vi
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 80330cc55bdc046449763f592f4b74f7, type: 2}
   m_SchemaSet:

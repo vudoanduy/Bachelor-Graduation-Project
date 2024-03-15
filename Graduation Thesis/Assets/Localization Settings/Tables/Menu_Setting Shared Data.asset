@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Menu_Setting Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Menu_Setting
+  m_TableCollectionNameGuidString: 215f961a2432b5a41839c80fc266a95d
+  m_Entries:
+  - m_Id: 17128980480
+    m_Key: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 138621190144
+    m_Key: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 191888850944
+    m_Key: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286076141568
+    m_Key: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418768908288
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6177663975424
+    m_Key: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6231074242560
+    m_Key: Vietnamese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6613607350272
+    m_Key: Back
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6952100206495924341
+  references:
+    version: 2
+    RefIds:
+    - rid: 6952100206495924341
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1710508424622

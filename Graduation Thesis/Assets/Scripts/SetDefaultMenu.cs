@@ -6,11 +6,11 @@ public class SetDefaultMenu : MonoBehaviour
     [SerializeField] GameObject[] gameObjects;
 
     [Header("Check if u want turn off first Object")]
-    public bool isFalseFirstObject;
+    public bool isTurnOffFirstObject;
 
     void Start(){
         int count = gameObjects.Length;
-        if(isFalseFirstObject){
+        if(isTurnOffFirstObject){
             gameObjects[0].gameObject.SetActive(false);
         } else {
             gameObjects[0].gameObject.SetActive(true);
