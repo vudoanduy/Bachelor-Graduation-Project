@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: vi
   m_SharedData: {fileID: 11400000, guid: 0bec892f1bf00eb4cbf047cd19f0ba00, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6952100226950234262
   m_TableData:
   - m_Id: 6429310976
     m_Localized: Nhan vat
@@ -42,6 +43,15 @@ MonoBehaviour:
     m_Localized: "B\u1EA5t t\u1EED"
     m_Metadata:
       m_Items: []
+  - m_Id: 375037416144896
+    m_Localized: Ban co dong y mua voi gia {0} xu khong?
+    m_Metadata:
+      m_Items:
+      - rid: 6952100226950234262
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6952100226950234262
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0080f73318550100

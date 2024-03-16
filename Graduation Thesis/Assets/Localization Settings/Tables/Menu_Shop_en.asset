@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 0bec892f1bf00eb4cbf047cd19f0ba00, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6952100226950234261
   m_TableData:
   - m_Id: 6429310976
     m_Localized: Character
@@ -42,6 +43,15 @@ MonoBehaviour:
     m_Localized: Immortal
     m_Metadata:
       m_Items: []
+  - m_Id: 375037416144896
+    m_Localized: Are you sure to buy the skin with {0} coins?
+    m_Metadata:
+      m_Items:
+      - rid: 6952100226950234261
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6952100226950234261
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0080f73318550100

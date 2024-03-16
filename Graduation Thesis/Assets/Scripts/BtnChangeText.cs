@@ -28,6 +28,7 @@ public class BtnChangeText : MonoBehaviour
         CheckText();
     } 
 
+    // Set Text
     public void ChangeText(int num){
         idText += num;
         CheckText();
