@@ -3,6 +3,7 @@ using UnityEngine.Localization.Components;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 public class SetTextBuy : MonoBehaviour
 {
@@ -17,12 +18,12 @@ public class SetTextBuy : MonoBehaviour
 
     ManageSkin manageSkin;
 
-    int[] stateSkins;
+    List<int> stateSkins;
 
     void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
 
-        stateSkins = manageSkin.GetListStateSkin();
+        stateSkins = SaveManage.Instance.GetStateSkins();
 
         SetUpTextBuy();
         SetText();
@@ -32,7 +33,7 @@ public class SetTextBuy : MonoBehaviour
         for(int i = 0; i < stateSkins.Count(); i++){
             if(stateSkins[i] == 1){
                 buttons[i].interactable = false;
-                SetText();
+                localizeStringEvent[i].StringReference = localizedString[1];
             }
         }
     }

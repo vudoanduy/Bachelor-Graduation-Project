@@ -14,7 +14,7 @@ public class ChangeTextCoin : MonoBehaviour
     }
 
     public void UpdateText(){
-        int coin = manageCoin.GetCoin();
+        int coin = SaveManage.Instance.GetCoinCurrent();
         coinInfo.text = coin.ToString();
     }
 }

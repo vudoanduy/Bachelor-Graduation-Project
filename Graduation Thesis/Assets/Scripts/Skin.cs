@@ -21,8 +21,7 @@ public class Skin
         costSkins = cost;
     }
 
-    public void ChangeState(int state, ref int stateSkins){
+    public void ChangeState(int state){
         this.state = state;
-        stateSkins = state;
     }
 }

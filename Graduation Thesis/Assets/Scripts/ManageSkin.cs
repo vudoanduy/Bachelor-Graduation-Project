@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class ManageSkin : MonoBehaviour
 
     string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
     int[] costSkins = new int[]{0, 5000, 20000, 50000};
-    int[] stateSkins = new int[]{1, 0, 0, 0};
+    List<int> stateSkins = new List<int>{1, 0, 0, 0};
 
     int count;
     int idSkin = 0;
@@ -43,18 +44,14 @@ public class ManageSkin : MonoBehaviour
     }
 
     void Start(){
+        SaveManage.Instance.LoadGame();
         count = nameSkins.Count();
+        stateSkins = SaveManage.Instance.GetStateSkins();
 
         skins = new Skin[count];
         manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
 
         SetUpSkin();
-    }
-
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.A)){
-            manageCoin.AddCoin(10000);
-        }
     }
 
     //
@@ -90,9 +87,11 @@ public class ManageSkin : MonoBehaviour
     public void BuySkin(){
         if(isBeBought){
             manageCoin.SubCoin(costSkins[this.idSkin]);
-            skins[this.idSkin].ChangeState(1, ref stateSkins[this.idSkin]);
+            skins[this.idSkin].ChangeState(1);
+            stateSkins[this.idSkin] = 1;
             buttonCurrent.interactable = false;
             localizeStringEvent.StringReference = stateBuy[0];
+            SaveManage.Instance.SetStateSkins(stateSkins);
             AppearNotifiBuy();
             Invoke("DisappearNotifiBuy", 1);
         } else{
@@ -115,7 +114,7 @@ public class ManageSkin : MonoBehaviour
     public int GetIdSkin(){
         return this.idSkin;
     }
-    public int[] GetListStateSkin(){
+    public List<int> GetListStateSkin(){
         return this.stateSkins;
     }
     public bool GetIsBeBought(){

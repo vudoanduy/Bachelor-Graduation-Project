@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ManageCoin : MonoBehaviour
@@ -6,12 +5,13 @@ public class ManageCoin : MonoBehaviour
     private int coinCurrent = 0;
 
     void Start(){
-
+        SaveManage.Instance.LoadGame();
+        this.coinCurrent = SaveManage.Instance.GetCoinCurrent();
     }
 
     // functions that interact with coins
     public bool CheckCoin(int cost){
-        if(coinCurrent >= cost){
+        if(this.coinCurrent >= cost){
             return true;
         }
         return false;
@@ -19,6 +19,7 @@ public class ManageCoin : MonoBehaviour
 
     public void SubCoin(int cost){
         this.coinCurrent -= cost;
+        SaveManage.Instance.SetCoinCurrent(this.coinCurrent);
     }
 
     public void AddCoin(int coin){
@@ -26,6 +27,7 @@ public class ManageCoin : MonoBehaviour
         if(this.coinCurrent >= 9999999){
             this.coinCurrent = 9999999;
         }
+        SaveManage.Instance.SetCoinCurrent(this.coinCurrent);
     }
 
     public int GetCoin(){

@@ -22,9 +22,8 @@ public class Item
         costItems = cost;
     }
 
-    public void ChangeQuantity(int quantity, ref int quantityItems){
+    public void ChangeQuantity(int quantity){
         this.quantity = quantity;
-        quantityItems = quantity;
     }
 
     public void ChangeMaxQuantity(int maxQuantity, ref int maxQuantityItems){

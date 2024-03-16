@@ -6,6 +6,7 @@ using UnityEngine.Localization;
 using TMPro;
 using System;
 using UnityEngine.Localization.Components;
+using System.Collections.Generic;
 
 public class ManageItem : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class ManageItem : MonoBehaviour
 
     string[] nameItems = new string[]{"Heart", "Immortal"};
     int[] costItems = new int[]{1000, 3000};
-    int[] quantityItems = new int[]{0,0};
+    List<int> quantityItems = new List<int>{0,0};
     int[] maxQuantityItems = new int[]{99,10};
 
     int count, idItem, numItem, coinTotal;
@@ -51,7 +52,9 @@ public class ManageItem : MonoBehaviour
     }
 
     void Start(){
+        SaveManage.Instance.LoadGame();
         count = nameItems.Count();
+        quantityItems = SaveManage.Instance.GetQuantityItems();
 
         items = new Item[count];
         manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
@@ -103,7 +106,9 @@ public class ManageItem : MonoBehaviour
             if(coinTotal <= manageCoin.GetCoin()){
                 manageCoin.SubCoin(coinTotal);
                 localizeStringEvent.StringReference = stateBuy[0];
-                items[idItem].ChangeQuantity(quantityItems[idItem] + numItem, ref quantityItems[idItem]);
+                items[idItem].ChangeQuantity(quantityItems[idItem] + numItem);
+                quantityItems[idItem] += numItem;
+                SaveManage.Instance.SetQuantityItems(quantityItems);
             } else {
                 localizeStringEvent.StringReference = stateBuy[1];
             }
