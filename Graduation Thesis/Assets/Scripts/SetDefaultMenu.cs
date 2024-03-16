@@ -8,7 +8,7 @@ public class SetDefaultMenu : MonoBehaviour
     [Header("Check if u want turn off first Object")]
     public bool isTurnOffFirstObject;
 
-    void Start(){
+    void OnEnable(){
         int count = gameObjects.Length;
         if(isTurnOffFirstObject){
             gameObjects[0].gameObject.SetActive(false);

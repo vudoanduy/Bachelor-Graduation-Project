@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 6429310976
-    m_Localized: "Nhan v\u1EADt"
+    m_Localized: Nhan vat
     m_Metadata:
       m_Items: []
   - m_Id: 110057979904
