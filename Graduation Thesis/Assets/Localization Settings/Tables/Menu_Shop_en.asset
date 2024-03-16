@@ -44,7 +44,24 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 375037416144896
-    m_Localized: Are you sure to buy the skin with {0} coins?
+    m_Localized: Are you sure to buy with {0} coins?
+    m_Metadata:
+      m_Items:
+      - rid: 6952100226950234261
+  - m_Id: 420963585327104
+    m_Localized: 'Quantity:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 439972326244352
+    m_Localized: Successfully purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 439974477922304
+    m_Localized: Failed purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442010674102272
+    m_Localized: You can only buy a maximum of {0} pieces.
     m_Metadata:
       m_Items:
       - rid: 6952100226950234261
@@ -54,4 +71,4 @@ MonoBehaviour:
     - rid: 6952100226950234261
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0080f73318550100
+        m_Entries: 0080f73318550100008037a101920100

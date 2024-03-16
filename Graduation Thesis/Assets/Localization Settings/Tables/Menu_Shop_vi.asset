@@ -48,10 +48,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 6952100226950234262
+  - m_Id: 420963585327104
+    m_Localized: "S\u1ED1 l\u01B0\u1EE3ng:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 439972326244352
+    m_Localized: Mua thanh cong
+    m_Metadata:
+      m_Items: []
+  - m_Id: 439974477922304
+    m_Localized: Mua that bai
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442010674102272
+    m_Localized: Chi mua duoc toi da {0} cai
+    m_Metadata:
+      m_Items:
+      - rid: 6952100226950234262
   references:
     version: 2
     RefIds:
     - rid: 6952100226950234262
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0080f73318550100
+        m_Entries: 0080f73318550100008037a101920100
