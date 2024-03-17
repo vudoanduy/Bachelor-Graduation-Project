@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [Serializable]
@@ -23,6 +24,13 @@ public class SaveManage : MonoBehaviour
     public List<int> quantityItems = new List<int>{0,0}; 
 
     public int coinCurrent = 0;
+
+    public List<int> posSlots = new List<int>();
+
+    public List<int> quantitySlots = new List<int>();
+
+    public List<int> markSlots = new List<int>();
+
     //
 
     void Awake(){
@@ -50,6 +58,18 @@ public class SaveManage : MonoBehaviour
         this.coinCurrent = coinCurrent;
     }
 
+    public void SetPosSlots(List<int> posSlots){
+        this.posSlots = posSlots;
+    }
+
+    public void SetQuantitySlots(List<int> quantitySlots){
+        this.quantitySlots = quantitySlots;
+    }
+
+    public void SetMarkSlots(List<int> markSlots){
+        this.markSlots = markSlots;
+    }
+
     //
     public List<int> GetStateSkins(){
         return stateSkins;
@@ -63,19 +83,36 @@ public class SaveManage : MonoBehaviour
         return coinCurrent;
     }
 
+    public List<int> GetPosSlots(){
+        return posSlots;
+    }
+
+    public List<int> GetQuantitySlots(){
+        return quantitySlots;
+    }
+
+    public List<int> GetMarkSlots(){
+        return markSlots;
+    }
+
     //
     public void SaveGame(){
         string s = JsonUtility.ToJson(SaveManage.Instance);
+        Debug.Log(s);
         SaveSystem.SetString(SAVEDATA, s);
     }
 
     public void LoadGame(){
         string s = SaveSystem.GetString(SAVEDATA);
+        Debug.Log(s);
         if(s != string.Empty){
             SaveManageData obj = JsonUtility.FromJson<SaveManageData>(s);
             stateSkins = obj.stateSkins;
             quantityItems = obj.quantityItems;
             coinCurrent = obj.coinCurrent;
+            posSlots = obj.posSlots;
+            quantitySlots = obj.quantitySlots;
+            markSlots = obj.markSlots;
         }
     }
 

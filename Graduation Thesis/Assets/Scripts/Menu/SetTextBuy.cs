@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class SetTextBuy : MonoBehaviour
 {
+    // Ham nay chi de khi nguoi choi mua thi thay doi trang thai cua nut trong cua hang Buy=>Bought
+    // Dong thoi thi tat trang thai hoat dong cua cac skin da mua
     [Header("Button Buy in shop")]
     [SerializeField] Button[] buttons;
 

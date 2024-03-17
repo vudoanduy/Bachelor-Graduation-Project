@@ -9,23 +9,32 @@ using UnityEngine.UI;
 
 public class ManageSkin : MonoBehaviour
 {
+    // Bang thong bao gia skin can mua
     [Header("Notifi Cost Skin")]
     [SerializeField] LocalizedString localizeStringCost;
     [SerializeField] TextMeshProUGUI textCostSkin;
 
+    // Thong bao trang thai mua thanh cong hay that bai
     [Header("Notifi state buy")]
     [SerializeField] GameObject notifiBuy;
     [SerializeField] LocalizedString[] stateBuy;
     [SerializeField] LocalizeStringEvent localizeStringEvent;
 
+    [Header("Sprite Skin")]
+    [SerializeField] Sprite[] spriteSkin;
+
     Skin[] skins;
     ManageCoin manageCoin;
+    ManageBag manageBag;
     Button buttonCurrent;
     
 
     string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
     int[] costSkins = new int[]{0, 5000, 20000, 50000};
-    List<int> stateSkins = new List<int>{1, 0, 0, 0};
+    List<int> stateSkins = new List<int>{1, 0, 0, 0}; // Neu nguoi choi da mua skin thi tra ve 1, nguoc lai 0
+    int[] hpSkins = new []{2,3,4,5};
+    int[] timeImmortalSkins = new int[]{3,5,7,9};
+
 
     int count;
     int idSkin = 0;
@@ -50,24 +59,29 @@ public class ManageSkin : MonoBehaviour
 
         skins = new Skin[count];
         manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
+        manageBag = GameObject.Find("ManageBag").GetComponent<ManageBag>();
 
         SetUpSkin();
     }
 
-    //
+    void Update(){
+        
+    }
+
+    // khoi tao thong so skin 
     public void SetUpSkin(){
         for(int i = 0; i < count; i++){
-            skins[i] = new Skin(nameSkins[i], costSkins[i], stateSkins[i]);
+            skins[i] = new Skin(nameSkins[i], costSkins[i], stateSkins[i], hpSkins[i], timeImmortalSkins[i], spriteSkin[i]);
         }
     }
 
-    //
+    // Lay thong tin ve vi tri skin vua bam nut Mua trong cua hang
     public void GetIdSkin(int idSkin){
         this.idSkin = idSkin;
         buttonCurrent = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
     }
 
-    //
+    // Theo doi gia tri cua skin luc vua bam vao va hien thi len bang thong bao gia
     public void UpdateText(string value){
         textCostSkin.text = value;
     }
@@ -78,7 +92,9 @@ public class ManageSkin : MonoBehaviour
         localizeStringCost.RefreshString();
     }
 
-    // Manage buy skins in shop
+    // Khi bam nut mua se goi toi ham kiem tra xem so xu hien co co du mua hay khong 
+    // Neu nguoi choi bam yes, se goi toi ham BuySkin va kiem tra tung dieu kien
+    // Khi mua thanh cong se hien bang thong bao mua thanh cong, nguoc lai se thong bao loi
     public void CheckCoin(){
         isBeBought = manageCoin.CheckCoin(costSkins[this.idSkin]);
         UpdateCost();
@@ -92,6 +108,7 @@ public class ManageSkin : MonoBehaviour
             buttonCurrent.interactable = false;
             localizeStringEvent.StringReference = stateBuy[0];
             SaveManage.Instance.SetStateSkins(stateSkins);
+            manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].GetSpriteSkin());
             AppearNotifiBuy();
             Invoke("DisappearNotifiBuy", 1);
         } else{
@@ -101,7 +118,7 @@ public class ManageSkin : MonoBehaviour
         }
     }
 
-    //
+    // Goi ham show trang thai mua 
     private void AppearNotifiBuy(){
         notifiBuy.gameObject.SetActive(true);
     }
@@ -110,7 +127,7 @@ public class ManageSkin : MonoBehaviour
         notifiBuy.gameObject.SetActive(false);
     }
 
-    //
+    // Lay cac thong so can thiet
     public int GetIdSkin(){
         return this.idSkin;
     }
@@ -119,5 +136,14 @@ public class ManageSkin : MonoBehaviour
     }
     public bool GetIsBeBought(){
         return this.isBeBought;
+    }
+
+    public Sprite GetSpriteSkin(int id){
+        return this.spriteSkin[id];
+    }
+
+    // Can mieu ta info skin nao thi ghi vao phan ben duoi
+    private void SetInfoSkin(){
+        // ghi cac thong tin muon ghi vao day
     }
 }

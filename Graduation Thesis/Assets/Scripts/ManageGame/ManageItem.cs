@@ -1,7 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using TMPro;
 using System;
@@ -10,34 +8,40 @@ using System.Collections.Generic;
 
 public class ManageItem : MonoBehaviour
 {
+    // Truong nhap thong tin ve so luong item can mua
     [Header("Set Text Input Field")]
     [SerializeField] LocalizedString quantity;
     [SerializeField] TMP_InputField textField;
     [SerializeField] TextMeshProUGUI textNotifi;
 
 
+    // Bang trang thai mua item
     [Header("Notifi state buy")]
     [SerializeField] GameObject notifiBuy;
     [SerializeField] LocalizedString[] stateBuy;
     [SerializeField] LocalizeStringEvent localizeStringEvent;
     [SerializeField] TextMeshProUGUI textNotifiBuy;
 
+    [Header("Sprite Item in Shop")]
+    [SerializeField] Sprite[] spriteItems;
+
 
     ManageCoin manageCoin;
+    ManageBag manageBag;
     Item[] items;
 
     string[] nameItems = new string[]{"Heart", "Immortal"};
     int[] costItems = new int[]{1000, 3000};
-    List<int> quantityItems = new List<int>{0,0};
-    int[] maxQuantityItems = new int[]{99,10};
+    List<int> quantityItems = new List<int>{0,0}; // so luong cua tung item trong tui hien co
+    int[] maxQuantityItems = new int[]{99,10}; // so luong toi da cua cac phan tu tuong ung
 
     int count, idItem, numItem, coinTotal;
 
     bool isNumber;
 
     string costTotal;
-
     string _textNotifiBuy;
+
     //
     void OnEnable(){
         quantity.Arguments = new object[]{costTotal};
@@ -58,18 +62,20 @@ public class ManageItem : MonoBehaviour
 
         items = new Item[count];
         manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
+        manageBag = GameObject.Find("ManageBag").GetComponent<ManageBag>();
 
         SetUpItem();
     }
 
-    //
+    // Khoi tao cac items
     public void SetUpItem(){
         for(int i = 0; i < count; i++){
             items[i] = new Item(nameItems[i], costItems[i], quantityItems[i], maxQuantityItems[i]);
         }
     }
 
-    //
+    // Cap nhat gia tri ve tong gia nguoi choi can phai mua
+    // Cong thuc: so luong item nhap vao truong nhap du lieu * gia tuong ung
     private void UpdateText(string value){
         textNotifi.text = value;
     }
@@ -81,7 +87,7 @@ public class ManageItem : MonoBehaviour
         quantity.RefreshString();
     }
 
-    //
+    // Cai dat bang thong bao khi nguoi choi mua qua so luong toi da
     private void UpdateTextBuy(string value){
         textNotifiBuy.text = value;
     }
@@ -91,7 +97,8 @@ public class ManageItem : MonoBehaviour
         stateBuy[2].RefreshString();
     }
 
-    // when click yes
+    // Khi nguoi choi an yes tai bang nhap so luong se goi toi ham nay
+    // Neu nguoi choi nhap gia tri khong phai la so nguyen se tu dong thoat tro choi
     public void GetNumItem(){
         isNumber = Int32.TryParse(textField.text, out numItem);
         if(isNumber){
@@ -101,6 +108,12 @@ public class ManageItem : MonoBehaviour
         }
     }
 
+    // Sau khi hien gia can phai tra, nguoi choi an yes se tien hanh xem xet
+    // Co 3 truong hop xay ra: 
+    // 1. nguoi choi mua thanh cong => state thanh cong
+    // 2. nguoi choi khong du xu => state that bai
+    // 3. nguoi choi nhap mua qua so luong quy dinh. 
+    //      VD: current 50, max 99, Input: 50 => thong bao nguoi choi chi duoc mua toi da 99
     public void BuyItems(){
         if(numItem + quantityItems[idItem] <= maxQuantityItems[idItem]){
             if(coinTotal <= manageCoin.GetCoin()){
@@ -108,6 +121,7 @@ public class ManageItem : MonoBehaviour
                 localizeStringEvent.StringReference = stateBuy[0];
                 items[idItem].ChangeQuantity(quantityItems[idItem] + numItem);
                 quantityItems[idItem] += numItem;
+                manageBag.AddSlot(idItem, (int)quantityItems[idItem], 1, spriteItems[idItem]);
                 SaveManage.Instance.SetQuantityItems(quantityItems);
             } else {
                 localizeStringEvent.StringReference = stateBuy[1];
@@ -120,12 +134,12 @@ public class ManageItem : MonoBehaviour
         Invoke("DisappearNotifiBuy", 1);
     }
 
-    // Calculate cointotal
+    // Tinh toan tong gia xu phai tra
     public int Multiple(int a, int b){
-        return a * b;
+        return Math.Abs(a * b);
     }
     
-    //
+    // Bang thong bao trang thai mua
     private void AppearNotifiBuy(){
         notifiBuy.gameObject.SetActive(true);
     }
@@ -134,13 +148,16 @@ public class ManageItem : MonoBehaviour
         notifiBuy.gameObject.SetActive(false);
     }
 
-    //
+    // Lay cac thong so can thiet
     public void GetIdItem(int idItem){
         this.idItem = idItem;
     }
 
-    //
     public int GetIdItem(){
         return this.idItem;
+    }
+
+    public Sprite GetSpriteItem(int idItem){
+        return this.spriteItems[idItem];
     }
 }
