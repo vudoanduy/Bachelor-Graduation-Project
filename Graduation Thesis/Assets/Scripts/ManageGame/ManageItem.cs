@@ -25,9 +25,14 @@ public class ManageItem : MonoBehaviour
     [Header("Sprite Item in Shop")]
     [SerializeField] Sprite[] spriteItems;
 
+    [Header("Info item in slot")]
+    [SerializeField] LocalizedString[] infoItems;
 
     ManageCoin manageCoin;
     ManageBag manageBag;
+
+    LocalizeStringEvent textInfoItem;
+
     Item[] items;
 
     string[] nameItems = new string[]{"Heart", "Immortal"};
@@ -159,5 +164,16 @@ public class ManageItem : MonoBehaviour
 
     public Sprite GetSpriteItem(int idItem){
         return this.spriteItems[idItem];
+    }
+
+    // nguoi dung su dung item se giam so luong di 1
+    public void UseItem(int idItem){
+        quantityItems[idItem]--;
+        SaveManage.Instance.SetQuantityItems(quantityItems);
+    }
+
+    // Set cac info Item khi nguoi dung click vao item nao do trong tui do
+    public LocalizedString GetInfoItem(int idItem){
+        return infoItems[idItem];
     }
 }

@@ -23,13 +23,15 @@ public class SaveManage : MonoBehaviour
 
     public List<int> quantityItems = new List<int>{0,0}; 
 
+    public List<int> posSlots = new List<int>(){0};
+
+    public List<int> quantitySlots = new List<int>(){0};
+
+    public List<int> markSlots = new List<int>(){0};
+
     public int coinCurrent = 0;
 
-    public List<int> posSlots = new List<int>();
-
-    public List<int> quantitySlots = new List<int>();
-
-    public List<int> markSlots = new List<int>();
+    public int idSkinSelected = 0;
 
     //
 
@@ -70,6 +72,10 @@ public class SaveManage : MonoBehaviour
         this.markSlots = markSlots;
     }
 
+    public void SetIDSkinSelected(int idSkinSelected){
+        this.idSkinSelected = idSkinSelected;
+    }
+
     //
     public List<int> GetStateSkins(){
         return stateSkins;
@@ -95,6 +101,10 @@ public class SaveManage : MonoBehaviour
         return markSlots;
     }
 
+    public int GetIDSkinSelected(){
+        return idSkinSelected;
+    }
+
     //
     public void SaveGame(){
         string s = JsonUtility.ToJson(SaveManage.Instance);
@@ -113,6 +123,7 @@ public class SaveManage : MonoBehaviour
             posSlots = obj.posSlots;
             quantitySlots = obj.quantitySlots;
             markSlots = obj.markSlots;
+            idSkinSelected = obj.idSkinSelected;
         }
     }
 

@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class ChangeTextCoin : MonoBehaviour
 {
-    ManageCoin manageCoin;
     TextMeshProUGUI coinInfo;
 
     void Start(){
-        manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
+        SaveManage.Instance.LoadGame();
         coinInfo = this.GetComponent<TextMeshProUGUI>();
 
         UpdateText();
