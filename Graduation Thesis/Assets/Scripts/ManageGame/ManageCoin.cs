@@ -7,6 +7,11 @@ public class ManageCoin : MonoBehaviour
     void Start(){
         SaveManage.Instance.LoadGame();
         this.coinCurrent = SaveManage.Instance.GetCoinCurrent();
+
+        if(GameObject.FindFirstObjectByType<ManageCoin>() != this){
+            Destroy(GameObject.FindFirstObjectByType<ManageCoin>().gameObject);
+            return;
+        }
     }
 
     // Kiem tra xem so xu co du de mua hay khong

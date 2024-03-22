@@ -70,6 +70,11 @@ public class ManageItem : MonoBehaviour
         manageBag = GameObject.Find("ManageBag").GetComponent<ManageBag>();
 
         SetUpItem();
+
+        if(GameObject.FindFirstObjectByType<ManageItem>() != this){
+            Destroy(GameObject.FindFirstObjectByType<ManageItem>().gameObject);
+            return;
+        }
     }
 
     // Khoi tao cac items
@@ -121,7 +126,7 @@ public class ManageItem : MonoBehaviour
     //      VD: current 50, max 99, Input: 50 => thong bao nguoi choi chi duoc mua toi da 99
     public void BuyItems(){
         if(numItem + quantityItems[idItem] <= maxQuantityItems[idItem]){
-            if(coinTotal <= manageCoin.GetCoin()){
+            if(coinTotal <= manageCoin.GetCoin() && numItem > 0){
                 manageCoin.SubCoin(coinTotal);
                 localizeStringEvent.StringReference = stateBuy[0];
                 items[idItem].ChangeQuantity(quantityItems[idItem] + numItem);

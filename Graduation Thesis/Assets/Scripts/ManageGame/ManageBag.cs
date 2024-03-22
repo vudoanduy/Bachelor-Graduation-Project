@@ -54,6 +54,11 @@ public class ManageBag : MonoBehaviour
         manageItem = GameObject.Find("ManageItem").GetComponent<ManageItem>();
 
         SetUpBag();
+
+        if(GameObject.FindFirstObjectByType<ManageBag>() != this){
+            Destroy(GameObject.FindFirstObjectByType<ManageBag>().gameObject);
+            return;
+        }
     }
     
     // 

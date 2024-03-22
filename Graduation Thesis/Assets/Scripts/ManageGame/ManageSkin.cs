@@ -70,6 +70,11 @@ public class ManageSkin : MonoBehaviour
         manageBag = GameObject.Find("ManageBag").GetComponent<ManageBag>();
 
         SetUpSkin();
+
+        if(GameObject.FindFirstObjectByType<ManageSkin>() != this){
+            Destroy(GameObject.FindFirstObjectByType<ManageSkin>().gameObject);
+            return;
+        }
     }
 
     // khoi tao thong so skin 
