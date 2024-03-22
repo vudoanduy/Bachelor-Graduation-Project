@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SkinInfo_vi
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: vi
+  m_SharedData: {fileID: 11400000, guid: 52397143b661d16418cfb1c2c0717f7a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 60221259776
+    m_Localized: "Mu b\u1EA9m sinh, nh\u1EA1y ben am thanh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 479395807232
+    m_Localized: "Th\u1EE7 l\u0129nh b\u1ED9 l\u1EA1c th\u1EDDi ti\u1EC1n s\u1EED,
+      m\u1EA1nh m\u1EBD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 381576249344
+    m_Localized: "Ninja xu\u1EA5t chu'ng\nTho\u1EAFt \u1EA9n tho\u1EAFt hi\u1EC7n,
+      nhanh nh\u1EB9n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500522516480
+    m_Localized: Phi hanh gia yeu mau hong ghet su gia doi
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
