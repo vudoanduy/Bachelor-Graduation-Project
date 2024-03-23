@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     void Update(){
         CheckRun();
         CheckJump();
+        CheckSliding();
     }
 
     // An di chuyen ben nao thi qua ben do
@@ -86,18 +87,19 @@ public class PlayerMove : MonoBehaviour
         }
 
         if(pressJump){
-            if(countJump == (maxJump - 1)){
+            if(countJump == maxJump){
                 return;
             }
-            countJump++;
 
             if(isGround){
                 Jump();
             } else if(!isGround){
                 anim.SetBool("isDouble", true);
                 Jump();
-                Invoke("Delay", 0.05f);
+                Invoke("DelayDoubleJump", 0.05f);
             }
+
+            Invoke("DelayCountJump", 0.1f);
         }
 
         anim.SetFloat("velocityY", rb.velocityY);
@@ -108,11 +110,33 @@ public class PlayerMove : MonoBehaviour
         rb.velocityY = force;
     }
 
-    private void Delay(){
+    protected void DelayCountJump(){
+        countJump++;
+    }
+
+    private void DelayDoubleJump(){
         anim.SetBool("isDouble", false);
     }
 
     #endregion
     //
     
+    // Nguoi choi truot tuong khi khong cham dat
+    #region PlayerSliding
+
+    public void CheckSliding(){
+        bool isGround = playerColision.GetIsGround();
+        bool isSliding = playerColision.GetIsSliding();
+
+        if(isSliding){
+            if(isGround){
+                anim.SetBool("isSliding", false);
+            }
+            if(!isGround){
+                anim.SetBool("isSliding", true);
+            }
+        }
+    }
+
+    #endregion
 }
