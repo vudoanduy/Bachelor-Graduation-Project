@@ -1,14 +1,18 @@
-using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Virtual Camera")]
+    [SerializeField] CinemachineVirtualCamera cam2D;
+
     Rigidbody2D rb;
     Animator anim;
     PlayerColision playerColision;
 
     Vector3 scalePlayer;
 
+    [Header("Parameters")]
     public int speed = 5, force = 10;
     public int maxJump = 0;
     
@@ -63,11 +67,13 @@ public class PlayerMove : MonoBehaviour
     protected void RunRight(){
         rb.velocityX = speed;
         this.transform.localScale = scalePlayer;
+        cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.4f;
     }
 
     protected void RunLeft(){
         rb.velocityX = -speed;
         this.transform.localScale = new Vector3(-scalePlayer.x, scalePlayer.y, scalePlayer.z);
+        cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.6f;
     }
 
     #endregion
@@ -129,12 +135,15 @@ public class PlayerMove : MonoBehaviour
         bool isSliding = playerColision.GetIsSliding();
 
         if(isSliding){
+            countJump = 0;
             if(isGround){
                 anim.SetBool("isSliding", false);
             }
             if(!isGround){
                 anim.SetBool("isSliding", true);
             }
+        } else {
+            anim.SetBool("isSliding", false);
         }
     }
 

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerColision : MonoBehaviour
@@ -23,7 +24,7 @@ public class PlayerColision : MonoBehaviour
     }
 
     protected void CheckSliding(){
-        isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.06f, 0.72f), 0, ground);
+        isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.12f, 0.72f), 0, ground);
     }
 
     #endregion
@@ -40,4 +41,7 @@ public class PlayerColision : MonoBehaviour
     }
 
     #endregion
+
+    
+
 }
