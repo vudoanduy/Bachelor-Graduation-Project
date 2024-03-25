@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.Localization.Components;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ManageItem : MonoBehaviour
 {
@@ -174,6 +175,7 @@ public class ManageItem : MonoBehaviour
     // nguoi dung su dung item se giam so luong di 1
     public void UseItem(int idItem){
         quantityItems[idItem]--;
+        FindFirstObjectByType<PlayerUseItem>().UseItem(idItem);
         SaveManage.Instance.SetQuantityItems(quantityItems);
     }
 

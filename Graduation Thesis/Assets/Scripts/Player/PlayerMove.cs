@@ -6,6 +6,9 @@ public class PlayerMove : MonoBehaviour
     [Header("Virtual Camera")]
     [SerializeField] CinemachineVirtualCamera cam2D;
 
+    [Header("Set Skin Move")]
+    [SerializeField] RuntimeAnimatorController[] playerController;
+
     Rigidbody2D rb;
     Animator anim;
     PlayerColision playerColision;
@@ -22,11 +25,14 @@ public class PlayerMove : MonoBehaviour
     
     //
     void Start(){
+        SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
 
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
+
+        SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
 
     void Update(){
@@ -148,4 +154,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     #endregion
+
+    public void SetPlayerController(int idControl){
+        anim.runtimeAnimatorController = playerController[idControl];
+    }
 }

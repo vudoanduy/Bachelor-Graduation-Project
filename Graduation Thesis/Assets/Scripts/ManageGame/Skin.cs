@@ -6,8 +6,10 @@ public class Skin
     private int cost;
     private int state;
     private int hpSkin;
+    public int HPSkin{get{return hpSkin;} set{hpSkin = value;}}
     private int timeImmortalSkin;
-    private string infoSkin;
+    public int TimeImmortalSkin{get{return timeImmortalSkin;} set{timeImmortalSkin = value;}}
+
     Sprite imageSkin;
 
     public Skin(string name, int cost, int state, int hpSkin, int timeImmortalSkin, Sprite imageSkin){
@@ -32,10 +34,6 @@ public class Skin
 
     public void ChangeState(int state){
         this.state = state;
-    }
-
-    public void SetInfoSkin(string info){
-        this.infoSkin = info;
     }
 
     public Sprite GetSpriteSkin(){

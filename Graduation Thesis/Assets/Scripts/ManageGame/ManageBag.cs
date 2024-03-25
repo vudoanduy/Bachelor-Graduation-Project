@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
+using UnityEngine.SceneManagement;
 
 public class ManageBag : MonoBehaviour
 {
@@ -210,7 +211,11 @@ public class ManageBag : MonoBehaviour
     public void UseSlot(){
         if(markSlots[this.idSlot] == 0){
             manageSkin.SetPointerSkin(posSlots[this.idSlot]);
+            if(SceneManager.GetActiveScene().name != "Menu"){
+                FindFirstObjectByType<PlayerMove>().SetPlayerController(posSlots[this.idSlot]);
+            }
         } else {
+            if(SceneManager.GetActiveScene().name == "Menu") return;
             manageItem.UseItem(posSlots[this.idSlot]);
             UpdateSlot(this.idSlot, --quantitySlots[this.idSlot]);
             if(quantitySlots[this.idSlot] == 0){

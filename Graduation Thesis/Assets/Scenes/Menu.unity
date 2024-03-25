@@ -1851,6 +1851,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154591957}
   m_CullTransparentMesh: 1
+--- !u!1 &161234433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3563740454745262285, guid: 58588e46c95ca2841a6235fabaa0e058, type: 3}
+  m_PrefabInstance: {fileID: 708200638147200952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &180251398
 GameObject:
   m_ObjectHideFlags: 0
@@ -6030,6 +6035,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616849196}
   m_CullTransparentMesh: 1
+--- !u!1 &628016836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7273828155517665496, guid: 4cc83646681eb5445a6fa3d69ca6681f, type: 3}
+  m_PrefabInstance: {fileID: 5432266732310459677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &648979485
 GameObject:
   m_ObjectHideFlags: 0
@@ -7595,6 +7605,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710678513}
   m_CullTransparentMesh: 1
+--- !u!1 &729145256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1213934857568695585, guid: 6ce49a0957cc124498a5f70d99801673, type: 3}
+  m_PrefabInstance: {fileID: 3228126501573773662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729587746
 GameObject:
   m_ObjectHideFlags: 0
@@ -11372,6 +11387,11 @@ MonoBehaviour:
   currentPage: {fileID: 798641649}
   targetPage: {fileID: 1134851688}
   isKeepCurrentPage: 0
+--- !u!1 &1118202198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 561564297056752429, guid: 8ab88c633eeeb71409eb0bf585fb8507, type: 3}
+  m_PrefabInstance: {fileID: 8332288245857129966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134851688
 GameObject:
   m_ObjectHideFlags: 0
@@ -12453,6 +12473,11 @@ MonoBehaviour:
   - {fileID: -6367560908665664636, guid: 6a86b6690da662f46bfe09b96b67bf97, type: 3}
   - {fileID: -6367560908665664636, guid: e845242073b9c8d40a443029c55a14f9, type: 3}
   skinUnlocked:
+  - {fileID: 161234433}
+  - {fileID: 1118202198}
+  - {fileID: 729145256}
+  - {fileID: 628016836}
+  skinUnlockedPrefabs:
   - {fileID: 3563740454745262285, guid: 58588e46c95ca2841a6235fabaa0e058, type: 3}
   - {fileID: 561564297056752429, guid: 8ab88c633eeeb71409eb0bf585fb8507, type: 3}
   - {fileID: 1213934857568695585, guid: 6ce49a0957cc124498a5f70d99801673, type: 3}
@@ -17112,6 +17137,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267181434}
     m_Modifications:
+    - target: {fileID: 420453361209193519, guid: 9805d38498cc1144db3f04ab03e3c2da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1937335076613999555, guid: 9805d38498cc1144db3f04ab03e3c2da, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_Data
       value: 

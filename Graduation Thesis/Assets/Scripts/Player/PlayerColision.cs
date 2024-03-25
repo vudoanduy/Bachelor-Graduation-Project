@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,13 +6,13 @@ public class PlayerColision : MonoBehaviour
 {
     [Header("Layer Mask Check")]
     [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask enemy;
 
     [Header("GameObject Check")]
     [SerializeField] GameObject checkGround;
     [SerializeField] GameObject checkSliding;
 
-    bool isGround;
-    bool isSliding;
+    bool isGround, isSliding, isHeadEnemy;
 
     void Update(){
         CheckGround();
@@ -29,6 +30,24 @@ public class PlayerColision : MonoBehaviour
 
     #endregion
     
+    #region Check hit
+
+    // Neu va cham vao dau quai vat thi se gay dame cho quai
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.tag == "HeadEnemy"){
+            StartCoroutine(DelayCheckHead());
+        }
+    }
+
+    IEnumerator DelayCheckHead(){
+        isHeadEnemy = true;
+        
+        yield return new WaitForSeconds(0.1f);
+
+        isHeadEnemy = false;
+    }
+
+    #endregion
 
     #region Send Info
 
@@ -38,6 +57,10 @@ public class PlayerColision : MonoBehaviour
 
     public bool GetIsSliding(){
         return this.isSliding;
+    }
+
+    public bool GetIsHeadEnemy(){
+        return this.isHeadEnemy;
     }
 
     #endregion

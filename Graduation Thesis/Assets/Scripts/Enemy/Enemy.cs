@@ -12,9 +12,16 @@ public class Enemy
         set{speedMove = value;}
     }
 
-    public Enemy(int hp, float speedMove){
+    protected int damage;
+    public int Damage{
+        get{return damage;}
+        set{damage = value;}
+    }
+
+    public Enemy(int hp, float speedMove, int damage){
         this.hp = hp;
         this.speedMove = speedMove;
+        this.damage = damage;
     }
 
     public Enemy(){

@@ -10,19 +10,25 @@ public class SlimeBig : MonoBehaviour
 
     Slime bigSlime;
     Animator anim;
+    // CheckHeadEnemy checkHeadEnemy;
+    PlayerColision playerColision;
 
     [Header("Parameters")]
-    public int hpBigSlime;
+    public int hpBigSlime, damageBigSlime;
     public int distanceMove = 4, minMiniSlime, maxMiniSlime;
     protected int minCoin, maxCoin;
 
     public float speedMoveBigSlime;
     protected float pointLeft, pointRight;
 
-    //
+    private bool isGetDamage = true;
+
+    #region Set Up
+
     void Start(){
-        bigSlime = new Slime(this.transform, hpBigSlime, speedMoveBigSlime);
+        bigSlime = new Slime(this.transform, hpBigSlime, speedMoveBigSlime, damageBigSlime);
         anim = this.GetComponent<Animator>();
+        playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
 
         pointLeft = this.transform.position.x - distanceMove;
         pointRight = this.transform.position.x + distanceMove;
@@ -43,19 +49,37 @@ public class SlimeBig : MonoBehaviour
         bigSlime.DirectionMoveStart(direct);
     }
 
+    #endregion
+
     #region Check hit
 
-    void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.name == "CheckGround"){
-            bigSlime.HP -= 1;
-            if(bigSlime.HP == 0){
-                StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/2, speedMoveBigSlime * 2));
-                StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/2, speedMoveBigSlime * 1.5f));
-                Invoke(nameof(Die), 0.2f);
+    void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.tag == "Player"){
+            if(playerColision.GetIsHeadEnemy()){
+                if(isGetDamage){
+                    isGetDamage = false;
+                    StartCoroutine(HitDamage());
+                }
+            } else {
+                FindFirstObjectByType<PlayerInfo>().GetDame(bigSlime.Damage);
             }
-            anim.SetBool("isHit", true);
-            Invoke(nameof(TurnOffHitAnim), 0.625f);
         }
+    }
+
+    IEnumerator HitDamage(){
+        bigSlime.HP -= 1;
+
+        yield return new WaitForSeconds(0.1f);
+
+        isGetDamage = true;
+
+        if(bigSlime.HP == 0){
+            StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/2, speedMoveBigSlime * 2));
+            StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/2, speedMoveBigSlime * 1.5f));
+            Invoke(nameof(Die), 0.2f);
+        }
+        anim.SetBool("isHit", true);
+        Invoke(nameof(TurnOffHitAnim), 0.625f);
     }
 
     protected void TurnOffHitAnim(){
@@ -79,7 +103,11 @@ public class SlimeBig : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
 
-        slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime);
+        if(damageBigSlime / 2 < 1){
+            slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, 1);
+        } else {
+            slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, damageBigSlime/2);
+        }
         slimeMini.SetPoint(pointLeft, pointRight, directStart);
     }
 

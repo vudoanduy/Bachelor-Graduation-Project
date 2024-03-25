@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class ManageSkin : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class ManageSkin : MonoBehaviour
 
     [Header("Skin Unlocked")]
     [SerializeField] GameObject[] skinUnlocked;
+    [SerializeField] GameObject[] skinUnlockedPrefabs;
     [SerializeField] GameObject pointerSkin;
 
     [Header("Info skin")]
@@ -84,13 +87,16 @@ public class ManageSkin : MonoBehaviour
             skins[i] = new Skin(nameSkins[i], costSkins[i], stateSkins[i], hpSkins[i], timeImmortalSkins[i], spriteSkin[i]);
         }
 
-        for(int i = 0; i < count; i++){
-            if(stateSkins[i] == 1){
-                UnlockSkin(idSkin);
-            } else {
-                skinUnlocked[i].SetActive(false);
+        if(SceneManager.GetActiveScene().name == "Menu"){
+            for(int i = 0; i < count; i++){
+                if(stateSkins[i] == 1){
+                    UnlockSkin(idSkin);
+                } else {
+                    skinUnlocked[i].SetActive(false);
+                }
             }
         }
+
 
         SetPointerSkin(idSkinSelected);
     }
@@ -171,12 +177,8 @@ public class ManageSkin : MonoBehaviour
         return this.spriteSkin[id];
     }
 
-    // Can mieu ta info skin nao thi ghi vao phan ben duoi
-    private void SetInfoSkin(){
-        // ghi cac thong tin muon ghi vao day
-    }
-
     // Mo khoa skin va tro con tro vao skin dang su dung
+    // Con tro chi xuat hien tai man hinh menu ben ngoai game
     public void UnlockSkin(int id){
         skinUnlocked[id].SetActive(true);
     }
@@ -184,7 +186,27 @@ public class ManageSkin : MonoBehaviour
     public void SetPointerSkin(int idSkin){
         idSkinSelected = idSkin;
         SaveManage.Instance.SetIDSkinSelected(idSkinSelected);
-        pointerSkin.transform.localPosition = skinUnlocked[idSkin].transform.localPosition + new Vector3(0, 1.3f, 0);
+
+        if(SceneManager.GetActiveScene().name == "Menu"){
+            pointerSkin.transform.localPosition = skinUnlockedPrefabs[idSkin].transform.localPosition + new Vector3(0, 1.3f, 0);
+        }
+
+        if(FindFirstObjectByType<PlayerInfo>() != null){
+            FindFirstObjectByType<PlayerInfo>().SetHPSkin(skins[idSkinSelected].HPSkin);
+        }
+
+        if(SceneManager.GetActiveScene().name != "Menu"){
+            FindFirstObjectByType<PlayerMove>().SetPlayerController(idSkinSelected);
+        }
+    }
+
+    // 
+    public int ReadHpSkinCurrent(){
+        return skins[idSkinSelected].HPSkin;
+    }
+
+    public int ReadTimeImmortalSkin(){
+        return skins[idSkinSelected].TimeImmortalSkin;
     }
 
     // Set cac info Skin khi nguoi dung click vao skin nao do trong tui do

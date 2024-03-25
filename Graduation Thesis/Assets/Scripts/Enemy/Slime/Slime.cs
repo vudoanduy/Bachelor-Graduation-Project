@@ -8,7 +8,7 @@ public class Slime : Enemy
     Transform tranSlime;
     Vector2 posSlime, scaleSlime;
     
-    public Slime(Transform tranSlime, int hp, float speedMove) : base(hp, speedMove){
+    public Slime(Transform tranSlime, int hp, float speedMove, int damage) : base(hp, speedMove, damage){
         UpdateTrans(tranSlime);
     }
 
