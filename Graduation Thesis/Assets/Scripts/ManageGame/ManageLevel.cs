@@ -12,6 +12,6 @@ public class ManageLevel : MonoBehaviour
     }
 
     public void JoinLevel(){
-        SceneManager.LoadScene("1");
+        SceneManager.LoadScene("LevelDemo");
     }
 }

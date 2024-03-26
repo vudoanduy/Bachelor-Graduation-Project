@@ -10,6 +10,8 @@ public class SlimeMini : MonoBehaviour
     bool isMove = false, isGround;
     private bool isGetDamage = true;
 
+    protected int minCoin = 1, maxCoin = 5;
+
     void Start(){
         miniSlime = new Slime(this.transform);
         playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
@@ -43,7 +45,8 @@ public class SlimeMini : MonoBehaviour
     #region Check hit
 
     void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.CompareTag("Player"))
+        {
             if(playerColision.GetIsHeadEnemy()){
                 if(isGetDamage){
                     isGetDamage = false;
@@ -63,6 +66,10 @@ public class SlimeMini : MonoBehaviour
         isGetDamage = true;
 
         if(miniSlime.HP == 0){
+            int coinSlime = miniSlime.RandomCoin(minCoin, maxCoin);
+
+            FindFirstObjectByType<ManageCoin>().AddCoin(coinSlime);
+            FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
             Invoke(nameof(Die), 0.2f);
         }
         anim.SetBool("isHit", true);

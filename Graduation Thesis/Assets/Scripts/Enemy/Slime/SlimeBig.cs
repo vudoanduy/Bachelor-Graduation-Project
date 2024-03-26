@@ -19,7 +19,7 @@ public class SlimeBig : MonoBehaviour
     PlayerColision playerColision;
 
 
-    protected int minCoin, maxCoin;
+    protected int minCoin = 1, maxCoin = 10;
 
     protected float pointLeft, pointRight;
 
@@ -56,7 +56,8 @@ public class SlimeBig : MonoBehaviour
     #region Check hit
 
     void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.CompareTag("Player"))
+        {
             if(playerColision.GetIsHeadEnemy()){
                 if(isGetDamage){
                     isGetDamage = false;
@@ -76,6 +77,11 @@ public class SlimeBig : MonoBehaviour
         isGetDamage = true;
 
         if(bigSlime.HP == 0){
+            int coinSlime = bigSlime.RandomCoin(minCoin, maxCoin);
+
+            FindFirstObjectByType<ManageCoin>().AddCoin(coinSlime);
+            FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
+
             StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/2, speedMoveBigSlime * 2));
             StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/2, speedMoveBigSlime * 1.5f));
             Invoke(nameof(Die), 0.2f);
