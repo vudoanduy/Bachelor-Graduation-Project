@@ -26,6 +26,8 @@ public class ManageCoin : MonoBehaviour
 
     #endregion
 
+
+    #region Interact with Coin
     // Kiem tra xem so xu co du de mua hay khong
     // tra ve true neu du, false neu nguoc lai
     public bool CheckCoin(int cost){
@@ -51,8 +53,14 @@ public class ManageCoin : MonoBehaviour
         FindFirstObjectByType<ChangeTextCoin>().UpdateText();
     }
 
+    #endregion
+
     // lay cac thong so can thiet
+    #region Get Info
+    
     public int GetCoin(){
         return this.coinCurrent;
     }
+
+    #endregion
 }

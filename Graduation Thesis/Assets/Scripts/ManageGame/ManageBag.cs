@@ -17,28 +17,26 @@ public class ManageBag : MonoBehaviour
     [Header("Item (Prefabs)")]
     [SerializeField] GameObject item;
 
-    [Header("List Slot")]
+    [Header("Slot In Bag")]
     [SerializeField] GameObject listSlot;
-
-    [Header("Info Slot")]
     [SerializeField] GameObject infoSlot;
-
-    [Header("text info Slot")]
     [SerializeField] LocalizeStringEvent textInfoSlot;
 
-    List<int> posSlots = new List<int>(){0};    // vi tri cua hinh anh trong skin hoac item
-    List<int> quantitySlots = new List<int>(){0};  // so luong cua moi vat pham trong slot
-    List<int> markSlots = new List<int>(){0};  // danh dau 0 la skin, 1 la item
+    List<int> posSlots = new(){0};    // vi tri cua hinh anh trong skin hoac item
+    List<int> quantitySlots = new(){0};  // so luong cua moi vat pham trong slot
+    List<int> markSlots = new(){0};  // danh dau 0 la skin, 1 la item
 
-    List<GameObject> listSlots = new List<GameObject>();
-    List<Sprite> spriteSlots = new List<Sprite>();
+    List<GameObject> listSlots = new();
+    List<Sprite> spriteSlots = new();
 
     LocalizedString textSlot;
 
     ManageSkin manageSkin;
     ManageItem manageItem;
 
-    int rowSlot = 3, columnSlot = 4;
+    private readonly int rowSlot = 3;
+    private readonly int columnSlot = 4;
+    
     int posExisted; // tra ve -1 neu ko ton tai, nguoc lai tra ve vi tri ma no ton tai
     int previdSlot = -1, idSlot;
 
@@ -213,6 +211,7 @@ public class ManageBag : MonoBehaviour
             manageSkin.SetPointerSkin(posSlots[this.idSlot]);
             if(SceneManager.GetActiveScene().name != "Menu"){
                 FindFirstObjectByType<PlayerMove>().SetPlayerController(posSlots[this.idSlot]);
+                FindFirstObjectByType<ChangeIcon>().ChangeIconPlayer(posSlots[this.idSlot]);
             }
         } else {
             if(SceneManager.GetActiveScene().name == "Menu") return;

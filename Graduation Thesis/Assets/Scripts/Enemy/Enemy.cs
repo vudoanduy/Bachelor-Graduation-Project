@@ -1,5 +1,7 @@
 public class Enemy
 {
+    #region Parameters
+
     protected int hp;
     public int HP{
         get{return hp;}
@@ -18,6 +20,8 @@ public class Enemy
         set{damage = value;}
     }
 
+    #endregion
+
     public Enemy(int hp, float speedMove, int damage){
         this.hp = hp;
         this.speedMove = speedMove;
@@ -27,6 +31,7 @@ public class Enemy
     public Enemy(){
         this.hp = 0;
         this.speedMove = 0;
+        this.damage = 0;
     }
 
     // Sinh ra ngau nhien vang tuy y

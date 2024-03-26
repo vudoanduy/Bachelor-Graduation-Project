@@ -55,14 +55,6 @@ public class PlayerInfo : MonoBehaviour
 
     public void GetDame(int damage){
         if(isGetDamage){
-            // isGetDamage = false;
-            // this.hpCurrent -= damage;
-            // if(this.hpCurrent <= 0){
-            //     this.hpCurrent = 0;
-            // }
-            // UpdateHPInfo();
-            // Invoke(nameof(Immortal), timeImmortalAfterHit);
-
             StartCoroutine(Immortal(timeImmortalAfterHit));
             this.hpCurrent -= damage;
             if(this.hpCurrent <= 0){

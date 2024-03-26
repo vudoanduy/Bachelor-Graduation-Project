@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
-using UnityEngine.UI;
 
 public class SetLevelName : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class SetLevelName : MonoBehaviour
     }
 
     void Start(){
-        btn_Start.gameObject.SetActive(false);
+        btn_Start.SetActive(false);
     }
 
     private void UpdateText(string value)
@@ -37,7 +36,7 @@ public class SetLevelName : MonoBehaviour
 
     public void SetText(){
         if(isAppearStart){
-            btn_Start.gameObject.SetActive(true);
+            btn_Start.SetActive(true);
             isAppearStart = false;
         }
 

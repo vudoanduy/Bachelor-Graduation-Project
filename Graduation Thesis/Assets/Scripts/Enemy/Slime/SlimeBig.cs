@@ -6,19 +6,21 @@ public class SlimeBig : MonoBehaviour
 {
     // Ve mat y tuong thi con quai slime nay no di chuyen qua lai tai 2 vi tri co dinh thoi
     // Khi chet thi no sinh ra bao nhieu con slime con tuy y 
+    [Header("Object Mini Slime")]
     [SerializeField] GameObject miniSlimePrefabs;
+
+    [Header("Parameters")]
+    [SerializeField] protected int hpBigSlime, damageBigSlime;
+    [SerializeField] protected float speedMoveBigSlime;
+    [SerializeField] protected int distanceMove = 4, minMiniSlime, maxMiniSlime;
 
     Slime bigSlime;
     Animator anim;
-    // CheckHeadEnemy checkHeadEnemy;
     PlayerColision playerColision;
 
-    [Header("Parameters")]
-    public int hpBigSlime, damageBigSlime;
-    public int distanceMove = 4, minMiniSlime, maxMiniSlime;
+
     protected int minCoin, maxCoin;
 
-    public float speedMoveBigSlime;
     protected float pointLeft, pointRight;
 
     private bool isGetDamage = true;

@@ -12,10 +12,10 @@ public class MovePage : MonoBehaviour
     // ham nay muc dich de di chuyen qua lai khi chuyen cac man hinh lien tuc
     public void SetPage(){
         if(!isKeepCurrentPage){
-            currentPage.gameObject.SetActive(false);
+            currentPage.SetActive(false);
         } else {
-            currentPage.gameObject.SetActive(true);
+            currentPage.SetActive(true);
         }
-        targetPage.gameObject.SetActive(true);
+        targetPage.SetActive(true);
     }
 }

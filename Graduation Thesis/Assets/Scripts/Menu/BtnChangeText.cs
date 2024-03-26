@@ -68,7 +68,6 @@ public class BtnChangeText : MonoBehaviour
             button[1].interactable = true;
         }
     }
-
     
     public void DefautText(){
         idText = 0;

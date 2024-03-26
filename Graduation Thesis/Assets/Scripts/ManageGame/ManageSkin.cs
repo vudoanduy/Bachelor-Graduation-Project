@@ -37,13 +37,12 @@ public class ManageSkin : MonoBehaviour
     ManageCoin manageCoin;
     ManageBag manageBag;
     Button buttonCurrent;
-    
 
-    string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
-    int[] costSkins = new int[]{0, 5000, 20000, 50000};
-    List<int> stateSkins = new List<int>{1, 0, 0, 0}; // Neu nguoi choi da mua skin thi tra ve 1, nguoc lai 0
-    int[] hpSkins = new []{2,3,4,5};
-    int[] timeImmortalSkins = new int[]{3,5,7,9};
+    readonly string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
+    readonly int[] costSkins = new int[]{0, 5000, 20000, 50000};
+    List<int> stateSkins = new() { 1, 0, 0, 0}; // Neu nguoi choi da mua skin thi tra ve 1, nguoc lai 0
+    readonly int[] hpSkins = new []{2,3,4,5};
+    readonly int[] timeImmortalSkins = new int[]{3,5,7,9};
 
 
     int count;
@@ -80,6 +79,7 @@ public class ManageSkin : MonoBehaviour
         }
     }
 
+    #region Set Up
     // khoi tao thong so skin 
     public void SetUpSkin(){
         
@@ -100,13 +100,9 @@ public class ManageSkin : MonoBehaviour
 
         SetPointerSkin(idSkinSelected);
     }
+    #endregion
 
-    // Lay thong tin ve vi tri skin vua bam nut Mua trong cua hang
-    public void GetIdSkin(int idSkin){
-        this.idSkin = idSkin;
-        buttonCurrent = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
-    }
-
+    #region Change text when buy skin
     // Theo doi gia tri cua skin luc vua bam vao va hien thi len bang thong bao gia
     public void UpdateText(string value){
         textCostSkin.text = value;
@@ -125,6 +121,9 @@ public class ManageSkin : MonoBehaviour
         isBeBought = manageCoin.CheckCoin(costSkins[this.idSkin]);
         UpdateCost();
     }
+    #endregion
+
+    #region Skin Handle
 
     public void BuySkin(){
         if(isBeBought){
@@ -135,13 +134,14 @@ public class ManageSkin : MonoBehaviour
             skins[this.idSkin].ChangeState(1);
             stateSkins[this.idSkin] = 1;
 
-            //
+            // cap nhat nut mua trong cua hang va mo khoa skin trong Menu
             buttonCurrent.interactable = false;
             localizeStringEvent.StringReference = stateBuy[0];
             UnlockSkin(this.idSkin);
+
             //
             SaveManage.Instance.SetStateSkins(stateSkins);
-            manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].GetSpriteSkin());
+            manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].ImageSkin);
 
             AppearNotifiBuy();
             Invoke("DisappearNotifiBuy", 1);
@@ -151,30 +151,6 @@ public class ManageSkin : MonoBehaviour
             AppearNotifiBuy();
             Invoke("DisappearNotifiBuy", 1);
         }
-    }
-
-    // Goi ham show trang thai mua 
-    private void AppearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(true);
-    }
-
-    private void DisappearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(false);
-    }
-
-    // Lay cac thong so can thiet
-    public int GetIdSkin(){
-        return this.idSkin;
-    }
-    public List<int> GetListStateSkin(){
-        return this.stateSkins;
-    }
-    public bool GetIsBeBought(){
-        return this.isBeBought;
-    }
-
-    public Sprite GetSpriteSkin(int id){
-        return this.spriteSkin[id];
     }
 
     // Mo khoa skin va tro con tro vao skin dang su dung
@@ -199,8 +175,43 @@ public class ManageSkin : MonoBehaviour
             FindFirstObjectByType<PlayerMove>().SetPlayerController(idSkinSelected);
         }
     }
+    #endregion
 
-    // 
+    #region State Notifi Buy
+    // Goi ham show trang thai mua 
+    private void AppearNotifiBuy(){
+        notifiBuy.SetActive(true);
+    }
+
+    private void DisappearNotifiBuy(){
+        notifiBuy.SetActive(false);
+    }
+    #endregion
+
+    // Lay cac thong so can thiet
+    #region Get Info
+    public int GetIdSkin(){
+        return this.idSkin;
+    }
+
+    // Lay thong tin ve vi tri skin vua bam nut Mua trong cua hang
+    public void GetIdSkin(int idSkin){
+        this.idSkin = idSkin;
+        buttonCurrent = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+    }
+
+    public List<int> GetListStateSkin(){
+        return this.stateSkins;
+    }
+
+    public bool GetIsBeBought(){
+        return this.isBeBought;
+    }
+
+    public Sprite GetSpriteSkin(int id){
+        return this.spriteSkin[id];
+    }
+
     public int ReadHpSkinCurrent(){
         return skins[idSkinSelected].HPSkin;
     }
@@ -213,4 +224,7 @@ public class ManageSkin : MonoBehaviour
     public LocalizedString GetInfoSkin(int idSkin){
         return infoSkins[idSkin];
     }
+
+    #endregion
+
 }
