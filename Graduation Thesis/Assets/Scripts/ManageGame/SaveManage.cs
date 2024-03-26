@@ -33,6 +33,8 @@ public class SaveManage : MonoBehaviour
 
     public int idSkinSelected = 0;
 
+    public int localeID = 0;
+
     //
 
     void Awake(){
@@ -83,6 +85,11 @@ public class SaveManage : MonoBehaviour
         SaveGame();
     }
 
+    public void SetLocaleID(int localeID){
+        this.localeID = localeID;
+        SaveGame();
+    }
+
     #endregion
 
 
@@ -115,6 +122,10 @@ public class SaveManage : MonoBehaviour
         return idSkinSelected;
     }
 
+    public int GetLocaleID(){
+        return this.localeID;
+    }
+
     #endregion
 
     //
@@ -136,6 +147,7 @@ public class SaveManage : MonoBehaviour
             quantitySlots = obj.quantitySlots;
             markSlots = obj.markSlots;
             idSkinSelected = obj.idSkinSelected;
+            localeID = obj.localeID;
         }
     }
 

@@ -4,9 +4,13 @@ using UnityEngine.Localization.Settings;
 
 public class ChangeLocale : MonoBehaviour
 {
-    public int localeID;
+    private int localeID;
 
     void Start(){
+        SaveManage.Instance.LoadGame();
+
+        localeID = SaveManage.Instance.GetLocaleID();
+
         SwitchLocale(localeID);
     }
 
@@ -17,6 +21,8 @@ public class ChangeLocale : MonoBehaviour
     }
 
     public void SwitchLocale(int localeID){
+        Debug.Log("Thay doi ngon ngu sang " + localeID);
         StartCoroutine(SetLocale(localeID));
+        SaveManage.Instance.SetLocaleID(localeID);
     }
 }
