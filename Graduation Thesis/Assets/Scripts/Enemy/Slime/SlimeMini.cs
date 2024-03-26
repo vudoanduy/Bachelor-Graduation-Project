@@ -7,10 +7,10 @@ public class SlimeMini : MonoBehaviour
     Animator anim;
     PlayerColision playerColision;
 
-    bool isMove = false, isGround;
+    bool isMove = false;
     private bool isGetDamage = true;
 
-    protected int minCoin = 1, maxCoin = 5;
+    [SerializeField] protected int minCoin = 1, maxCoin = 5;
 
     void Start(){
         miniSlime = new Slime(this.transform);
@@ -72,6 +72,7 @@ public class SlimeMini : MonoBehaviour
             FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
             Invoke(nameof(Die), 0.2f);
         }
+        
         anim.SetBool("isHit", true);
         Invoke(nameof(TurnOffHitAnim), 0.625f);
     }

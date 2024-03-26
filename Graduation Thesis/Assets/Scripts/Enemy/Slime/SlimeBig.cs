@@ -6,24 +6,21 @@ public class SlimeBig : MonoBehaviour
 {
     // Ve mat y tuong thi con quai slime nay no di chuyen qua lai tai 2 vi tri co dinh thoi
     // Khi chet thi no sinh ra bao nhieu con slime con tuy y 
-    [Header("Object Mini Slime")]
+    [Header("Object Mini")]
     [SerializeField] GameObject miniSlimePrefabs;
 
     [Header("Parameters")]
     [SerializeField] protected int hpBigSlime, damageBigSlime;
-    [SerializeField] protected float speedMoveBigSlime;
-    [SerializeField] protected int distanceMove = 4, minMiniSlime, maxMiniSlime;
+    [SerializeField] protected float speedMoveBigSlime,pointLeft, pointRight;
+    [SerializeField] protected int minCoin, maxCoin;
+    [SerializeField] protected bool isSpawnMedium = false;
 
     Slime bigSlime;
     Animator anim;
     PlayerColision playerColision;
 
-
-    protected int minCoin = 1, maxCoin = 10;
-
-    protected float pointLeft, pointRight;
-
     private bool isGetDamage = true;
+
 
     #region Set Up
 
@@ -31,9 +28,6 @@ public class SlimeBig : MonoBehaviour
         bigSlime = new Slime(this.transform, hpBigSlime, speedMoveBigSlime, damageBigSlime);
         anim = this.GetComponent<Animator>();
         playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
-
-        pointLeft = this.transform.position.x - distanceMove;
-        pointRight = this.transform.position.x + distanceMove;
 
         SetUpBigSlime();
     }
@@ -82,8 +76,13 @@ public class SlimeBig : MonoBehaviour
             FindFirstObjectByType<ManageCoin>().AddCoin(coinSlime);
             FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
 
-            StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/2, speedMoveBigSlime * 2));
-            StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/2, speedMoveBigSlime * 1.5f));
+            if(isSpawnMedium){
+                StartCoroutine(SpawnMediumSlime(0.5f, hpBigSlime/2, bigSlime.SpeedMove, pointLeft, pointRight));
+                StartCoroutine(SpawnMediumSlime(-0.5f, hpBigSlime/2, bigSlime.SpeedMove, pointLeft, pointRight));
+            } else {
+                StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/2, bigSlime.SpeedMove * 1.2f));
+                StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/2, bigSlime.SpeedMove * 1.5f));
+            }
             Invoke(nameof(Die), 0.2f);
         }
         anim.SetBool("isHit", true);
@@ -100,6 +99,28 @@ public class SlimeBig : MonoBehaviour
 
     #endregion
     
+    #region Spawn Medium Slime
+
+    IEnumerator SpawnMediumSlime(float directStart, int hpMediumSlime, float speedMoveMediumSlime, float pointLeft, float pointRight){
+        GameObject newMediumSlime = Instantiate(miniSlimePrefabs);
+        SlimeMedium slimeMedium = newMediumSlime.GetComponent<SlimeMedium>();
+
+        newMediumSlime.transform.position = this.transform.position;
+        
+        yield return new WaitForSeconds(0.1f);
+
+        if(damageBigSlime / 2 < 1){
+            slimeMedium.SetUpMiniSlime(hpMediumSlime, speedMoveMediumSlime, 1);
+        } else {
+            slimeMedium.SetUpMiniSlime(hpMediumSlime, speedMoveMediumSlime, damageBigSlime/2);
+        }
+
+        slimeMedium.SetPoint(pointLeft, pointRight, directStart);
+    }
+
+    #endregion
+
+
     #region Spawn Mini Slime
 
     // Tuy y cai dat thong so cua mini Slime theo y thich
@@ -111,14 +132,14 @@ public class SlimeBig : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
 
-        if(damageBigSlime / 2 < 1){
+        if(bigSlime.Damage / 2 < 1){
             slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, 1);
         } else {
-            slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, damageBigSlime/2);
+            slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, bigSlime.Damage/2);
         }
+
         slimeMini.SetPoint(pointLeft, pointRight, directStart);
     }
-
     #endregion
 
 }

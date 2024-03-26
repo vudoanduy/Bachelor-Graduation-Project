@@ -34,7 +34,8 @@ public class PlayerColision : MonoBehaviour
 
     // Neu va cham vao dau quai vat thi se gay dame cho quai
     void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag == "HeadEnemy"){
+        if(other.gameObject.CompareTag("HeadEnemy"))
+        {
             StartCoroutine(DelayCheckHead());
         }
     }

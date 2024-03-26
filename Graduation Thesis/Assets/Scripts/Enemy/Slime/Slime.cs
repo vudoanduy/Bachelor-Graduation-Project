@@ -10,6 +10,8 @@ public class Slime : Enemy
     Vector2 posSlime, scaleSlime;
 
     protected float pointLeft, pointRight, currentPoint;
+    public float PointLeft{get{return pointLeft;} set{pointLeft=value;}}
+    public float PointRight{get{return pointRight;} set{pointRight=value;}}
 
     #endregion
 
@@ -45,29 +47,36 @@ public class Slime : Enemy
 
     #region Slime Move
     public void Move(){
-        this.tranSlime.Translate(Vector2.right * base.speedMove * Time.deltaTime);
-
-        ChangeDirectionMove();
+        CheckDirectionMove();
     }
 
-    protected void ChangeDirectionMove(){
+    protected void CheckDirectionMove(){
         float distance = Math.Abs(this.posSlime.x - currentPoint);
 
         if(distance < 0.5f){
             if(currentPoint == pointLeft){
                 currentPoint = pointRight;
+                ChangeDirectionHead();
             } else{
                 currentPoint = pointLeft;
+                ChangeDirectionHead();
             }
-
-            ChangeDirectionHead();
         }
+
+        MoveSlime();
     }
 
-    protected void ChangeDirectionHead(){
-        base.speedMove *= -1;
+    protected void ChangeDirectionHead(){       
         this.scaleSlime.x *= -1;
         this.tranSlime.localScale = scaleSlime;
+    }
+
+    protected void MoveSlime(){
+        if(currentPoint == pointLeft){
+            this.tranSlime.Translate(base.speedMove * Time.deltaTime * Vector2.left);
+        } else {
+            this.tranSlime.Translate(base.speedMove * Time.deltaTime * Vector2.right);
+        }
     }
 
     #endregion
