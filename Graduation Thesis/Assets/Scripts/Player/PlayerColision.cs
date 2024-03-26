@@ -1,26 +1,53 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerColision : MonoBehaviour
 {
     [Header("Layer Mask Check")]
     [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask enemy;
 
     [Header("GameObject Check")]
     [SerializeField] GameObject checkGround;
+    [SerializeField] GameObject checkSliding;
 
-    bool isGround;
+    bool isGround, isSliding, isHeadEnemy;
 
     void Update(){
         CheckGround();
+        CheckSliding();
     }
 
     #region Check
     protected void CheckGround(){
-        isGround = Physics2D.OverlapBox(checkGround.transform.position, new Vector2(0.36f, 0.108f), 0, ground);
+        isGround = Physics2D.OverlapBox(checkGround.transform.position, new Vector2(0.36f, 0.054f), 0, ground);
+    }
+
+    protected void CheckSliding(){
+        isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.12f, 0.72f), 0, ground);
     }
 
     #endregion
     
+    #region Check hit
+
+    // Neu va cham vao dau quai vat thi se gay dame cho quai
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.tag == "HeadEnemy"){
+            StartCoroutine(DelayCheckHead());
+        }
+    }
+
+    IEnumerator DelayCheckHead(){
+        isHeadEnemy = true;
+        
+        yield return new WaitForSeconds(0.1f);
+
+        isHeadEnemy = false;
+    }
+
+    #endregion
 
     #region Send Info
 
@@ -28,5 +55,16 @@ public class PlayerColision : MonoBehaviour
         return this.isGround;
     }
 
+    public bool GetIsSliding(){
+        return this.isSliding;
+    }
+
+    public bool GetIsHeadEnemy(){
+        return this.isHeadEnemy;
+    }
+
     #endregion
+
+    
+
 }

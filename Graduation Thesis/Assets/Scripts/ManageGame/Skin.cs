@@ -3,12 +3,19 @@ using UnityEngine;
 public class Skin
 {
     private string name;
-    private int cost;
     private int state;
+
+    private int cost;
+    public int Cost{get{return cost;} set{cost = value;}}
+    
     private int hpSkin;
+    public int HPSkin{get{return hpSkin;} set{hpSkin = value;}}
+    
     private int timeImmortalSkin;
-    private string infoSkin;
-    Sprite imageSkin;
+    public int TimeImmortalSkin{get{return timeImmortalSkin;} set{timeImmortalSkin = value;}}
+
+    protected Sprite imageSkin;
+    public Sprite ImageSkin{get {return imageSkin;} set{imageSkin = value;}}
 
     public Skin(string name, int cost, int state, int hpSkin, int timeImmortalSkin, Sprite imageSkin){
         this.name = name;
@@ -25,22 +32,7 @@ public class Skin
         nameSkins = name;
     }
 
-    public void ChangeCost(int cost, ref int costSkins){
-        this.cost = cost;
-        costSkins = cost;
-    }
-
     public void ChangeState(int state){
         this.state = state;
-    }
-
-    public void SetInfoSkin(string info){
-        this.infoSkin = info;
-    }
-
-    public Sprite GetSpriteSkin(){
-        return this.imageSkin;
-    }
-
-    
+    }  
 }

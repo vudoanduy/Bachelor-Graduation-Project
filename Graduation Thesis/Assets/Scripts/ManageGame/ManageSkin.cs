@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class ManageSkin : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class ManageSkin : MonoBehaviour
 
     [Header("Skin Unlocked")]
     [SerializeField] GameObject[] skinUnlocked;
+    [SerializeField] GameObject[] skinUnlockedPrefabs;
     [SerializeField] GameObject pointerSkin;
 
     [Header("Info skin")]
@@ -34,13 +37,12 @@ public class ManageSkin : MonoBehaviour
     ManageCoin manageCoin;
     ManageBag manageBag;
     Button buttonCurrent;
-    
 
-    string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
-    int[] costSkins = new int[]{0, 5000, 20000, 50000};
-    List<int> stateSkins = new List<int>{1, 0, 0, 0}; // Neu nguoi choi da mua skin thi tra ve 1, nguoc lai 0
-    int[] hpSkins = new []{2,3,4,5};
-    int[] timeImmortalSkins = new int[]{3,5,7,9};
+    readonly string[] nameSkins = new string[]{"Virtual_Guy", "Ninja_Frog", "Mask_Dude", "Pink_Man"};
+    readonly int[] costSkins = new int[]{0, 5000, 20000, 50000};
+    List<int> stateSkins = new() { 1, 0, 0, 0}; // Neu nguoi choi da mua skin thi tra ve 1, nguoc lai 0
+    readonly int[] hpSkins = new []{2,3,4,5};
+    readonly int[] timeImmortalSkins = new int[]{3,5,7,9};
 
 
     int count;
@@ -77,6 +79,7 @@ public class ManageSkin : MonoBehaviour
         }
     }
 
+    #region Set Up
     // khoi tao thong so skin 
     public void SetUpSkin(){
         
@@ -84,23 +87,22 @@ public class ManageSkin : MonoBehaviour
             skins[i] = new Skin(nameSkins[i], costSkins[i], stateSkins[i], hpSkins[i], timeImmortalSkins[i], spriteSkin[i]);
         }
 
-        for(int i = 0; i < count; i++){
-            if(stateSkins[i] == 1){
-                UnlockSkin(idSkin);
-            } else {
-                skinUnlocked[i].SetActive(false);
+        if(SceneManager.GetActiveScene().name == "Menu"){
+            for(int i = 0; i < count; i++){
+                if(stateSkins[i] == 1){
+                    UnlockSkin(idSkin);
+                } else {
+                    skinUnlocked[i].SetActive(false);
+                }
             }
         }
 
+
         SetPointerSkin(idSkinSelected);
     }
+    #endregion
 
-    // Lay thong tin ve vi tri skin vua bam nut Mua trong cua hang
-    public void GetIdSkin(int idSkin){
-        this.idSkin = idSkin;
-        buttonCurrent = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
-    }
-
+    #region Change text when buy skin
     // Theo doi gia tri cua skin luc vua bam vao va hien thi len bang thong bao gia
     public void UpdateText(string value){
         textCostSkin.text = value;
@@ -119,6 +121,9 @@ public class ManageSkin : MonoBehaviour
         isBeBought = manageCoin.CheckCoin(costSkins[this.idSkin]);
         UpdateCost();
     }
+    #endregion
+
+    #region Skin Handle
 
     public void BuySkin(){
         if(isBeBought){
@@ -129,13 +134,14 @@ public class ManageSkin : MonoBehaviour
             skins[this.idSkin].ChangeState(1);
             stateSkins[this.idSkin] = 1;
 
-            //
+            // cap nhat nut mua trong cua hang va mo khoa skin trong Menu
             buttonCurrent.interactable = false;
             localizeStringEvent.StringReference = stateBuy[0];
             UnlockSkin(this.idSkin);
+
             //
             SaveManage.Instance.SetStateSkins(stateSkins);
-            manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].GetSpriteSkin());
+            manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].ImageSkin);
 
             AppearNotifiBuy();
             Invoke("DisappearNotifiBuy", 1);
@@ -147,22 +153,57 @@ public class ManageSkin : MonoBehaviour
         }
     }
 
+    // Mo khoa skin va tro con tro vao skin dang su dung
+    // Con tro chi xuat hien tai man hinh menu ben ngoai game
+    public void UnlockSkin(int id){
+        skinUnlocked[id].SetActive(true);
+    }
+
+    public void SetPointerSkin(int idSkin){
+        idSkinSelected = idSkin;
+        SaveManage.Instance.SetIDSkinSelected(idSkinSelected);
+
+        if(SceneManager.GetActiveScene().name == "Menu"){
+            pointerSkin.transform.localPosition = skinUnlockedPrefabs[idSkin].transform.localPosition + new Vector3(0, 1.3f, 0);
+        }
+
+        if(FindFirstObjectByType<PlayerInfo>() != null){
+            FindFirstObjectByType<PlayerInfo>().SetHPSkin(skins[idSkinSelected].HPSkin);
+        }
+
+        if(SceneManager.GetActiveScene().name != "Menu"){
+            FindFirstObjectByType<PlayerMove>().SetPlayerController(idSkinSelected);
+        }
+    }
+    #endregion
+
+    #region State Notifi Buy
     // Goi ham show trang thai mua 
     private void AppearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(true);
+        notifiBuy.SetActive(true);
     }
 
     private void DisappearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(false);
+        notifiBuy.SetActive(false);
     }
+    #endregion
 
     // Lay cac thong so can thiet
+    #region Get Info
     public int GetIdSkin(){
         return this.idSkin;
     }
+
+    // Lay thong tin ve vi tri skin vua bam nut Mua trong cua hang
+    public void GetIdSkin(int idSkin){
+        this.idSkin = idSkin;
+        buttonCurrent = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+    }
+
     public List<int> GetListStateSkin(){
         return this.stateSkins;
     }
+
     public bool GetIsBeBought(){
         return this.isBeBought;
     }
@@ -171,24 +212,19 @@ public class ManageSkin : MonoBehaviour
         return this.spriteSkin[id];
     }
 
-    // Can mieu ta info skin nao thi ghi vao phan ben duoi
-    private void SetInfoSkin(){
-        // ghi cac thong tin muon ghi vao day
+    public int ReadHpSkinCurrent(){
+        return skins[idSkinSelected].HPSkin;
     }
 
-    // Mo khoa skin va tro con tro vao skin dang su dung
-    public void UnlockSkin(int id){
-        skinUnlocked[id].SetActive(true);
-    }
-
-    public void SetPointerSkin(int idSkin){
-        idSkinSelected = idSkin;
-        SaveManage.Instance.SetIDSkinSelected(idSkinSelected);
-        pointerSkin.transform.localPosition = skinUnlocked[idSkin].transform.localPosition + new Vector3(0, 1.3f, 0);
+    public int ReadTimeImmortalSkin(){
+        return skins[idSkinSelected].TimeImmortalSkin;
     }
 
     // Set cac info Skin khi nguoi dung click vao skin nao do trong tui do
     public LocalizedString GetInfoSkin(int idSkin){
         return infoSkins[idSkin];
     }
+
+    #endregion
+
 }

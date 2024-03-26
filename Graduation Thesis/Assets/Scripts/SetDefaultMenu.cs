@@ -12,13 +12,13 @@ public class SetDefaultMenu : MonoBehaviour
     void OnEnable(){
         int count = gameObjects.Length;
         if(isTurnOffFirstObject){
-            gameObjects[0].gameObject.SetActive(false);
+            gameObjects[0].SetActive(false);
         } else {
-            gameObjects[0].gameObject.SetActive(true);
+            gameObjects[0].SetActive(true);
         }
 
         for(int i = 1; i < count; i++){
-            gameObjects[i].gameObject.SetActive(false);
+            gameObjects[i].SetActive(false);
         }
     }
 }

@@ -1,14 +1,21 @@
-using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Virtual Camera")]
+    [SerializeField] CinemachineVirtualCamera cam2D;
+
+    [Header("Set Skin Move")]
+    [SerializeField] RuntimeAnimatorController[] playerController;
+
     Rigidbody2D rb;
     Animator anim;
     PlayerColision playerColision;
 
     Vector3 scalePlayer;
 
+    [Header("Parameters")]
     public int speed = 5, force = 10;
     public int maxJump = 0;
     
@@ -18,16 +25,20 @@ public class PlayerMove : MonoBehaviour
     
     //
     void Start(){
+        SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
 
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
+
+        SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
 
     void Update(){
         CheckRun();
         CheckJump();
+        CheckSliding();
     }
 
     // An di chuyen ben nao thi qua ben do
@@ -62,11 +73,13 @@ public class PlayerMove : MonoBehaviour
     protected void RunRight(){
         rb.velocityX = speed;
         this.transform.localScale = scalePlayer;
+        cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.4f;
     }
 
     protected void RunLeft(){
         rb.velocityX = -speed;
         this.transform.localScale = new Vector3(-scalePlayer.x, scalePlayer.y, scalePlayer.z);
+        cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.6f;
     }
 
     #endregion
@@ -86,18 +99,19 @@ public class PlayerMove : MonoBehaviour
         }
 
         if(pressJump){
-            if(countJump == (maxJump - 1)){
+            if(countJump == maxJump){
                 return;
             }
-            countJump++;
 
             if(isGround){
                 Jump();
             } else if(!isGround){
                 anim.SetBool("isDouble", true);
                 Jump();
-                Invoke("Delay", 0.05f);
+                Invoke("DelayDoubleJump", 0.05f);
             }
+
+            Invoke("DelayCountJump", 0.1f);
         }
 
         anim.SetFloat("velocityY", rb.velocityY);
@@ -108,11 +122,40 @@ public class PlayerMove : MonoBehaviour
         rb.velocityY = force;
     }
 
-    private void Delay(){
+    protected void DelayCountJump(){
+        countJump++;
+    }
+
+    private void DelayDoubleJump(){
         anim.SetBool("isDouble", false);
     }
 
     #endregion
     //
     
+    // Nguoi choi truot tuong khi khong cham dat
+    #region PlayerSliding
+
+    public void CheckSliding(){
+        bool isGround = playerColision.GetIsGround();
+        bool isSliding = playerColision.GetIsSliding();
+
+        if(isSliding){
+            countJump = 0;
+            if(isGround){
+                anim.SetBool("isSliding", false);
+            }
+            if(!isGround){
+                anim.SetBool("isSliding", true);
+            }
+        } else {
+            anim.SetBool("isSliding", false);
+        }
+    }
+
+    #endregion
+
+    public void SetPlayerController(int idControl){
+        anim.runtimeAnimatorController = playerController[idControl];
+    }
 }

@@ -29,9 +29,11 @@ public class SaveManage : MonoBehaviour
 
     public List<int> markSlots = new List<int>(){0};
 
-    public int coinCurrent = 0;
+    public int coinCurrent = 10000;
 
     public int idSkinSelected = 0;
+
+    public int localeID = 0;
 
     //
 
@@ -47,36 +49,51 @@ public class SaveManage : MonoBehaviour
         LoadGame();
     }
 
-    //
+    #region Set Info
     public void SetStateSkins(List<int> stateSkins){
         this.stateSkins = stateSkins;
+        SaveGame();
     }
 
     public void SetQuantityItems(List<int> quantityItems){
         this.quantityItems = quantityItems;
+        SaveGame();
     }
 
     public void SetCoinCurrent(int coinCurrent){
         this.coinCurrent = coinCurrent;
+        SaveGame();
     }
 
     public void SetPosSlots(List<int> posSlots){
         this.posSlots = posSlots;
+        SaveGame();
     }
 
     public void SetQuantitySlots(List<int> quantitySlots){
         this.quantitySlots = quantitySlots;
+        SaveGame();
     }
 
     public void SetMarkSlots(List<int> markSlots){
         this.markSlots = markSlots;
+        SaveGame();
     }
 
     public void SetIDSkinSelected(int idSkinSelected){
         this.idSkinSelected = idSkinSelected;
+        SaveGame();
     }
 
-    //
+    public void SetLocaleID(int localeID){
+        this.localeID = localeID;
+        SaveGame();
+    }
+
+    #endregion
+
+
+    #region Get Info
     public List<int> GetStateSkins(){
         return stateSkins;
     }
@@ -105,6 +122,12 @@ public class SaveManage : MonoBehaviour
         return idSkinSelected;
     }
 
+    public int GetLocaleID(){
+        return this.localeID;
+    }
+
+    #endregion
+
     //
     public void SaveGame(){
         string s = JsonUtility.ToJson(SaveManage.Instance);
@@ -124,6 +147,7 @@ public class SaveManage : MonoBehaviour
             quantitySlots = obj.quantitySlots;
             markSlots = obj.markSlots;
             idSkinSelected = obj.idSkinSelected;
+            localeID = obj.localeID;
         }
     }
 

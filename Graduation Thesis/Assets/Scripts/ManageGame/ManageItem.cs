@@ -31,14 +31,12 @@ public class ManageItem : MonoBehaviour
     ManageCoin manageCoin;
     ManageBag manageBag;
 
-    LocalizeStringEvent textInfoItem;
-
     Item[] items;
 
-    string[] nameItems = new string[]{"Heart", "Immortal"};
-    int[] costItems = new int[]{1000, 3000};
-    List<int> quantityItems = new List<int>{0,0}; // so luong cua tung item trong tui hien co
-    int[] maxQuantityItems = new int[]{99,10}; // so luong toi da cua cac phan tu tuong ung
+    readonly string[] nameItems = new string[]{"Heart", "Immortal"};
+    readonly int[] costItems = new int[]{1000, 3000};
+    List<int> quantityItems = new() { 0,0}; // so luong cua tung item trong tui hien co
+    readonly int[] maxQuantityItems = new int[]{99,10}; // so luong toi da cua cac phan tu tuong ung
 
     int count, idItem, numItem, coinTotal;
 
@@ -97,16 +95,7 @@ public class ManageItem : MonoBehaviour
         quantity.RefreshString();
     }
 
-    // Cai dat bang thong bao khi nguoi choi mua qua so luong toi da
-    private void UpdateTextBuy(string value){
-        textNotifiBuy.text = value;
-    }
-    public void SetTextNotifiBuy(){
-        _textNotifiBuy = maxQuantityItems[idItem].ToString();
-        stateBuy[2].Arguments[0] = _textNotifiBuy;
-        stateBuy[2].RefreshString();
-    }
-
+    #region Items Handle
     // Khi nguoi choi an yes tai bang nhap so luong se goi toi ham nay
     // Neu nguoi choi nhap gia tri khong phai la so nguyen se tu dong thoat tro choi
     public void GetNumItem(){
@@ -129,8 +118,10 @@ public class ManageItem : MonoBehaviour
             if(coinTotal <= manageCoin.GetCoin() && numItem > 0){
                 manageCoin.SubCoin(coinTotal);
                 localizeStringEvent.StringReference = stateBuy[0];
+
                 items[idItem].ChangeQuantity(quantityItems[idItem] + numItem);
                 quantityItems[idItem] += numItem;
+
                 manageBag.AddSlot(idItem, (int)quantityItems[idItem], 1, spriteItems[idItem]);
                 SaveManage.Instance.SetQuantityItems(quantityItems);
             } else {
@@ -141,28 +132,56 @@ public class ManageItem : MonoBehaviour
             SetTextNotifiBuy();
         }
         AppearNotifiBuy();
-        Invoke("DisappearNotifiBuy", 1);
+        Invoke(nameof(DisappearNotifiBuy), 1);
+    }
+
+    // nguoi dung su dung item se giam so luong di 1
+    public void UseItem(int idItem){
+        quantityItems[idItem]--;
+        FindFirstObjectByType<PlayerUseItem>().UseItem(idItem);
+        SaveManage.Instance.SetQuantityItems(quantityItems);
     }
 
     // Tinh toan tong gia xu phai tra
     public int Multiple(int a, int b){
         return Math.Abs(a * b);
     }
+    #endregion
+    
     
     // Bang thong bao trang thai mua
+    #region State of NotifiBuy
+
+    // Cai dat bang thong bao khi nguoi choi mua qua so luong toi da
+    private void UpdateTextBuy(string value){
+        if(textNotifiBuy != null){
+            textNotifiBuy.text = value;
+        }
+    }
+
+    public void SetTextNotifiBuy(){
+        _textNotifiBuy = maxQuantityItems[idItem].ToString();
+        stateBuy[2].Arguments[0] = _textNotifiBuy;
+        stateBuy[2].RefreshString();
+    }
+
     private void AppearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(true);
+        notifiBuy.SetActive(true);
     }
 
     private void DisappearNotifiBuy(){
-        notifiBuy.gameObject.SetActive(false);
+        notifiBuy.SetActive(false);
     }
+    #endregion
 
-    // Lay cac thong so can thiet
-    public void GetIdItem(int idItem){
+    #region SetInfo
+    public void SetIdItem(int idItem){
         this.idItem = idItem;
     }
+    #endregion
 
+    // Lay cac thong so can thiet
+    #region Get Info
     public int GetIdItem(){
         return this.idItem;
     }
@@ -171,14 +190,11 @@ public class ManageItem : MonoBehaviour
         return this.spriteItems[idItem];
     }
 
-    // nguoi dung su dung item se giam so luong di 1
-    public void UseItem(int idItem){
-        quantityItems[idItem]--;
-        SaveManage.Instance.SetQuantityItems(quantityItems);
-    }
-
     // Set cac info Item khi nguoi dung click vao item nao do trong tui do
     public LocalizedString GetInfoItem(int idItem){
         return infoItems[idItem];
     }
+    #endregion
+
+
 }
