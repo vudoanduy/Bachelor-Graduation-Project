@@ -3,6 +3,7 @@
 // Tam thoi boi vi 2 con quai nay co chung 1 cach di chuyen nen tam thoi de no ke thua cua Slime (do cung khong biet nen dat ten gi)
 // Sau nay neu cos thay doi cacsh di chuyen thi se update lai sau
 
+using System.Collections;
 using UnityEngine;
 
 public class Turtle : Slime
@@ -18,4 +19,5 @@ public class Turtle : Slime
         this.damageSpikeTurtle = damageSpikeTurtle;
     } 
 
+    
 }
