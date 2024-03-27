@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+// Ve mat y tuong thi con medium nay cung kha giong voi con big
+
 public class SlimeMedium : MonoBehaviour
 {
     [SerializeField] GameObject miniSlimePrefabs;

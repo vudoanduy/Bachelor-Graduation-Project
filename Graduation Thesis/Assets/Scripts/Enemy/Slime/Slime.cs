@@ -50,6 +50,7 @@ public class Slime : Enemy
         CheckDirectionMove();
     }
 
+    // Kiem tra xem quai vat da di den gioi han co the cua no chua
     protected void CheckDirectionMove(){
         float distance = Math.Abs(this.posSlime.x - currentPoint);
 
@@ -66,11 +67,14 @@ public class Slime : Enemy
         MoveSlime();
     }
 
+    // Ham nay de quai vat quay dau lai theo huong di chuyen
     protected void ChangeDirectionHead(){       
         this.scaleSlime.x *= -1;
         this.tranSlime.localScale = scaleSlime;
     }
 
+
+    // Quai vat di chuyen sang trai hay phai
     protected void MoveSlime(){
         if(currentPoint == pointLeft){
             this.tranSlime.Translate(base.speedMove * Time.deltaTime * Vector2.left);
