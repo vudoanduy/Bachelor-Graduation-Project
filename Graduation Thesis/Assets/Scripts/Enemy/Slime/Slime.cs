@@ -25,6 +25,10 @@ public class Slime : Enemy
         UpdateTrans(tranSlime);
     }
 
+    public Slime()
+    {
+    }
+
     #endregion
 
     // Xem xet huong di chuyen ban dau cua quai vat

@@ -75,10 +75,10 @@ public class SlimeMedium : MonoBehaviour
         isGetDamage = true;
 
         if(mediumSlime.HP == 0){
-            int coinSlime = mediumSlime.RandomCoin(minCoin, maxCoin);
+            int coin = mediumSlime.RandomCoin(minCoin, maxCoin);
 
-            FindFirstObjectByType<ManageCoin>().AddCoin(coinSlime);
-            FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
+            FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+            FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
 
             StartCoroutine(SpawnMiniSlime(0.5f, hpMediumSlime/2, mediumSlime.SpeedMove * 1.2f));
             StartCoroutine(SpawnMiniSlime(-0.5f, hpMediumSlime/2, mediumSlime.SpeedMove * 1.5f));

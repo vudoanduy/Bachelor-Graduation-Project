@@ -66,10 +66,10 @@ public class SlimeMini : MonoBehaviour
         isGetDamage = true;
 
         if(miniSlime.HP == 0){
-            int coinSlime = miniSlime.RandomCoin(minCoin, maxCoin);
+            int coin = miniSlime.RandomCoin(minCoin, maxCoin);
 
-            FindFirstObjectByType<ManageCoin>().AddCoin(coinSlime);
-            FindFirstObjectByType<AppearCoins>().AppearNotifi(coinSlime, this.transform);
+            FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+            FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
             Invoke(nameof(Die), 0.2f);
         }
         
