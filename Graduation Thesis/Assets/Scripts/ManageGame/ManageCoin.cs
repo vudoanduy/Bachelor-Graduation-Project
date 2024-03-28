@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ManageCoin : MonoBehaviour
 {
-    private int coinCurrent = 0; // xu hien tai cua nguoi choi, duoc su dung trong toan tro choi
+    private int coinCurrent; // xu hien tai cua nguoi choi, duoc su dung trong toan tro choi
 
     void Start(){
         SaveManage.Instance.LoadGame();

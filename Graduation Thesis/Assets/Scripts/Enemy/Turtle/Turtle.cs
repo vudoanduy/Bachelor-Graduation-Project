@@ -10,7 +10,7 @@ public class Turtle : Slime
     protected int damageSpikeTurtle;
     public int DamageSpikeTurtle{get{return damageSpikeTurtle;} set{damageSpikeTurtle = value;}}
 
-    public Turtle(Transform transSlime) : base(transSlime){
+    public Turtle(Transform transSlime, int minCoin, int maxCoin) : base(transSlime, minCoin, maxCoin){
         this.damageSpikeTurtle = 1;
     }
 
@@ -18,7 +18,5 @@ public class Turtle : Slime
     : base(transTurtle ,hp, speedMove, damage, minCoin, maxCoin)
     {
         this.damageSpikeTurtle = damageSpikeTurtle;
-    } 
-
-    
+    }  
 }

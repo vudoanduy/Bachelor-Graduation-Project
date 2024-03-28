@@ -1,20 +1,24 @@
-using System.Collections;
 using UnityEngine;
 
 public class SlimeMini : MonoBehaviour
 {
     Slime miniSlime;
     Animator anim;
+    PlayerInfo playerInfo;
+    PlayerColision playerColision;
+
     CheckHit<Enemy> checkHit;
 
     bool isMove = false;
-    private bool isGetDamage = true;
 
     [SerializeField] protected int minCoin = 1, maxCoin = 5;
 
     void Start(){
-        miniSlime = new Slime(this.transform);       
+        miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
         anim = this.GetComponent<Animator>();
+        playerInfo = FindFirstObjectByType<PlayerInfo>();
+        playerColision = FindFirstObjectByType<PlayerColision>();
+
         checkHit = new(){
             Data = miniSlime
         };
@@ -48,7 +52,7 @@ public class SlimeMini : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+            if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;
                     StartCoroutine(checkHit.HitDamage());
@@ -62,7 +66,7 @@ public class SlimeMini : MonoBehaviour
                     }
                 }
             } else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(miniSlime.Damage);
+                playerInfo.GetDame(miniSlime.Damage);
             }
         }
     }

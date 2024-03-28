@@ -21034,6 +21034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LocaleManage
       objectReference: {fileID: 0}
+    - target: {fileID: 5033470901477560765, guid: 54e39270bac23654fa5e3b1fb6c06e73, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5150254991243656261, guid: 54e39270bac23654fa5e3b1fb6c06e73, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -21540,6 +21544,10 @@ PrefabInstance:
     - target: {fileID: 1094216550944256650, guid: b965417de94abb3488b728b24f038ab6, type: 3}
       propertyPath: m_Name
       value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650038954680622461, guid: b965417de94abb3488b728b24f038ab6, type: 3}
+      propertyPath: m_text
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

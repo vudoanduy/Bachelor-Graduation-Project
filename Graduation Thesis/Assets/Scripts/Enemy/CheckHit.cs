@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CheckHit<T>where T: Enemy
+public class CheckHit<T> where T: Enemy
 {
     private T data;
     public T Data{
@@ -19,10 +19,14 @@ public class CheckHit<T>where T: Enemy
         Data.IsGetDamage = true;
         
         Data.Anim.SetBool("isHit", true);
+        Debug.Log("Phat hinh anh bi dame");
 
         yield return new WaitForSeconds(0.625f);
 
         Data.Anim.SetBool("isHit", false);
+        Debug.Log("Phat hinh anh bi dame");
+
+        yield break;
     }
 
     #endregion

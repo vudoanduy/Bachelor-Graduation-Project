@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnailNormal : MonoBehaviour
@@ -24,15 +21,18 @@ public class SnailNormal : MonoBehaviour
     Vector2 scaleCheckGround;
     Vector2 posCheckGround;
 
-    private bool isGround, isMove = true, isChangeDirect = true, isGetDamage = true;
+    private bool isGround, isMove = true, isChangeDirect = true;
     float angle , limitAngle;
 
-    [Obsolete]
+    #region Set Up
+
     void Start(){
         SetVector();
         angle = limitAngle = this.transform.eulerAngles.z;
 
-        snailNormal = new Snail(hpSnail, speedMoveSnail, damageSnail, minCoin, maxCoin);
+        snailNormal = new Snail(hpSnail, speedMoveSnail, damageSnail, minCoin, maxCoin){
+            Anim = this.GetComponent<Animator>()
+        };
         anim = this.GetComponent<Animator>();
         checkHit = new(){
             Data = snailNormal
@@ -70,6 +70,8 @@ public class SnailNormal : MonoBehaviour
         scaleCheckGround = checkGround.transform.localScale;
         posCheckGround = checkGround.transform.position;
     }
+
+    #endregion
 
     #region Move Snail
     public void Move(){

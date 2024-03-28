@@ -44,5 +44,7 @@ public class FreezeAxis : MonoBehaviour
         col2D.sharedMaterial = enemyPhysicMat;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        yield break;
     }
 }

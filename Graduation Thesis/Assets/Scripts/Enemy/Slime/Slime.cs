@@ -21,8 +21,10 @@ public class Slime : Enemy
         UpdateTrans(tranSlime);
     }
 
-    public Slime(Transform tranSlime) : base(){
+    public Slime(Transform tranSlime, int minCoin, int maxCoin) : base(){
         UpdateTrans(tranSlime);
+        base.minCoin = minCoin;
+        base.maxCoin = maxCoin;
     }
 
     public Slime()

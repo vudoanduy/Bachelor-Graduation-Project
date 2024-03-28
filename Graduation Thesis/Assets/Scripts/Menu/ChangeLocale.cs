@@ -18,6 +18,7 @@ public class ChangeLocale : MonoBehaviour
     IEnumerator SetLocale(int localeID){
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeID];
+        yield break;
     }
 
     public void SwitchLocale(int localeID){

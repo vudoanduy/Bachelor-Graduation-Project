@@ -49,9 +49,4 @@ public class Enemy
         int coins = UnityEngine.Random.Range(min,max);
         return coins;
     }
-
-    internal void Invoke(string v1, float v2)
-    {
-        throw new NotImplementedException();
-    }
 }

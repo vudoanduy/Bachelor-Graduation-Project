@@ -14,17 +14,26 @@ public class TurtleNormal : MonoBehaviour
 
     Turtle turtleNormal;
     Animator anim;
-    CheckHit<Turtle> checkHit;
+    PlayerColision playerColision;
+    PlayerInfo playerInfo;
+
+    CheckHit<Enemy> checkHit;
 
     [SerializeField] protected bool isStart = false, isLaunchSpikes = false, isMove = false;
     [SerializeField] protected int hpTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin;
     [SerializeField] protected float speedMoveTurtle, distanceLaunch, pointLeft, pointRight;
 
-    protected bool isGrowSpike = true, isGetDamage = true;
+    protected bool isGrowSpike = true;
+
+    #region Set Up
 
     void Start(){
-        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin);
+        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin){
+            Anim = this.GetComponent<Animator>()
+        };
         anim = this.GetComponent<Animator>();
+        playerColision = FindFirstObjectByType<PlayerColision>();
+        playerInfo = FindFirstObjectByType<PlayerInfo>();
 
         checkHit = new()
         {
@@ -53,6 +62,8 @@ public class TurtleNormal : MonoBehaviour
         isStart = true;
     }
 
+    #endregion
+
     #region Grow Spike From Turtle
     IEnumerator GrowSpike(){
         if(isLaunchSpikes){
@@ -70,6 +81,8 @@ public class TurtleNormal : MonoBehaviour
 
         yield return new WaitForSeconds(3);
         isGrowSpike = true;
+
+        yield break;
     }
     #endregion
 
@@ -78,7 +91,7 @@ public class TurtleNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+            if(playerColision.GetIsHeadEnemy()){
                 if(turtleNormal.IsGetDamage){
                     turtleNormal.IsGetDamage = false;
                     StartCoroutine(checkHit.HitDamage());
@@ -92,7 +105,7 @@ public class TurtleNormal : MonoBehaviour
                     }
                 }
             } else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(turtleNormal.Damage);
+                playerInfo.GetDame(turtleNormal.Damage);
             }
         }
     }

@@ -16,9 +16,10 @@ public class AppearCoins : MonoBehaviour
         newNotifi.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "+ " + coin;
         newNotifi.transform.localPosition = new Vector3(trans.localPosition.x, trans.localPosition.y, notifiAddCoin.transform.localPosition.z);
 
-        LeanTween.moveLocalY(newNotifi.gameObject, trans.localPosition.y + 3f, 2f).setEase(LeanTweenType.linear);
+        LeanTween.moveLocalY(newNotifi, trans.localPosition.y + 3f, 2f).setEase(LeanTweenType.linear);
         yield return new WaitForSeconds(2f);
 
         Destroy(newNotifi);
+        yield break;
     }
 }

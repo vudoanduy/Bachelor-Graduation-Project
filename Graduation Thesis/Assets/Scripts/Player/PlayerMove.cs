@@ -67,17 +67,17 @@ public class PlayerMove : MonoBehaviour
                 prevPressRight = true;
             }
         }
-        anim.SetFloat("velocityX", rb.velocityX);
+        anim.SetFloat("velocityX", rb.velocity.x);
     }
 
     protected void RunRight(){
-        rb.velocityX = speed;
+        rb.velocity = new Vector2(speed, rb.velocity.y);
         this.transform.localScale = scalePlayer;
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.4f;
     }
 
     protected void RunLeft(){
-        rb.velocityX = -speed;
+        rb.velocity = new Vector2(-speed, rb.velocity.y);
         this.transform.localScale = new Vector3(-scalePlayer.x, scalePlayer.y, scalePlayer.z);
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.6f;
     }
@@ -108,18 +108,18 @@ public class PlayerMove : MonoBehaviour
             } else if(!isGround){
                 anim.SetBool("isDouble", true);
                 Jump();
-                Invoke("DelayDoubleJump", 0.05f);
+                Invoke(nameof(DelayDoubleJump), 0.05f);
             }
 
-            Invoke("DelayCountJump", 0.1f);
+            Invoke(nameof(DelayCountJump), 0.1f);
         }
 
-        anim.SetFloat("velocityY", rb.velocityY);
+        anim.SetFloat("velocityY", rb.velocity.y);
         anim.SetBool("isGround", isGround);
     }
 
     protected void Jump(){
-        rb.velocityY = force;
+        rb.velocity = new Vector2(rb.velocity.x,force);
     }
 
     protected void DelayCountJump(){

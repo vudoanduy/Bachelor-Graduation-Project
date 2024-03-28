@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 // Ve mat y tuong thi con medium nay cung kha giong voi con big
@@ -13,14 +12,13 @@ public class SlimeMedium : MonoBehaviour
     CheckHit<Enemy> checkHit;
 
     bool isMove = false;
-    private bool isGetDamage = true;
 
     private int hpMediumSlime;
 
     [SerializeField] protected int minCoin = 1, maxCoin = 5;
 
     void Start(){
-        mediumSlime = new Slime(this.transform);   
+        mediumSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};   
         anim = this.GetComponent<Animator>();
         checkHit = new(){
             Data = mediumSlime
@@ -67,6 +65,9 @@ public class SlimeMedium : MonoBehaviour
                         FindFirstObjectByType<ManageCoin>().AddCoin(coin);
                         FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
 
+                        StartCoroutine(SpawnMiniSlime(0.5f, mediumSlime.HP/2, mediumSlime.SpeedMove * 1.2f));
+                        StartCoroutine(SpawnMiniSlime(-0.5f, mediumSlime.HP/2, mediumSlime.SpeedMove * 1.5f));  
+
                         Invoke(nameof(Die), 0.3f);
                     }
                 }
@@ -94,12 +95,20 @@ public class SlimeMedium : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         if(mediumSlime.Damage / 2 < 1){
+            if(hpMiniSlime < 1){
+                hpMiniSlime = 1;
+            }
             slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, 1);
         } else {
+            if(hpMiniSlime < 1){
+                hpMiniSlime = 1;
+            }
             slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, mediumSlime.Damage/2);
         }
 
         slimeMini.SetPoint(mediumSlime.PointLeft, mediumSlime.PointRight, directStart);
+
+        yield break;
     }
     #endregion
 }

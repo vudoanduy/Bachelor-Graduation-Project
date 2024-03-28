@@ -63,6 +63,14 @@ public class SlimeBig : MonoBehaviour
                         FindFirstObjectByType<ManageCoin>().AddCoin(coin);
                         FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
 
+                        if(isSpawnMedium){
+                            StartCoroutine(SpawnMediumSlime(0.5f, hpBigSlime/2, speedMoveBigSlime));
+                            StartCoroutine(SpawnMediumSlime(-0.5f, hpBigSlime/2, speedMoveBigSlime));
+                        } else{
+                            StartCoroutine(SpawnMiniSlime(0.5f, hpBigSlime/4, speedMoveBigSlime * 1.2f));
+                            StartCoroutine(SpawnMiniSlime(-0.5f, hpBigSlime/4, speedMoveBigSlime * 1.5f));  
+                        }
+
                         Invoke(nameof(Die), 0.3f);
                     }
                 }
@@ -80,7 +88,7 @@ public class SlimeBig : MonoBehaviour
     
     #region Spawn Medium Slime
 
-    IEnumerator SpawnMediumSlime(float directStart, int hpMediumSlime, float speedMoveMediumSlime, float pointLeft, float pointRight){
+    IEnumerator SpawnMediumSlime(float directStart, int hpMediumSlime, float speedMoveMediumSlime){
         GameObject newMediumSlime = Instantiate(miniSlimePrefabs);
         SlimeMedium slimeMedium = newMediumSlime.GetComponent<SlimeMedium>();
 
@@ -95,10 +103,11 @@ public class SlimeBig : MonoBehaviour
         }
 
         slimeMedium.SetPoint(pointLeft, pointRight, directStart);
+
+        yield break;
     }
 
     #endregion
-
 
     #region Spawn Mini Slime
 
@@ -112,12 +121,20 @@ public class SlimeBig : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         if(bigSlime.Damage / 2 < 1){
+            if(hpMiniSlime < 1){
+                hpMiniSlime = 1;
+            }
             slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, 1);
         } else {
+            if(hpMiniSlime < 1){
+                hpMiniSlime = 1;
+            }
             slimeMini.SetUpMiniSlime(hpMiniSlime, speedMoveMiniSlime, bigSlime.Damage/2);
         }
 
         slimeMini.SetPoint(pointLeft, pointRight, directStart);
+
+        yield break;
     }
     #endregion
 

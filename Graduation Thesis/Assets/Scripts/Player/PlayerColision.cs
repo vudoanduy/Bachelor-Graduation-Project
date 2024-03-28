@@ -46,6 +46,7 @@ public class PlayerColision : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         isHeadEnemy = false;
+        yield break;
     }
 
     #endregion
