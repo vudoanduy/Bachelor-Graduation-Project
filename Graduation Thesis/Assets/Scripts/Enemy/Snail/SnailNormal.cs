@@ -13,22 +13,30 @@ public class SnailNormal : MonoBehaviour
     [SerializeField] int hpSnail;
     [SerializeField] int damageSnail;
     [SerializeField] float speedMoveSnail;
+    [SerializeField] int minCoin;
+    [SerializeField] int maxCoin;
 
     Snail snailNormal;
     Animator anim;
+    CheckHit<Enemy> checkHit;
 
     Vector2 scaleEnemy;
     Vector2 scaleCheckGround;
     Vector2 posCheckGround;
 
-    private bool isGround, isMove = true, isChangeDirect = true;
-    float angle = 0, limitAngle = 0;
+    private bool isGround, isMove = true, isChangeDirect = true, isGetDamage = true;
+    float angle , limitAngle;
 
+    [Obsolete]
     void Start(){
         SetVector();
+        angle = limitAngle = this.transform.eulerAngles.z;
 
-        snailNormal = new Snail(hpSnail, speedMoveSnail, damageSnail);
+        snailNormal = new Snail(hpSnail, speedMoveSnail, damageSnail, minCoin, maxCoin);
         anim = this.GetComponent<Animator>();
+        checkHit = new(){
+            Data = snailNormal
+        };
     }
 
     void Update(){
@@ -69,7 +77,7 @@ public class SnailNormal : MonoBehaviour
     }
 
     protected void ChangeDirect(){
-        angle += 0.3f;
+        angle += 0.4f;
 
         if(angle >= limitAngle){
             angle = limitAngle;
@@ -78,6 +86,36 @@ public class SnailNormal : MonoBehaviour
         }
 
         this.transform.localRotation = Quaternion.Euler(new Vector3(0,0,angle));
+    }
+
+    #endregion
+
+    #region Check hit
+
+    void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.CompareTag("Player"))
+        {
+            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+                if(snailNormal.IsGetDamage){
+                    snailNormal.IsGetDamage = false;
+                    StartCoroutine(checkHit.HitDamage());
+                    if(snailNormal.HP == 0){
+                        int coin = snailNormal.RandomCoin(snailNormal.MinCoin, snailNormal.MaxCoin);
+
+                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+
+                        Invoke(nameof(Die), 0.3f);
+                    }
+                }
+            } else {
+                FindFirstObjectByType<PlayerInfo>().GetDame(snailNormal.Damage);
+            }
+        }
+    }
+
+    protected void Die(){
+        Destroy(this.gameObject);
     }
 
     #endregion

@@ -14,7 +14,7 @@ public class TurtleNormal : MonoBehaviour
 
     Turtle turtleNormal;
     Animator anim;
-    PlayerColision playerColision;
+    CheckHit<Turtle> checkHit;
 
     [SerializeField] protected bool isStart = false, isLaunchSpikes = false, isMove = false;
     [SerializeField] protected int hpTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin;
@@ -23,9 +23,13 @@ public class TurtleNormal : MonoBehaviour
     protected bool isGrowSpike = true, isGetDamage = true;
 
     void Start(){
-        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle);
+        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin);
         anim = this.GetComponent<Animator>();
-        playerColision = FindFirstObjectByType<PlayerColision>();  
+
+        checkHit = new()
+        {
+            Data = turtleNormal
+        };
 
         turtleNormal.SetPoint(pointLeft, pointRight);
         turtleNormal.DirectionMoveStart(0.5f);
@@ -44,8 +48,8 @@ public class TurtleNormal : MonoBehaviour
         }
     }
 
-    public void SpawnTurtle(int hpTurtle, float speedMoveTurtle, int damageTurtle, int damageSpikeTurtle){
-        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle);
+    public void SpawnTurtle(int hpTurtle, float speedMoveTurtle, int damageTurtle, int damageSpikeTurtle, int minCoin, int maxCoin){
+        turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin);
         isStart = true;
     }
 
@@ -74,38 +78,23 @@ public class TurtleNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(playerColision.GetIsHeadEnemy()){
-                if(isGetDamage){
-                    isGetDamage = false;
-                    StartCoroutine(HitDamage());
+            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+                if(turtleNormal.IsGetDamage){
+                    turtleNormal.IsGetDamage = false;
+                    StartCoroutine(checkHit.HitDamage());
+                    if(turtleNormal.HP == 0){
+                        int coin = turtleNormal.RandomCoin(turtleNormal.MinCoin, turtleNormal.MaxCoin);
+
+                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+
+                        Invoke(nameof(Die), 0.3f);
+                    }
                 }
-            }  else {
+            } else {
                 FindFirstObjectByType<PlayerInfo>().GetDame(turtleNormal.Damage);
             }
         }
-    }
-
-    IEnumerator HitDamage(){
-        turtleNormal.HP -= 1;
-
-        yield return new WaitForSeconds(0.1f);
-
-        isGetDamage = true;
-
-        if(turtleNormal.HP == 0){
-            int coin = turtleNormal.RandomCoin(minCoin, maxCoin);
-
-            FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-            FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
-            Invoke(nameof(Die), 0.2f);
-        }
-        
-        anim.SetBool("isHit", true);
-        Invoke(nameof(TurnOffHitAnim), 0.625f);
-    }
-
-    protected void TurnOffHitAnim(){
-        anim.SetBool("isHit", false);
     }
 
     protected void Die(){

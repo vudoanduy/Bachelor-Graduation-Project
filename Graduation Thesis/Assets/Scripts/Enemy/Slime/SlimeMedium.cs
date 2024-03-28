@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 // Ve mat y tuong thi con medium nay cung kha giong voi con big
@@ -9,7 +10,7 @@ public class SlimeMedium : MonoBehaviour
 
     Slime mediumSlime;
     Animator anim;
-    PlayerColision playerColision;
+    CheckHit<Enemy> checkHit;
 
     bool isMove = false;
     private bool isGetDamage = true;
@@ -19,10 +20,11 @@ public class SlimeMedium : MonoBehaviour
     [SerializeField] protected int minCoin = 1, maxCoin = 5;
 
     void Start(){
-        mediumSlime = new Slime(this.transform);
-        playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
-        
+        mediumSlime = new Slime(this.transform);   
         anim = this.GetComponent<Animator>();
+        checkHit = new(){
+            Data = mediumSlime
+        };
     }
 
     void Update(){
@@ -55,41 +57,23 @@ public class SlimeMedium : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(playerColision.GetIsHeadEnemy()){
-                if(isGetDamage){
-                    isGetDamage = false;
-                    StartCoroutine(HitDamage());
+            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+                if(mediumSlime.IsGetDamage){
+                    mediumSlime.IsGetDamage = false;
+                    StartCoroutine(checkHit.HitDamage());
+                    if(mediumSlime.HP == 0){
+                        int coin = mediumSlime.RandomCoin(mediumSlime.MinCoin, mediumSlime.MaxCoin);
+
+                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+
+                        Invoke(nameof(Die), 0.3f);
+                    }
                 }
-            }  else {
+            } else {
                 FindFirstObjectByType<PlayerInfo>().GetDame(mediumSlime.Damage);
             }
         }
-    }
-
-    IEnumerator HitDamage(){
-        mediumSlime.HP -= 1;
-        Debug.Log(mediumSlime.HP);
-
-        yield return new WaitForSeconds(0.1f);
-
-        isGetDamage = true;
-
-        if(mediumSlime.HP == 0){
-            int coin = mediumSlime.RandomCoin(minCoin, maxCoin);
-
-            FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-            FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
-
-            StartCoroutine(SpawnMiniSlime(0.5f, hpMediumSlime/2, mediumSlime.SpeedMove * 1.2f));
-            StartCoroutine(SpawnMiniSlime(-0.5f, hpMediumSlime/2, mediumSlime.SpeedMove * 1.5f));
-            Invoke(nameof(Die), 0.2f);
-        }
-        anim.SetBool("isHit", true);
-        Invoke(nameof(TurnOffHitAnim), 0.625f);
-    }
-
-    protected void TurnOffHitAnim(){
-        anim.SetBool("isHit", false);
     }
 
     protected void Die(){

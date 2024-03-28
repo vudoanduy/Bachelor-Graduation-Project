@@ -17,7 +17,7 @@ public class Slime : Enemy
 
     #region Constructor
 
-    public Slime(Transform tranSlime, int hp, float speedMove, int damage) : base(hp, speedMove, damage){
+    public Slime(Transform tranSlime, int hp, float speedMove, int damage, int minCoin, int maxCoin) : base(hp, speedMove, damage, minCoin, maxCoin){
         UpdateTrans(tranSlime);
     }
 

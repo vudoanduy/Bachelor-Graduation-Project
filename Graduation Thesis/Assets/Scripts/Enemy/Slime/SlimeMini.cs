@@ -5,7 +5,7 @@ public class SlimeMini : MonoBehaviour
 {
     Slime miniSlime;
     Animator anim;
-    PlayerColision playerColision;
+    CheckHit<Enemy> checkHit;
 
     bool isMove = false;
     private bool isGetDamage = true;
@@ -13,10 +13,11 @@ public class SlimeMini : MonoBehaviour
     [SerializeField] protected int minCoin = 1, maxCoin = 5;
 
     void Start(){
-        miniSlime = new Slime(this.transform);
-        playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
-        
+        miniSlime = new Slime(this.transform);       
         anim = this.GetComponent<Animator>();
+        checkHit = new(){
+            Data = miniSlime
+        };
     }
 
     void Update(){
@@ -47,38 +48,23 @@ public class SlimeMini : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(playerColision.GetIsHeadEnemy()){
-                if(isGetDamage){
-                    isGetDamage = false;
-                    StartCoroutine(HitDamage());
+            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+                if(miniSlime.IsGetDamage){
+                    miniSlime.IsGetDamage = false;
+                    StartCoroutine(checkHit.HitDamage());
+                    if(miniSlime.HP == 0){
+                        int coin = miniSlime.RandomCoin(miniSlime.MinCoin, miniSlime.MaxCoin);
+
+                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
+                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+
+                        Invoke(nameof(Die), 0.3f);
+                    }
                 }
-            }  else {
+            } else {
                 FindFirstObjectByType<PlayerInfo>().GetDame(miniSlime.Damage);
             }
         }
-    }
-
-    IEnumerator HitDamage(){
-        miniSlime.HP -= 1;
-
-        yield return new WaitForSeconds(0.1f);
-
-        isGetDamage = true;
-
-        if(miniSlime.HP == 0){
-            int coin = miniSlime.RandomCoin(minCoin, maxCoin);
-
-            FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-            FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
-            Invoke(nameof(Die), 0.2f);
-        }
-        
-        anim.SetBool("isHit", true);
-        Invoke(nameof(TurnOffHitAnim), 0.625f);
-    }
-
-    protected void TurnOffHitAnim(){
-        anim.SetBool("isHit", false);
     }
 
     protected void Die(){
