@@ -19,15 +19,15 @@ public class SaveManage : MonoBehaviour
     public static string SAVEDATA = "SAVEDATA";
 
     //
-    public List<int> stateSkins = new List<int>{1,0,0,0};
+    public List<int> stateSkins = new() { 1,0,0,0};
 
-    public List<int> quantityItems = new List<int>{0,0}; 
+    public List<int> quantityItems = new() { 0,0}; 
 
-    public List<int> posSlots = new List<int>(){0};
+    public List<int> posSlots = new(){0};
 
-    public List<int> quantitySlots = new List<int>(){0};
+    public List<int> quantitySlots = new(){0};
 
-    public List<int> markSlots = new List<int>(){0};
+    public List<int> markSlots = new(){0};
 
     public int coinCurrent = 10000;
 

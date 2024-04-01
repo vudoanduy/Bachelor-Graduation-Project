@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+// Su dung de hien so luong tien nguoi choi nhan duoc khi giet quai bat ki
 public class AppearCoins : MonoBehaviour
 {
     [SerializeField] GameObject notifiAddCoin;

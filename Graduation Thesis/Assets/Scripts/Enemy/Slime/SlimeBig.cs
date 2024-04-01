@@ -1,4 +1,5 @@
 using System.Collections;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
 
@@ -6,17 +7,31 @@ public class SlimeBig : MonoBehaviour
 {
     // Ve mat y tuong thi con quai slime nay no di chuyen qua lai tai 2 vi tri co dinh thoi
     // Khi chet thi no sinh ra bao nhieu con slime con tuy y 
-    [Header("Object Mini")]
+    [Header("Object spawn")]
     [SerializeField] GameObject miniSlimePrefabs;
 
-    [Header("Parameters")]
-    [SerializeField] protected int hpBigSlime, damageBigSlime;
-    [SerializeField] protected float speedMoveBigSlime,pointLeft, pointRight;
-    [SerializeField] protected int minCoin, maxCoin;
-    [SerializeField] protected bool isSpawnMedium = false;
+    [Header("Set parameters")]
+    [SerializeField] protected int hpBigSlime;
+    [SerializeField] protected float speedMoveBigSlime;
+    [SerializeField] protected int damageBigSlime;
+
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
+
+    [Header("Set distance move")]
+    [SerializeField] protected float pointLeft;
+    [SerializeField] protected float pointRight;
+
+    [Header("Set spawn")]
+    [SerializeField] protected bool isSpawnMedium;
 
     Slime bigSlime;
     CheckHit<Enemy> checkHit;
+    PlayerColision playerColision;
+    PlayerInfo playerInfo;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
     #region Set Up
 
@@ -25,10 +40,13 @@ public class SlimeBig : MonoBehaviour
         {
             Anim = this.GetComponent<Animator>()
         };
-
         checkHit = new(){
             Data = bigSlime
         };
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
 
         SetUpBigSlime();
     }
@@ -53,15 +71,17 @@ public class SlimeBig : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+            Debug.Log(playerColision.GetIsHeadEnemy());
+            if(playerColision.GetIsHeadEnemy()){
                 if(bigSlime.IsGetDamage){
                     bigSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage());
+                    Debug.Log("Quai vat bi mat mau");
+                    StartCoroutine(checkHit.HitDamage(0.625f));
                     if(bigSlime.HP == 0){
                         int coin = bigSlime.RandomCoin(bigSlime.MinCoin, bigSlime.MaxCoin);
 
-                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
 
                         if(isSpawnMedium){
                             StartCoroutine(SpawnMediumSlime(0.5f, hpBigSlime/2, speedMoveBigSlime));
@@ -75,10 +95,12 @@ public class SlimeBig : MonoBehaviour
                     }
                 }
             } else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(bigSlime.Damage);
+                playerInfo.GetDame(bigSlime.Damage);
             }
         }
     }
+
+    
 
     protected void Die(){
         Destroy(this.gameObject);

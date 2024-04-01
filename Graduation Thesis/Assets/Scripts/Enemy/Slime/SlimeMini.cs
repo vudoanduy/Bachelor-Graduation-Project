@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class SlimeMini : MonoBehaviour
 {
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
+
     Slime miniSlime;
-    Animator anim;
+    CheckHit<Enemy> checkHit;
     PlayerInfo playerInfo;
     PlayerColision playerColision;
-
-    CheckHit<Enemy> checkHit;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
     bool isMove = false;
 
-    [SerializeField] protected int minCoin = 1, maxCoin = 5;
-
     void Start(){
         miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
-        anim = this.GetComponent<Animator>();
-        playerInfo = FindFirstObjectByType<PlayerInfo>();
-        playerColision = FindFirstObjectByType<PlayerColision>();
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
 
         checkHit = new(){
             Data = miniSlime
@@ -55,12 +58,12 @@ public class SlimeMini : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage());
+                    StartCoroutine(checkHit.HitDamage(0.625f));
                     if(miniSlime.HP == 0){
                         int coin = miniSlime.RandomCoin(miniSlime.MinCoin, miniSlime.MaxCoin);
 
-                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
 
                         Invoke(nameof(Die), 0.3f);
                     }

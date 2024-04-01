@@ -5,15 +5,15 @@ public class Slime : Enemy
 {
     Transform tranSlime;
 
-    #region Parameters
-
     Vector2 posSlime, scaleSlime;
 
-    protected float pointLeft, pointRight, currentPoint;
+    private float pointLeft;
     public float PointLeft{get{return pointLeft;} set{pointLeft=value;}}
+
+    private float pointRight;
     public float PointRight{get{return pointRight;} set{pointRight=value;}}
 
-    #endregion
+    private float currentPoint;
 
     #region Constructor
 
@@ -25,10 +25,6 @@ public class Slime : Enemy
         UpdateTrans(tranSlime);
         base.minCoin = minCoin;
         base.maxCoin = maxCoin;
-    }
-
-    public Slime()
-    {
     }
 
     #endregion

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [Serializable]
 public class SaveManageData
 {
-    public List<int> stateSkins = new() { 1,0,0,0};
+    public List<int> stateSkins = new() {1,0,0,0};
 
-    public List<int> quantityItems = new() { 0,0}; 
+    public List<int> quantityItems = new() {0,0}; 
 
     public List<int> posSlots = new(){};
 

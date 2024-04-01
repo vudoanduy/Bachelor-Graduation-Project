@@ -6,7 +6,6 @@ public class PlayerColision : MonoBehaviour
 {
     [Header("Layer Mask Check")]
     [SerializeField] LayerMask ground;
-    [SerializeField] LayerMask enemy;
 
     [Header("GameObject Check")]
     [SerializeField] GameObject checkGround;

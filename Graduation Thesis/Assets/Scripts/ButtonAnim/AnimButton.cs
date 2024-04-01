@@ -8,6 +8,13 @@ using UnityEngine.UI;
 
 public class AnimButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    [Header("Select Style Button")]
+    [SerializeField] protected bool isRectangle;
+    [SerializeField] protected bool isCircle;
+    [SerializeField] protected bool isOptions;
+
+    Sprite btn_Hold, btn_Exit;
+
     readonly string btnCircle_ExitPath = "Menu/layer1";
     readonly string btnRectangle_ExitPath = "Menu/layer3";
     readonly string btnOptions_ExitPath = "Menu/layer5";
@@ -15,13 +22,6 @@ public class AnimButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     readonly string btnCircle_HoldPath = "Menu/layer2";
     readonly string btnRectangle_HoldPath = "Menu/layer4";
     readonly string btnOptions_HoldPath = "Menu/layer6";
-
-    Sprite btn_Hold, btn_Exit;
-
-    [Header("Select Style Button")]
-    [SerializeField] protected bool isRectangle;
-    [SerializeField] protected bool isCircle;
-    [SerializeField] protected bool isOptions;
 
     void Start(){
         CheckStyleButton();

@@ -11,20 +11,17 @@ public class CheckHit<T> where T: Enemy
 
     #region Check hit
 
-    public IEnumerator HitDamage(){
+    public IEnumerator HitDamage(float timeDelay){
         Data.HP -= 1;
         
         yield return new WaitForSeconds(0.1f);
 
-        Data.IsGetDamage = true;
-        
+        Data.IsGetDamage = true;       
         Data.Anim.SetBool("isHit", true);
-        Debug.Log("Phat hinh anh bi dame");
 
-        yield return new WaitForSeconds(0.625f);
+        yield return new WaitForSeconds(timeDelay);
 
         Data.Anim.SetBool("isHit", false);
-        Debug.Log("Phat hinh anh bi dame");
 
         yield break;
     }

@@ -5,24 +5,33 @@ using UnityEngine;
 
 public class SlimeMedium : MonoBehaviour
 {
+    [Header("Object spawn")]
     [SerializeField] GameObject miniSlimePrefabs;
 
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
+
     Slime mediumSlime;
-    Animator anim;
     CheckHit<Enemy> checkHit;
+    PlayerColision playerColision;
+    PlayerInfo playerInfo;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
     bool isMove = false;
 
     private int hpMediumSlime;
 
-    [SerializeField] protected int minCoin = 1, maxCoin = 5;
-
     void Start(){
         mediumSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};   
-        anim = this.GetComponent<Animator>();
         checkHit = new(){
             Data = mediumSlime
         };
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
     }
 
     void Update(){
@@ -55,15 +64,15 @@ public class SlimeMedium : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+            if(playerColision.GetIsHeadEnemy()){
                 if(mediumSlime.IsGetDamage){
                     mediumSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage());
+                    StartCoroutine(checkHit.HitDamage(0.625f));
                     if(mediumSlime.HP == 0){
                         int coin = mediumSlime.RandomCoin(mediumSlime.MinCoin, mediumSlime.MaxCoin);
 
-                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
 
                         StartCoroutine(SpawnMiniSlime(0.5f, mediumSlime.HP/2, mediumSlime.SpeedMove * 1.2f));
                         StartCoroutine(SpawnMiniSlime(-0.5f, mediumSlime.HP/2, mediumSlime.SpeedMove * 1.5f));  
@@ -72,7 +81,7 @@ public class SlimeMedium : MonoBehaviour
                     }
                 }
             } else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(mediumSlime.Damage);
+                playerInfo.GetDame(mediumSlime.Damage);
             }
         }
     }

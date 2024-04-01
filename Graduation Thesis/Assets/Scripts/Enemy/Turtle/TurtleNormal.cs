@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
 
@@ -8,20 +9,40 @@ using UnityEngine;
 // 
 public class TurtleNormal : MonoBehaviour
 {
-    [Header("Check Hit Head Turtle")]
+    [Header("Check hit head of Turtle")]
     [SerializeField] GameObject checkHead;
     [SerializeField] GameObject launchSpikes;
 
+    [Header("Spikes")]
+    [SerializeField] GameObject[] spikeTurtlePrefabs;
+
+    [Header("Set parameters")]
+    [SerializeField] protected bool isStart;
+    [SerializeField] protected int hpTurtle;
+    [SerializeField] protected float speedMoveTurtle;
+    [SerializeField] protected int damageTurtle;
+
+    [Header("Set launch spikes")]
+    [SerializeField] protected bool isLaunchSpikes;
+    [SerializeField] protected int damageSpikeTurtle;
+    [SerializeField] protected float distanceLaunch;
+
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
+
+    [Header("Set distance move")]
+    [SerializeField] protected bool isMove;
+    [SerializeField] protected float pointLeft;
+    [SerializeField] protected float pointRight;
+
+
     Turtle turtleNormal;
-    Animator anim;
+    CheckHit<Enemy> checkHit;
     PlayerColision playerColision;
     PlayerInfo playerInfo;
-
-    CheckHit<Enemy> checkHit;
-
-    [SerializeField] protected bool isStart = false, isLaunchSpikes = false, isMove = false;
-    [SerializeField] protected int hpTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin;
-    [SerializeField] protected float speedMoveTurtle, distanceLaunch, pointLeft, pointRight;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
     protected bool isGrowSpike = true;
 
@@ -31,9 +52,10 @@ public class TurtleNormal : MonoBehaviour
         turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin){
             Anim = this.GetComponent<Animator>()
         };
-        anim = this.GetComponent<Animator>();
-        playerColision = FindFirstObjectByType<PlayerColision>();
-        playerInfo = FindFirstObjectByType<PlayerInfo>();
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
 
         checkHit = new()
         {
@@ -67,15 +89,15 @@ public class TurtleNormal : MonoBehaviour
     #region Grow Spike From Turtle
     IEnumerator GrowSpike(){
         if(isLaunchSpikes){
-            OnLaunchSpike();
+            SpawnSpikes();
         }
 
-        anim.SetBool("isGrow", true);
+        turtleNormal.Anim.SetBool("isGrow", true);
         checkHead.SetActive(false);
         yield return new WaitForSeconds(1.5f);
 
         OffLaunchSpike();
-        anim.SetBool("isGrow", false);
+        turtleNormal.Anim.SetBool("isGrow", false);
         yield return new WaitForSeconds(0.65f);
         checkHead.SetActive(true);
 
@@ -94,12 +116,12 @@ public class TurtleNormal : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(turtleNormal.IsGetDamage){
                     turtleNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage());
+                    StartCoroutine(checkHit.HitDamage(0.417f));
                     if(turtleNormal.HP == 0){
                         int coin = turtleNormal.RandomCoin(turtleNormal.MinCoin, turtleNormal.MaxCoin);
 
-                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
 
                         Invoke(nameof(Die), 0.3f);
                     }
@@ -118,6 +140,14 @@ public class TurtleNormal : MonoBehaviour
 
     #region Launch Spike From Turtle 
 
+    public void SpawnSpikes(){
+        for(int i = 0; i < spikeTurtlePrefabs.Length; i++){
+            GameObject newSpike = Instantiate(spikeTurtlePrefabs[i], launchSpikes.transform);
+        }
+
+        OnLaunchSpike();
+    }
+
     public void OnLaunchSpike(){
         for(int i = 0; i < launchSpikes.transform.childCount; i++){
             double newPosX = 0, newPosY = 0;
@@ -130,7 +160,8 @@ public class TurtleNormal : MonoBehaviour
 
     public void OffLaunchSpike(){
         for(int i = 0; i < launchSpikes.transform.childCount; i++){
-            launchSpikes.transform.GetChild(i).transform.localPosition = Vector3.forward;
+            // launchSpikes.transform.GetChild(i).transform.localPosition = Vector3.forward;
+            Destroy(launchSpikes.transform.GetChild(i).gameObject);
         }
     }
 
@@ -139,6 +170,14 @@ public class TurtleNormal : MonoBehaviour
     protected void CalculatorPos(float distanceLaunch, float angle, ref double newPosX, ref double newPosY){
         newPosX = distanceLaunch * Math.Sin(angle * 3.14f / 180) * -1;
         newPosY = distanceLaunch * Math.Cos(angle * 3.14f / 180);
+    }
+
+    #endregion
+
+    #region Get Value
+
+    public int GetDamageSpikeTurtle(){
+        return this.damageSpikeTurtle;
     }
 
     #endregion

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Thay doi icon(anh dai dien) cua nhan vat dang chon cho phu hop
 public class ChangeIcon : MonoBehaviour
 {
     [Header("Set icon")]

@@ -2,27 +2,32 @@ using UnityEngine;
 
 public class SnailNormal : MonoBehaviour
 {
-    [Header("Check Ground")]
+    [Header("Check ground")]
     [SerializeField] GameObject checkGround;
     [SerializeField] LayerMask ground;
 
     [Header("Set parameters")]
-    [SerializeField] int hpSnail;
-    [SerializeField] int damageSnail;
-    [SerializeField] float speedMoveSnail;
-    [SerializeField] int minCoin;
-    [SerializeField] int maxCoin;
+    [SerializeField] protected int hpSnail;
+    [SerializeField] protected int damageSnail;
+    [SerializeField] protected float speedMoveSnail;
+
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
 
     Snail snailNormal;
-    Animator anim;
     CheckHit<Enemy> checkHit;
+    PlayerColision playerColision;
+    PlayerInfo playerInfo;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
     Vector2 scaleEnemy;
     Vector2 scaleCheckGround;
     Vector2 posCheckGround;
 
     private bool isGround, isMove = true, isChangeDirect = true;
-    float angle , limitAngle;
+    private float angle, limitAngle;
 
     #region Set Up
 
@@ -33,10 +38,13 @@ public class SnailNormal : MonoBehaviour
         snailNormal = new Snail(hpSnail, speedMoveSnail, damageSnail, minCoin, maxCoin){
             Anim = this.GetComponent<Animator>()
         };
-        anim = this.GetComponent<Animator>();
         checkHit = new(){
             Data = snailNormal
         };
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
     }
 
     void Update(){
@@ -49,9 +57,7 @@ public class SnailNormal : MonoBehaviour
                 Move();
                 isChangeDirect = true;
             }
-        }
-
-        if(!isGround){
+        } else {
             if(isChangeDirect){
                 limitAngle += 90;
                 isChangeDirect = false;
@@ -97,21 +103,21 @@ public class SnailNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            if(FindFirstObjectByType<PlayerColision>().GetIsHeadEnemy()){
+            if(playerColision.GetIsHeadEnemy()){
                 if(snailNormal.IsGetDamage){
                     snailNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage());
+                    StartCoroutine(checkHit.HitDamage(0.417f));
                     if(snailNormal.HP == 0){
                         int coin = snailNormal.RandomCoin(snailNormal.MinCoin, snailNormal.MaxCoin);
 
-                        FindFirstObjectByType<ManageCoin>().AddCoin(coin);
-                        FindFirstObjectByType<AppearCoins>().AppearNotifi(coin, this.transform);
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
 
                         Invoke(nameof(Die), 0.3f);
                     }
                 }
             } else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(snailNormal.Damage);
+                playerInfo.GetDame(snailNormal.Damage);
             }
         }
     }
