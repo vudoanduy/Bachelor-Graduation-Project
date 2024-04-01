@@ -27,7 +27,7 @@ public class BtnChangeText : MonoBehaviour
     public bool isSetOffButton; 
 
 
-    void Start(){
+    private void Start(){
         idText = 0;
         countText = textChange.Count();
 

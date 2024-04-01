@@ -42,20 +42,20 @@ public class ManageBag : MonoBehaviour
 
     bool isShowInfo = false;
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
 
         posSlots = SaveManage.Instance.GetPosSlots();
         quantitySlots = SaveManage.Instance.GetQuantitySlots();
         markSlots = SaveManage.Instance.GetMarkSlots();
 
-        manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
-        manageItem = GameObject.Find("ManageItem").GetComponent<ManageItem>();
+        manageSkin = FindObjectOfType<ManageSkin>().GetComponent<ManageSkin>();
+        manageItem = FindObjectOfType<ManageItem>().GetComponent<ManageItem>();
 
         SetUpBag();
 
-        if(GameObject.FindFirstObjectByType<ManageBag>() != this){
-            Destroy(GameObject.FindFirstObjectByType<ManageBag>().gameObject);
+        if(FindFirstObjectByType<ManageBag>() != this){
+            Destroy(FindFirstObjectByType<ManageBag>().gameObject);
             return;
         }
     }
@@ -82,7 +82,7 @@ public class ManageBag : MonoBehaviour
 
     // Cap nhat gia tri trong slot
     public void AddSlot(int posSlot, int quantitySlot, int markSlot, Sprite spriteSlot){
-        posExisted = CheckSlot(spriteSlot);
+        posExisted = GetSpriteSlot(spriteSlot);
 
         if(posExisted == -1){
             this.posSlots.Add(posSlot);
@@ -118,7 +118,7 @@ public class ManageBag : MonoBehaviour
     }
 
     // Kiem tra xem item da co trong slot chua, neu co thi ghi de, neu chua thi tao slot moi
-    public int CheckSlot(Sprite spriteSlot){
+    public int GetSpriteSlot(Sprite spriteSlot){
         return spriteSlots.IndexOf(spriteSlot);
     }
 
@@ -234,10 +234,10 @@ public class ManageBag : MonoBehaviour
     public void DestroySlot(){
         int count = posSlots.Count;
         for(int i = 0; i <= count; i++){
-            Destroy(listSlots[i].gameObject);
+            Destroy(listSlots[i]);
         }
-        listSlots = new List<GameObject>();
-        spriteSlots = new List<Sprite>();
+        listSlots = new();
+        spriteSlots = new();
 
         SetUpBag();
     }
