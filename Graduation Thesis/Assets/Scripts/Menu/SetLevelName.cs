@@ -16,16 +16,16 @@ public class SetLevelName : MonoBehaviour
 
     bool isAppearStart = true;
 
-    void OnEnable(){
+    private void OnEnable(){
         localizedString.Arguments = new object[]{s};
         localizedString.StringChanged += UpdateText;
     }
 
-    void OnDisable(){
+    private void OnDisable(){
         localizedString.StringChanged -= UpdateText;
     }
 
-    void Start(){
+    private void Start(){
         btn_Start.SetActive(false);
     }
 

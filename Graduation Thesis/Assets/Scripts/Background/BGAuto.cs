@@ -1,22 +1,22 @@
 using UnityEngine;
 
+// Background tu dong di chuyen khong phu thuoc vao nguoi choi.
+// Su dung lam background nen
 public class BGAuto : MonoBehaviour
 {
     Renderer render;
 
-    float speedAuto = 0.5f;
+    readonly float speedAuto = 0.5f;
 
-    //
-    void Start(){
+    private void Start(){
         render = this.GetComponent<Renderer>();
     }
 
-    void Update(){
+    private void Update(){
         RunBG();
     }
 
-    //
-    void RunBG(){
-        render.material.mainTextureOffset += Vector2.left * speedAuto * Time.deltaTime;
+    private void RunBG(){
+        render.material.mainTextureOffset += speedAuto * Time.deltaTime * Vector2.left;
     }
 }

@@ -6,7 +6,6 @@ public class PlayerColision : MonoBehaviour
 {
     [Header("Layer Mask Check")]
     [SerializeField] LayerMask ground;
-    [SerializeField] LayerMask enemy;
 
     [Header("GameObject Check")]
     [SerializeField] GameObject checkGround;
@@ -14,7 +13,7 @@ public class PlayerColision : MonoBehaviour
 
     bool isGround, isSliding, isHeadEnemy;
 
-    void Update(){
+    private void Update(){
         CheckGround();
         CheckSliding();
     }
@@ -33,8 +32,9 @@ public class PlayerColision : MonoBehaviour
     #region Check hit
 
     // Neu va cham vao dau quai vat thi se gay dame cho quai
-    void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag == "HeadEnemy"){
+    private void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.CompareTag("HeadEnemy"))
+        {
             StartCoroutine(DelayCheckHead());
         }
     }
@@ -45,6 +45,7 @@ public class PlayerColision : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         isHeadEnemy = false;
+        yield break;
     }
 
     #endregion

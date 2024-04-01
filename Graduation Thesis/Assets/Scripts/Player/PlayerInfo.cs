@@ -17,14 +17,16 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] GameObject shieldImg;
 
     ManageSkin manageSkin;
+    Animator anim;
 
     bool isGetDamage = true;
 
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
     protected int timeImmortalItem, timeImmortalAfterHit = 1;
 
-    void Start(){
+    private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
+        anim = this.GetComponent<Animator>();
         
         timeImmortalItem = manageSkin.ReadTimeImmortalSkin();
         hpSkin = manageSkin.ReadHpSkinCurrent();
@@ -116,11 +118,15 @@ public class PlayerInfo : MonoBehaviour
     IEnumerator Immortal(float timeImmortal){
         isGetDamage = false;
         shieldImg.SetActive(true);
+        anim.SetTrigger("isHit");
+        anim.SetBool("is Hit", true);
 
         yield return new WaitForSeconds(timeImmortal);
 
         isGetDamage = true;
         shieldImg.SetActive(false);
+        anim.SetBool("is Hit", false);
+        yield break;
     }
 
     #endregion

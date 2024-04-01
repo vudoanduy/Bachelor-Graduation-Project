@@ -1,23 +1,33 @@
-using System.Collections;
 using UnityEngine;
 
 public class SlimeMini : MonoBehaviour
 {
+    [Header("Set coins")]
+    [SerializeField] protected int minCoin;
+    [SerializeField] protected int maxCoin;
+
     Slime miniSlime;
-    Animator anim;
+    CheckHit<Enemy> checkHit;
+    PlayerInfo playerInfo;
     PlayerColision playerColision;
+    ManageCoin manageCoin;
+    AppearCoins appearCoins;
 
-    bool isMove = false, isGround;
-    private bool isGetDamage = true;
+    bool isMove = false;
 
-    void Start(){
-        miniSlime = new Slime(this.transform);
-        playerColision = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerColision>();
-        
-        anim = this.GetComponent<Animator>();
+    private void Start(){
+        miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
+        playerColision = FindObjectOfType<PlayerColision>();
+        playerInfo = FindObjectOfType<PlayerInfo>();
+        manageCoin = FindObjectOfType<ManageCoin>();
+        appearCoins = FindObjectOfType<AppearCoins>();
+
+        checkHit = new(){
+            Data = miniSlime
+        };
     }
 
-    void Update(){
+    private void Update(){
         if(isMove){
             miniSlime.Move();
             miniSlime.UpdateTrans(this.transform);
@@ -42,38 +52,29 @@ public class SlimeMini : MonoBehaviour
 
     #region Check hit
 
-    void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "Player"){
+    private void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.CompareTag("Player"))
+        {
             if(playerColision.GetIsHeadEnemy()){
-                if(isGetDamage){
-                    isGetDamage = false;
-                    StartCoroutine(HitDamage());
+                if(miniSlime.IsGetDamage){
+                    miniSlime.IsGetDamage = false;
+                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    if(miniSlime.HP == 0){
+                        int coin = miniSlime.RandomCoin(miniSlime.MinCoin, miniSlime.MaxCoin);
+
+                        manageCoin.AddCoin(coin);
+                        appearCoins.AppearNotifi(coin, this.transform);
+
+                        Invoke(nameof(Die), 0.3f);
+                    }
                 }
-            }  else {
-                FindFirstObjectByType<PlayerInfo>().GetDame(miniSlime.Damage);
+            } else {
+                playerInfo.GetDame(miniSlime.Damage);
             }
         }
     }
 
-    IEnumerator HitDamage(){
-        miniSlime.HP -= 1;
-
-        yield return new WaitForSeconds(0.1f);
-
-        isGetDamage = true;
-
-        if(miniSlime.HP == 0){
-            Invoke(nameof(Die), 0.2f);
-        }
-        anim.SetBool("isHit", true);
-        Invoke(nameof(TurnOffHitAnim), 0.625f);
-    }
-
-    protected void TurnOffHitAnim(){
-        anim.SetBool("isHit", false);
-    }
-
-    protected void Die(){
+    private  void Die(){
         Destroy(this.gameObject);
     }
 

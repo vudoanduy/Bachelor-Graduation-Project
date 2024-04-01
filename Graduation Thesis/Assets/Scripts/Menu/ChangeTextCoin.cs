@@ -5,7 +5,7 @@ public class ChangeTextCoin : MonoBehaviour
 {
     TextMeshProUGUI coinInfo;
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
         coinInfo = this.GetComponent<TextMeshProUGUI>();
 
@@ -14,6 +14,8 @@ public class ChangeTextCoin : MonoBehaviour
 
     public void UpdateText(){
         int coin = SaveManage.Instance.GetCoinCurrent();
-        coinInfo.text = coin.ToString();
+        if(coinInfo != null){
+            coinInfo.text = coin.ToString();
+        }
     }
 }
