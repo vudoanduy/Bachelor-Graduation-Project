@@ -31,7 +31,7 @@ public class SnailNormal : MonoBehaviour
 
     #region Set Up
 
-    void Start(){
+    private void Start(){
         SetVector();
         angle = limitAngle = this.transform.eulerAngles.z;
 
@@ -47,7 +47,7 @@ public class SnailNormal : MonoBehaviour
         appearCoins = FindObjectOfType<AppearCoins>();
     }
 
-    void Update(){
+    private void Update(){
         // Khi khong cham dat nua thi se xoay quai vat, den khi xoay xong thi tiep tuc di chuyen
         posCheckGround = checkGround.transform.position; 
         isGround = Physics2D.OverlapBox(posCheckGround, new Vector2(scaleCheckGround.x * scaleEnemy.x, scaleCheckGround.y * scaleEnemy.y), angle, ground);
@@ -100,7 +100,7 @@ public class SnailNormal : MonoBehaviour
 
     #region Check hit
 
-    void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
             if(playerColision.GetIsHeadEnemy()){
@@ -122,7 +122,7 @@ public class SnailNormal : MonoBehaviour
         }
     }
 
-    protected void Die(){
+    private void Die(){
         Destroy(this.gameObject);
     }
 

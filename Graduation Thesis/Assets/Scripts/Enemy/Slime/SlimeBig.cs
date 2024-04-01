@@ -35,7 +35,7 @@ public class SlimeBig : MonoBehaviour
 
     #region Set Up
 
-    void Start(){
+    private void Start(){
         bigSlime = new Slime(this.transform, hpBigSlime, speedMoveBigSlime, damageBigSlime, minCoin, maxCoin)
         {
             Anim = this.GetComponent<Animator>()
@@ -51,7 +51,7 @@ public class SlimeBig : MonoBehaviour
         SetUpBigSlime();
     }
 
-    void Update(){
+    private void Update(){
         bigSlime.Move();
         bigSlime.UpdateTrans(this.transform);
     }
@@ -68,7 +68,7 @@ public class SlimeBig : MonoBehaviour
 
     #region Check hit
 
-    void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log(playerColision.GetIsHeadEnemy());
@@ -102,7 +102,7 @@ public class SlimeBig : MonoBehaviour
 
     
 
-    protected void Die(){
+    private void Die(){
         Destroy(this.gameObject);
     }
 

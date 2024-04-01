@@ -138,7 +138,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5263766255667473327}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -162,8 +161,7 @@ BoxCollider2D:
     m_Bits: 64
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,6 +172,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.6, y: 0.3}
   m_EdgeRadius: 0
 --- !u!1 &5773979271044961054
@@ -273,7 +272,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &3057466482652326660
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -287,7 +286,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -328,7 +326,6 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5773979271044961054}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -352,8 +349,7 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.20262639, y: 0.25000006}
   m_Direction: 0
@@ -372,9 +368,9 @@ MonoBehaviour:
   cam2D: {fileID: 0}
   playerController:
   - {fileID: 9100000, guid: dbb71452a156dd3439a4573c10edd21a, type: 2}
-  - {fileID: 9100000, guid: 566aab6fcbcc4864ca9cbd2aa9ca6bc9, type: 2}
-  - {fileID: 9100000, guid: 408c3e4b15721ee4da1a8b17e1c2516b, type: 2}
-  - {fileID: 9100000, guid: 99cdf91e90ae9bc40855ea1c298320f8, type: 2}
+  - {fileID: 9100000, guid: c936272c42a41684e95963e5f61905e9, type: 2}
+  - {fileID: 9100000, guid: be207ba40e3e2f945bc47bca032d2208, type: 2}
+  - {fileID: 9100000, guid: ab102af6007ae7146a1997124c63b0be, type: 2}
   speed: 5
   force: 30
   maxJump: 2
@@ -393,9 +389,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  enemy:
-    serializedVersion: 2
-    m_Bits: 128
   checkGround: {fileID: 5263766255667473327}
   checkSliding: {fileID: 7196436544184412078}
 --- !u!114 &492463636876594898
@@ -480,7 +473,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7196436544184412078}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -504,8 +496,7 @@ BoxCollider2D:
     m_Bits: 64
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -516,5 +507,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.1, y: 4}
   m_EdgeRadius: 0

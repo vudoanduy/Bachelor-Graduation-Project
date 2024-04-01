@@ -22,7 +22,7 @@ public class SetTextBuy : MonoBehaviour
 
     List<int> stateSkins;
 
-    void Start(){
+    private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
 
         stateSkins = SaveManage.Instance.GetStateSkins();
@@ -31,7 +31,7 @@ public class SetTextBuy : MonoBehaviour
         SetText();
     }
 
-    void SetUpTextBuy(){
+    private void SetUpTextBuy(){
         for(int i = 0; i < stateSkins.Count(); i++){
             if(stateSkins[i] == 1){
                 buttons[i].interactable = false;

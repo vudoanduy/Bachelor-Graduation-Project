@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class ManageLevel : MonoBehaviour
 {
-    void Start(){
-        if (GameObject.FindFirstObjectByType<ManageLevel>() != this)
+    private void Start(){
+        if (FindFirstObjectByType<ManageLevel>() != this)
         {
-            Destroy(GameObject.FindFirstObjectByType<ManageLevel>().gameObject);
+            Destroy(FindFirstObjectByType<ManageLevel>().gameObject);
             return;
         }
     }

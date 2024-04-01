@@ -23,7 +23,7 @@ public class SlimeMedium : MonoBehaviour
 
     private int hpMediumSlime;
 
-    void Start(){
+    private void Start(){
         mediumSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};   
         checkHit = new(){
             Data = mediumSlime
@@ -34,7 +34,7 @@ public class SlimeMedium : MonoBehaviour
         appearCoins = FindObjectOfType<AppearCoins>();
     }
 
-    void Update(){
+    private void Update(){
         if(isMove){
             mediumSlime.Move();
             mediumSlime.UpdateTrans(this.transform);
@@ -61,7 +61,7 @@ public class SlimeMedium : MonoBehaviour
 
     #region Check hit
 
-    void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
             if(playerColision.GetIsHeadEnemy()){

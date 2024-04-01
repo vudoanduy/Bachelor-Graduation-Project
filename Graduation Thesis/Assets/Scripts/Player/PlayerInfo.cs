@@ -24,7 +24,7 @@ public class PlayerInfo : MonoBehaviour
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
     protected int timeImmortalItem, timeImmortalAfterHit = 1;
 
-    void Start(){
+    private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
         anim = this.GetComponent<Animator>();
         

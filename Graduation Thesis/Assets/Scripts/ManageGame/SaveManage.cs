@@ -37,7 +37,7 @@ public class SaveManage : MonoBehaviour
 
     //
 
-    void Awake(){
+    private void Awake(){
         if(instance == null){
             instance = this;
         } else {
@@ -45,7 +45,7 @@ public class SaveManage : MonoBehaviour
         }
     }
 
-    void Start(){
+    private void Start(){
         LoadGame();
     }
 

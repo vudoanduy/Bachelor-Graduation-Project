@@ -42,7 +42,7 @@ public class ManageBag : MonoBehaviour
 
     bool isShowInfo = false;
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
 
         posSlots = SaveManage.Instance.GetPosSlots();
