@@ -6,7 +6,7 @@ public class ChangeLocale : MonoBehaviour
 {
     private int localeID;
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
 
         localeID = SaveManage.Instance.GetLocaleID();

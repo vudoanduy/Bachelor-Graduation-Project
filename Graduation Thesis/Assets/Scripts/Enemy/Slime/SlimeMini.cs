@@ -15,7 +15,7 @@ public class SlimeMini : MonoBehaviour
 
     bool isMove = false;
 
-    void Start(){
+    private void Start(){
         miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
         playerColision = FindObjectOfType<PlayerColision>();
         playerInfo = FindObjectOfType<PlayerInfo>();
@@ -27,7 +27,7 @@ public class SlimeMini : MonoBehaviour
         };
     }
 
-    void Update(){
+    private void Update(){
         if(isMove){
             miniSlime.Move();
             miniSlime.UpdateTrans(this.transform);
@@ -52,7 +52,7 @@ public class SlimeMini : MonoBehaviour
 
     #region Check hit
 
-    void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
             if(playerColision.GetIsHeadEnemy()){
@@ -74,7 +74,7 @@ public class SlimeMini : MonoBehaviour
         }
     }
 
-    protected void Die(){
+    private  void Die(){
         Destroy(this.gameObject);
     }
 

@@ -23,7 +23,7 @@ public class AnimButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     readonly string btnRectangle_HoldPath = "Menu/layer4";
     readonly string btnOptions_HoldPath = "Menu/layer6";
 
-    void Start(){
+    private void Start(){
         CheckStyleButton();
     }
 

@@ -13,7 +13,7 @@ public class PlayerColision : MonoBehaviour
 
     bool isGround, isSliding, isHeadEnemy;
 
-    void Update(){
+    private void Update(){
         CheckGround();
         CheckSliding();
     }
@@ -32,7 +32,7 @@ public class PlayerColision : MonoBehaviour
     #region Check hit
 
     // Neu va cham vao dau quai vat thi se gay dame cho quai
-    void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.CompareTag("HeadEnemy"))
         {
             StartCoroutine(DelayCheckHead());

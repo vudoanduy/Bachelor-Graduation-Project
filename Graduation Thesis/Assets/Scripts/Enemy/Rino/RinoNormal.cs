@@ -110,10 +110,8 @@ public class RinoNormal : MonoBehaviour
 
         rinoNormal.Anim.SetBool("isHitWall", false);
         isRun = true;
-    }
 
-    void OnDrawGizmos(){
-        Gizmos.DrawCube(checkWall.transform.position, new Vector2(scaleRino.x * scaleCheckWall.x, scaleRino.y * scaleCheckWall.y));
+        yield break;
     }
 
     #endregion

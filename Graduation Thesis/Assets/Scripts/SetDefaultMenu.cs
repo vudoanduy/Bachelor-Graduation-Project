@@ -9,7 +9,7 @@ public class SetDefaultMenu : MonoBehaviour
     public bool isTurnOffFirstObject;
 
     // ham nay de cai mac dinh cac object khac off
-    void OnEnable(){
+    private void OnEnable(){
         int count = gameObjects.Length;
         if(isTurnOffFirstObject){
             gameObjects[0].SetActive(false);

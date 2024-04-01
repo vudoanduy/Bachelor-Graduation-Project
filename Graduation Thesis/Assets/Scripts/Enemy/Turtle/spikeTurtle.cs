@@ -2,21 +2,18 @@ using UnityEngine;
 
 public class SpikeTurtle : MonoBehaviour
 {
-    private int dameSpikeTurtle;
+    private int damageSpikeTurtle;
+    public int DamageSpikeTurtle{get{return damageSpikeTurtle;} set{damageSpikeTurtle = value;}}
 
-    PlayerInfo playerInfo;
-    TurtleNormal turtleNormal; 
+    PlayerInfo playerInfo; 
 
-    void Start(){
+    private void Start(){
         playerInfo = FindObjectOfType<PlayerInfo>();
-        turtleNormal = FindObjectOfType<TurtleNormal>();
-
-        dameSpikeTurtle = turtleNormal.GetDamageSpikeTurtle();
     }
 
-    void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player")){
-            playerInfo.GetDame(dameSpikeTurtle);
+            playerInfo.GetDame(damageSpikeTurtle);
             Destroy(this.gameObject);
         }
     }

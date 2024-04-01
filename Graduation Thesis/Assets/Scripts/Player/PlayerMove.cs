@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     bool prevPressLeft, prevPressRight;
     
     //
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
 
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
 
-    void Update(){
+    private void Update(){
         CheckRun();
         CheckJump();
         CheckSliding();

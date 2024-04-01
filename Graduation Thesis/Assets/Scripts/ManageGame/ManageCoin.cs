@@ -4,7 +4,7 @@ public class ManageCoin : MonoBehaviour
 {
     private int coinCurrent; // xu hien tai cua nguoi choi, duoc su dung trong toan tro choi
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
         this.coinCurrent = SaveManage.Instance.GetCoinCurrent();
 
@@ -18,7 +18,7 @@ public class ManageCoin : MonoBehaviour
 
     #region TestXu
 
-    void Update(){
+    private void Update(){
         if(Input.GetKeyDown(KeyCode.U)){
             AddCoin(10000);
         }

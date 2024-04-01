@@ -8,15 +8,15 @@ public class BGAuto : MonoBehaviour
 
     readonly float speedAuto = 0.5f;
 
-    void Start(){
+    private void Start(){
         render = this.GetComponent<Renderer>();
     }
 
-    void Update(){
+    private void Update(){
         RunBG();
     }
 
-    void RunBG(){
+    private void RunBG(){
         render.material.mainTextureOffset += speedAuto * Time.deltaTime * Vector2.left;
     }
 }

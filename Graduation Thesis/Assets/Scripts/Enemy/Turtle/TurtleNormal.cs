@@ -143,6 +143,7 @@ public class TurtleNormal : MonoBehaviour
     public void SpawnSpikes(){
         for(int i = 0; i < spikeTurtlePrefabs.Length; i++){
             GameObject newSpike = Instantiate(spikeTurtlePrefabs[i], launchSpikes.transform);
+            newSpike.GetComponent<SpikeTurtle>().DamageSpikeTurtle = turtleNormal.DamageSpikeTurtle;
         }
 
         OnLaunchSpike();

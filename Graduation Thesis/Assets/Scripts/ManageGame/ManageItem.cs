@@ -46,7 +46,7 @@ public class ManageItem : MonoBehaviour
     string _textNotifiBuy;
 
     //
-    void OnEnable(){
+    private void OnEnable(){
         quantity.Arguments = new object[]{costTotal};
         quantity.StringChanged += UpdateText;
 
@@ -54,11 +54,11 @@ public class ManageItem : MonoBehaviour
         stateBuy[2].StringChanged += UpdateTextBuy;
     }
 
-    void OnDisable(){
+    private void OnDisable(){
         quantity.StringChanged -= UpdateText;
     }
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
         count = nameItems.Count();
         quantityItems = SaveManage.Instance.GetQuantityItems();

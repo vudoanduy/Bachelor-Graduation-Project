@@ -52,16 +52,16 @@ public class ManageSkin : MonoBehaviour
     string costSkin;
 
     //
-    void OnEnable(){
+    private void OnEnable(){
         localizeStringCost.Arguments = new object[]{costSkin};
         localizeStringCost.StringChanged += UpdateText;
     }
 
-    void OnDisable(){
+    private void OnDisable(){
         localizeStringCost.StringChanged -= UpdateText;
     }
 
-    void Start(){
+    private void Start(){
         SaveManage.Instance.LoadGame();
         count = nameSkins.Count();
         stateSkins = SaveManage.Instance.GetStateSkins();
@@ -73,8 +73,8 @@ public class ManageSkin : MonoBehaviour
 
         SetUpSkin();
 
-        if(GameObject.FindFirstObjectByType<ManageSkin>() != this){
-            Destroy(GameObject.FindFirstObjectByType<ManageSkin>().gameObject);
+        if(FindFirstObjectByType<ManageSkin>() != this){
+            Destroy(FindFirstObjectByType<ManageSkin>().gameObject);
             return;
         }
     }
