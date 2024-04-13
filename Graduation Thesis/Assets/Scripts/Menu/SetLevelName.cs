@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -43,5 +44,9 @@ public class SetLevelName : MonoBehaviour
         s = EventSystem.current.currentSelectedGameObject.name;
         localizedString.Arguments[0] = s;
         localizedString.RefreshString();
+    }
+
+    public int GetLevelId(){
+        return int.Parse(s);
     }
 }

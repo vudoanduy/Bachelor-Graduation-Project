@@ -16,17 +16,22 @@ public class PlayerMove : MonoBehaviour
     Vector3 scalePlayer;
 
     [Header("Parameters")]
-    public int speed = 5, force = 10;
-    public int maxJump = 0;
+    [SerializeField] private int speed = 5;
+    [SerializeField] private int force = 10;
+    [SerializeField] private int maxJump = 0;
     
     protected int countJump = 0;
 
+    private int defaultSpeed, defaultForce, defaultMaxJump;
     bool prevPressLeft, prevPressRight;
     
     //
     private void Start(){
         SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
+        defaultSpeed = this.speed;
+        defaultForce = this.force;
+        defaultMaxJump = this.maxJump;
 
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
@@ -158,4 +163,36 @@ public class PlayerMove : MonoBehaviour
     public void SetPlayerController(int idControl){
         anim.runtimeAnimatorController = playerController[idControl];
     }
+
+    #region Inc parameters
+    // Inc speed
+    public void IncreaseSpeed(float times,float timeInc){
+        this.speed = (int)(this.speed * times);
+        Invoke(nameof(DefaultSpeed), timeInc);
+    }
+
+    private void DefaultSpeed(){
+        this.speed = defaultSpeed;
+    }
+
+    // Inc force
+    public void IncreaseForce(float times,float timeInc){
+        this.force = (int)(this.force * times);
+        Invoke(nameof(DefaultForce), timeInc);
+    }
+
+    private void DefaultForce(){
+        this.force = defaultForce;
+    }
+
+    // Inc maxJump
+    public void IncreaseMaxJump(int times,float timeInc){
+        this.maxJump += times;
+        Invoke(nameof(DefaultMaxJump), timeInc);
+    }
+
+    private void DefaultMaxJump(){
+        this.maxJump = defaultMaxJump;
+    }
+    #endregion
 }
