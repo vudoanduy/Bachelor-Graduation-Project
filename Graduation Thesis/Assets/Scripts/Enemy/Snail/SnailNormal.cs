@@ -106,7 +106,7 @@ public class SnailNormal : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(snailNormal.IsGetDamage){
                     snailNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.417f));
+                    StartCoroutine(checkHit.HitDamage(0.417f, playerInfo.GetDamageBase()));
                     if(snailNormal.HP == 0){
                         int coin = snailNormal.RandomCoin(snailNormal.MinCoin, snailNormal.MaxCoin);
 

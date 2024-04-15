@@ -27,6 +27,11 @@ public class PlayerColision : MonoBehaviour
         isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.12f, 0.72f), 0, ground);
     }
 
+    void OnDrawGizmos(){
+        Gizmos.DrawCube(checkGround.transform.position, new Vector2(0.36f, 0.054f));
+        Gizmos.color = Color.yellow;
+    }
+
     #endregion
     
     #region Check hit

@@ -10,8 +10,8 @@ public class ManageCoin : MonoBehaviour
 
         FindFirstObjectByType<ChangeTextCoin>().UpdateText();
 
-        if(GameObject.FindFirstObjectByType<ManageCoin>() != this){
-            Destroy(GameObject.FindFirstObjectByType<ManageCoin>().gameObject);
+        if(FindFirstObjectByType<ManageCoin>() != this){
+            Destroy(FindFirstObjectByType<ManageCoin>().gameObject);
             return;
         }   
     }

@@ -22,9 +22,11 @@ public class PlayerInfo : MonoBehaviour
     bool isGetDamage = true;
 
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
+    protected int damageBase = 1;
     protected int timeImmortalItem, timeImmortalAfterHit = 1;
 
     private float damageCoefficient = 1;
+    private int defaultDamageBase;
 
     private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
@@ -33,6 +35,7 @@ public class PlayerInfo : MonoBehaviour
         timeImmortalItem = manageSkin.ReadTimeImmortalSkin();
         hpSkin = manageSkin.ReadHpSkinCurrent();
         hpCurrent = this.hpSkin + this.hpBase;
+        defaultDamageBase = damageBase;
 
         UpdateHPPlayer();
         UpdateHPInfo();
@@ -49,6 +52,11 @@ public class PlayerInfo : MonoBehaviour
     public void SetHPSkin(int hpSkin){
         this.hpSkin = hpSkin;
         UpdateHPPlayer();
+    }
+
+    public void SetDamageBase(int damageBase){
+        this.damageBase = damageBase;
+        this.defaultDamageBase = damageBase;
     }
 
     #endregion
@@ -94,6 +102,10 @@ public class PlayerInfo : MonoBehaviour
         return this.hpPlayer;
     }
 
+    public int GetDamageBase(){
+        return this.damageBase;
+    }
+
     #endregion
 
     #region Consider Item Used
@@ -116,14 +128,26 @@ public class PlayerInfo : MonoBehaviour
         StartCoroutine(Immortal(timeImmortalItem));
     }
     
-    // Tang kha nang khang sat thuong
+    // Giam sat thuong nhan vao
     public void SetDamageCoefficient(float damageCoefficient,float timeEffect){
         this.damageCoefficient = damageCoefficient;
+        Invoke(nameof(DefaultDamageCoefficient), timeEffect);
     }
 
     public void DefaultDamageCoefficient(){
         this.damageCoefficient = 1;
     }
+
+    // Tang damage gay ra
+    public void IncreaseDamageBase(int damage, float timeEffect){
+        this.damageBase += damage;
+        Invoke(nameof(DefaultDamageBase), timeEffect);
+    }
+
+    public void DefaultDamageBase(){
+        this.damageBase = defaultDamageBase;
+    }
+
     
     // Goi toi ham bat tu voi thoi gian duoc xet
     IEnumerator Immortal(float timeImmortal){

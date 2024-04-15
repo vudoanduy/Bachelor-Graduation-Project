@@ -6,11 +6,13 @@ public class Melon : MonoBehaviour, IFruit
     [Tooltip("Enter the jump force increase in percentage")]
     [SerializeField] private float perForce;
     [Tooltip("Enter the validity period")]
-    [SerializeField] private float timeIncForce;
+    [SerializeField] private float timeEffect;
 
     Animator anim;
     PlayerMove playerMove;
     CircleCollider2D circleCollider2D;
+
+    private bool isCollected;
 
     private void Start(){
         anim = GetComponent<Animator>();
@@ -19,15 +21,16 @@ public class Melon : MonoBehaviour, IFruit
 
     public void Effect()
     {
-        playerMove.IncreaseForce(perForce, timeIncForce);
+        playerMove.IncreaseForce(perForce, timeEffect);
     }
 
-    void OnCollisionEnter2D(Collision2D other){
+    void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
+            if(isCollected) return;
+            isCollected = true;
             if(playerMove == null){
                 playerMove = FindObjectOfType<PlayerMove>();
             }
-            Debug.Log(this.gameObject.name);
             Effect();
             anim.SetTrigger("isCollected");
             circleCollider2D.isTrigger = true;

@@ -6,11 +6,13 @@ public class Banana : MonoBehaviour, IFruit
     [Tooltip("Enter the number of additional jumps")]
     [SerializeField] private int amountJump;
     [Tooltip("Enter the validity period")]
-    [SerializeField] private float timeIncMaxJump;
+    [SerializeField] private float timeEffect;
 
     Animator anim;
     PlayerMove playerMove;
     CircleCollider2D circleCollider2D;
+    
+    private bool isCollected;
 
     private void Start(){
         anim = GetComponent<Animator>();
@@ -19,15 +21,16 @@ public class Banana : MonoBehaviour, IFruit
 
     public void Effect()
     {
-        playerMove.IncreaseMaxJump(amountJump, timeIncMaxJump);
+        playerMove.IncreaseMaxJump(amountJump, timeEffect);
     }
 
-    void OnCollisionEnter2D(Collision2D other){
+    void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
+            if(isCollected) return;
+            isCollected = true;
             if(playerMove == null){
                 playerMove = FindObjectOfType<PlayerMove>();
             }
-            Debug.Log(this.gameObject.name);
             Effect();
             anim.SetTrigger("isCollected");
             circleCollider2D.isTrigger = true;

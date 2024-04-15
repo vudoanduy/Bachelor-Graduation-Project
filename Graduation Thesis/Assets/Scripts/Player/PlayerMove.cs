@@ -8,22 +8,28 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Set Skin Move")]
     [SerializeField] RuntimeAnimatorController[] playerController;
-
-    Rigidbody2D rb;
-    Animator anim;
-    PlayerColision playerColision;
-
-    Vector3 scalePlayer;
+    [SerializeField] GameObject ghostResources;
 
     [Header("Parameters")]
     [SerializeField] private int speed = 5;
     [SerializeField] private int force = 10;
     [SerializeField] private int maxJump = 0;
+    [SerializeField] private int countMaxToSpawnGhost = 6;
+
+    Rigidbody2D rb;
+    Animator anim;
+    PlayerColision playerColision;
+    SpriteRenderer spriteRenderer;
+    ParticleControllers particleControllers;
+
+    Vector3 scalePlayer;
     
     protected int countJump = 0;
 
     private int defaultSpeed, defaultForce, defaultMaxJump;
-    bool prevPressLeft, prevPressRight;
+    private int countToSpawnGhost = 0;
+    private float countTime = 0;
+    bool prevPressLeft, prevPressRight, isFlip, isTurnOnGhost;
     
     //
     private void Start(){
@@ -36,11 +42,21 @@ public class PlayerMove : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
 
         SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
 
     private void Update(){
+        countTime += Time.deltaTime;
+        if(isTurnOnGhost){
+            countToSpawnGhost++;
+            if(countToSpawnGhost > countMaxToSpawnGhost){
+                GameObject newGhost = Instantiate(ghostResources);
+                newGhost.GetComponent<Ghost>().CreateGhost(spriteRenderer.sprite, this.transform, isFlip);
+                countToSpawnGhost = 0;
+            }
+        }
         CheckRun();
         CheckJump();
         CheckSliding();
@@ -76,12 +92,14 @@ public class PlayerMove : MonoBehaviour
     }
 
     protected void RunRight(){
+        isFlip = false;
         rb.velocity = new Vector2(speed, rb.velocity.y);
         this.transform.localScale = scalePlayer;
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.4f;
     }
 
     protected void RunLeft(){
+        isFlip = true;
         rb.velocity = new Vector2(-speed, rb.velocity.y);
         this.transform.localScale = new Vector3(-scalePlayer.x, scalePlayer.y, scalePlayer.z);
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.6f;
@@ -125,6 +143,14 @@ public class PlayerMove : MonoBehaviour
 
     protected void Jump(){
         rb.velocity = new Vector2(rb.velocity.x,force);
+
+        if(particleControllers == null){
+            particleControllers = FindObjectOfType<ParticleControllers>();
+        }
+
+        if(!playerColision.GetIsGround()){
+            particleControllers.JumpParticlePlay();
+        }
     }
 
     protected void DelayCountJump(){
@@ -146,11 +172,18 @@ public class PlayerMove : MonoBehaviour
         bool isSliding = playerColision.GetIsSliding();
 
         if(isSliding){
+            if(particleControllers == null){
+                particleControllers = FindObjectOfType<ParticleControllers>();
+            }
             countJump = 0;
             if(isGround){
                 anim.SetBool("isSliding", false);
             }
             if(!isGround){
+                if(rb.velocity.y < 0 && countTime > 0.1f){
+                    particleControllers.SlidingParticlePlay();
+                    countTime = 0;
+                }
                 anim.SetBool("isSliding", true);
             }
         } else {
@@ -167,11 +200,13 @@ public class PlayerMove : MonoBehaviour
     #region Inc parameters
     // Inc speed
     public void IncreaseSpeed(float times,float timeInc){
+        isTurnOnGhost = true;
         this.speed = (int)(this.speed * times);
         Invoke(nameof(DefaultSpeed), timeInc);
     }
 
     private void DefaultSpeed(){
+        isTurnOnGhost = false;
         this.speed = defaultSpeed;
     }
 
@@ -195,4 +230,5 @@ public class PlayerMove : MonoBehaviour
         this.maxJump = defaultMaxJump;
     }
     #endregion
+
 }

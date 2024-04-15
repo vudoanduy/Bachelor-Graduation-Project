@@ -58,7 +58,7 @@ public class SlimeMini : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    StartCoroutine(checkHit.HitDamage(0.625f, playerInfo.GetDamageBase()));
                     if(miniSlime.HP == 0){
                         int coin = miniSlime.RandomCoin(miniSlime.MinCoin, miniSlime.MaxCoin);
 

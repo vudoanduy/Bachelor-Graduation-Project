@@ -67,7 +67,7 @@ public class SlimeMedium : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(mediumSlime.IsGetDamage){
                     mediumSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    StartCoroutine(checkHit.HitDamage(0.625f, playerInfo.GetDamageBase()));
                     if(mediumSlime.HP == 0){
                         int coin = mediumSlime.RandomCoin(mediumSlime.MinCoin, mediumSlime.MaxCoin);
 

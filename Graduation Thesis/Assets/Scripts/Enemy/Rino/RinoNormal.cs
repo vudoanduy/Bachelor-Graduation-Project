@@ -72,7 +72,7 @@ public class RinoNormal : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(rinoNormal.IsGetDamage){
                     rinoNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.417f));
+                    StartCoroutine(checkHit.HitDamage(0.417f, playerInfo.GetDamageBase()));
                     if(rinoNormal.HP == 0){
                         int coin = rinoNormal.RandomCoin(rinoNormal.MinCoin, rinoNormal.MaxCoin);
 

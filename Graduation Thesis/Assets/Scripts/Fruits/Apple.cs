@@ -10,6 +10,8 @@ public class Apple : MonoBehaviour, IFruit
     PlayerInfo playerInfo;
     CircleCollider2D circleCollider2D;
 
+    private bool isCollected;
+
     private void Start(){
         anim = GetComponent<Animator>();
         circleCollider2D = GetComponent<CircleCollider2D>();
@@ -19,12 +21,13 @@ public class Apple : MonoBehaviour, IFruit
         playerInfo.HealHP(hpHeal);
     }
 
-    void OnCollisionEnter2D(Collision2D other){
+    void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
+            if(isCollected) return;
+            isCollected = true;
             if(playerInfo == null){
                 playerInfo = FindObjectOfType<PlayerInfo>();
             }
-            Debug.Log(this.gameObject.name);
             Effect();
             anim.SetTrigger("isCollected");
             circleCollider2D.isTrigger = true;

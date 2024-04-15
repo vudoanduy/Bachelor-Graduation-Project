@@ -74,7 +74,7 @@ public class PlantNormal : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(plantNormal.IsGetDamage){
                     plantNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.417f));
+                    StartCoroutine(checkHit.HitDamage(0.417f, playerInfo.GetDamageBase()));
                     if(plantNormal.HP == 0){
                         int coin = plantNormal.RandomCoin(plantNormal.MinCoin, plantNormal.MaxCoin);
 

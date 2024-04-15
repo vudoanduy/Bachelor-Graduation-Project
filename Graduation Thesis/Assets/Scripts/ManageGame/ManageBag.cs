@@ -210,8 +210,8 @@ public class ManageBag : MonoBehaviour
         if(markSlots[this.idSlot] == 0){
             manageSkin.SetPointerSkin(posSlots[this.idSlot]);
             if(SceneManager.GetActiveScene().name != "Menu"){
-                FindFirstObjectByType<PlayerMove>().SetPlayerController(posSlots[this.idSlot]);
-                FindFirstObjectByType<ChangeIcon>().ChangeIconPlayer(posSlots[this.idSlot]);
+                FindObjectOfType<PlayerMove>().SetPlayerController(posSlots[this.idSlot]);
+                FindObjectOfType<ChangeIcon>().ChangeIconPlayer(posSlots[this.idSlot]);
             }
         } else {
             if(SceneManager.GetActiveScene().name == "Menu") return;

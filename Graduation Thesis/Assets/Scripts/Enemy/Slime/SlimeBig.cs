@@ -76,7 +76,7 @@ public class SlimeBig : MonoBehaviour
                 if(bigSlime.IsGetDamage){
                     bigSlime.IsGetDamage = false;
                     Debug.Log("Quai vat bi mat mau");
-                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    StartCoroutine(checkHit.HitDamage(0.625f, playerInfo.GetDamageBase()));
                     if(bigSlime.HP == 0){
                         int coin = bigSlime.RandomCoin(bigSlime.MinCoin, bigSlime.MaxCoin);
 

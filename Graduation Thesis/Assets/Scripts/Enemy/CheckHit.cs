@@ -11,8 +11,8 @@ public class CheckHit<T> where T: Enemy
 
     #region Check hit
 
-    public IEnumerator HitDamage(float timeDelay){
-        Data.HP -= 1;
+    public IEnumerator HitDamage(float timeDelay, int damage){
+        Data.HP -= damage;
         
         yield return new WaitForSeconds(0.1f);
 

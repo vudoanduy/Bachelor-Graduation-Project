@@ -116,7 +116,7 @@ public class TurtleNormal : MonoBehaviour
             if(playerColision.GetIsHeadEnemy()){
                 if(turtleNormal.IsGetDamage){
                     turtleNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.417f));
+                    StartCoroutine(checkHit.HitDamage(0.417f, playerInfo.GetDamageBase()));
                     if(turtleNormal.HP == 0){
                         int coin = turtleNormal.RandomCoin(turtleNormal.MinCoin, turtleNormal.MaxCoin);
 
