@@ -10196,7 +10196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d9628f99b526945826e1cc7858310b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam2D: {fileID: 0}
   playerController:
   - {fileID: 9100000, guid: dbb71452a156dd3439a4573c10edd21a, type: 2}
   - {fileID: 9100000, guid: c936272c42a41684e95963e5f61905e9, type: 2}
@@ -10206,7 +10205,7 @@ MonoBehaviour:
   speed: 5
   force: 30
   maxJump: 2
-  countMaxToSpawnGhost: 6
+  countMaxToSpawnGhost: 10
 --- !u!114 &7701655631541015879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10219,11 +10218,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570c7781d9cc326479d246a9d0777f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  coinLayer:
+    serializedVersion: 2
+    m_Bits: 512
   checkGround: {fileID: 5263766255667473327}
   checkSliding: {fileID: 7196436544184412078}
+  radiusMagnet: 1.5
+  speedMagnet: 6
 --- !u!114 &492463636876594898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10236,8 +10240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b1aeb41236f264e80f1827306e2e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpInfo: {fileID: 0}
-  hpBar: {fileID: 0}
   shieldImg: {fileID: 2461724707390830060}
 --- !u!114 &7557435567551549037
 MonoBehaviour:

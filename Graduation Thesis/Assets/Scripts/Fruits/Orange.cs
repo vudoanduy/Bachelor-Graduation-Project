@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Khi nguoi choi nhat duoc qua nay thi hoi mau theo phan tram HPtotal hien tai
+// Khi nguoi choi nhat duoc qua nay thi hoi mau theo phan tram HPPlayer
 public class Orange : MonoBehaviour, IFruit
 {
     [Tooltip("Restores health by percentage (0->1)")]

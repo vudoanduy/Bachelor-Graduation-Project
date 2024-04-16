@@ -35,7 +35,6 @@ public class ParticleControllers : MonoBehaviour
             isGround = true;
         }
     }
-
     public void SlidingParticlePlay(){
         if(countTime > timeSpawn){
 

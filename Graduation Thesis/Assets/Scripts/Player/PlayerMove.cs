@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("Virtual Camera")]
-    [SerializeField] CinemachineVirtualCamera cam2D;
 
     [Header("Set Skin Move")]
     [SerializeField] RuntimeAnimatorController[] playerController;
@@ -21,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     PlayerColision playerColision;
     SpriteRenderer spriteRenderer;
     ParticleControllers particleControllers;
+    CinemachineVirtualCamera cam2D;
 
     Vector3 scalePlayer;
     
@@ -43,6 +42,8 @@ public class PlayerMove : MonoBehaviour
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
+        cam2D = FindObjectOfType<CinemachineVirtualCamera>();
+        cam2D.Follow = this.transform;
 
         SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
@@ -142,7 +143,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     protected void Jump(){
-        rb.velocity = new Vector2(rb.velocity.x,force);
+        rb.velocity = new Vector2(rb.velocity.x, force);
 
         if(particleControllers == null){
             particleControllers = FindObjectOfType<ParticleControllers>();

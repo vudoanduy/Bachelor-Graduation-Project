@@ -11,11 +11,10 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-    [Header("HP Bar")]
-    [SerializeField] TextMeshProUGUI hpInfo;
-    [SerializeField] Image hpBar;
     [SerializeField] GameObject shieldImg;
 
+    TextMeshProUGUI hpInfo;
+    Image hpBar;
     ManageSkin manageSkin;
     Animator anim;
 
@@ -40,7 +39,6 @@ public class PlayerInfo : MonoBehaviour
         UpdateHPPlayer();
         UpdateHPInfo();
     }
-
 
     #region Set Parameters
 
@@ -90,6 +88,10 @@ public class PlayerInfo : MonoBehaviour
 
     // Neu nguoi choi co cac thao tac thay doi luong hp thi se cap nhat theo gia tri hp do
     public void UpdateHPInfo(){
+        if(hpInfo == null){
+            hpInfo = GameObject.Find("HpInfo").GetComponent<TextMeshProUGUI>();
+            hpBar = GameObject.Find("HPBar").GetComponent<Image>();
+        }
         hpInfo.text = this.hpCurrent + "/" + this.hpPlayer;
         hpBar.fillAmount = (float)this.hpCurrent/(float)this.hpPlayer;
     }
@@ -147,7 +149,6 @@ public class PlayerInfo : MonoBehaviour
     public void DefaultDamageBase(){
         this.damageBase = defaultDamageBase;
     }
-
     
     // Goi toi ham bat tu voi thoi gian duoc xet
     IEnumerator Immortal(float timeImmortal){
