@@ -43,8 +43,6 @@ public class SlimeBig : MonoBehaviour
         checkHit = new(){
             Data = bigSlime
         };
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -71,6 +69,10 @@ public class SlimeBig : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+            }
             Debug.Log(playerColision.GetIsHeadEnemy());
             if(playerColision.GetIsHeadEnemy()){
                 if(bigSlime.IsGetDamage){

@@ -46,6 +46,21 @@ public class PlayerColision : MonoBehaviour
             other.gameObject.GetComponent<Coins>().AddCoin();
             Destroy(other.gameObject);
         }
+        if(other.gameObject.CompareTag("Instruction")){
+            other.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        if(other.gameObject.CompareTag("CutScene")){
+            ManageCamera manageCamera = FindObjectOfType<ManageCamera>();
+            manageCamera.ChangeCams(int.Parse(other.gameObject.name), 0, 5);
+            FindObjectOfType<PlayerMove>().IdlePlayer(5);
+            other.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.CompareTag("Instruction")){
+            other.transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     IEnumerator DelayCheckHead(){

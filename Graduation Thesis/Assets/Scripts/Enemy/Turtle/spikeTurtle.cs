@@ -7,12 +7,11 @@ public class SpikeTurtle : MonoBehaviour
 
     PlayerInfo playerInfo; 
 
-    private void Start(){
-        playerInfo = FindObjectOfType<PlayerInfo>();
-    }
-
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player")){
+            if(playerInfo == null){
+                playerInfo = FindObjectOfType<PlayerInfo>();
+            }
             playerInfo.GetDame(damageSpikeTurtle);
             Destroy(this.gameObject);
         }

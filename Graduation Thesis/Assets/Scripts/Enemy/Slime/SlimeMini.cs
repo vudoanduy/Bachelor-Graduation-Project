@@ -17,8 +17,7 @@ public class SlimeMini : MonoBehaviour
 
     private void Start(){
         miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
+
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -55,6 +54,10 @@ public class SlimeMini : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+            }
             if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;

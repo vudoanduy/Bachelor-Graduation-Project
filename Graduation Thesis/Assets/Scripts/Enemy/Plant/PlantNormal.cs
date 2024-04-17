@@ -30,8 +30,6 @@ public class PlantNormal : MonoBehaviour
             DistanceBullet = distanceLaunch,
             SpeedMoveBullet = speedMoveBullet
         };
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -71,6 +69,10 @@ public class PlantNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+            }
             if(playerColision.GetIsHeadEnemy()){
                 if(plantNormal.IsGetDamage){
                     plantNormal.IsGetDamage = false;

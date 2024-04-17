@@ -1,4 +1,5 @@
 using Cinemachine;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -42,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        cam2D = FindObjectOfType<CinemachineVirtualCamera>();
+        cam2D = GameObject.Find("ManageCamera").transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
         cam2D.Follow = this.transform;
 
         SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
@@ -61,6 +62,15 @@ public class PlayerMove : MonoBehaviour
         CheckRun();
         CheckJump();
         CheckSliding();
+
+        if(Input.GetKeyDown(KeyCode.M)){
+            speed = 0;
+            force = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.N)){
+            speed = defaultSpeed;
+            force = defaultForce;
+        }
     }
 
     // An di chuyen ben nao thi qua ben do
@@ -198,7 +208,7 @@ public class PlayerMove : MonoBehaviour
         anim.runtimeAnimatorController = playerController[idControl];
     }
 
-    #region Inc parameters
+    #region Change parameters
     // Inc speed
     public void IncreaseSpeed(float times,float timeInc){
         isTurnOnGhost = true;
@@ -229,6 +239,18 @@ public class PlayerMove : MonoBehaviour
 
     private void DefaultMaxJump(){
         this.maxJump = defaultMaxJump;
+    }
+
+    // Cho nhan vat dung yen
+    public void IdlePlayer(float timeIdle){
+        speed = 0;
+        force = 0;
+        Invoke(nameof(DefaultAllParameter), timeIdle);
+    }
+
+    private void DefaultAllParameter(){
+        speed = defaultSpeed;
+        force = defaultForce;
     }
     #endregion
 

@@ -52,8 +52,6 @@ public class TurtleNormal : MonoBehaviour
         turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin){
             Anim = this.GetComponent<Animator>()
         };
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -113,6 +111,10 @@ public class TurtleNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+            }
             if(playerColision.GetIsHeadEnemy()){
                 if(turtleNormal.IsGetDamage){
                     turtleNormal.IsGetDamage = false;

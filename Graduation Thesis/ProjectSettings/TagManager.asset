@@ -11,6 +11,9 @@ TagManager:
   - Trap
   - Fruit
   - Coin
+  - Instruction
+  - VirtualCam
+  - CutScene
   layers:
   - Default
   - TransparentFX
