@@ -1,6 +1,5 @@
+using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class Treasure : MonoBehaviour
@@ -9,14 +8,16 @@ public class Treasure : MonoBehaviour
 
     [Header("")]
     [SerializeField] private int coin = 1000;
-    [Tooltip("Chest cooldown time: x(days) : y(hours) : z(minutes) : w(seconds)")]
+    [Tooltip("Chest cooldown time: (days) : (hours) : (minutes) : (seconds)")]
     [SerializeField] private Vector4 timeRetrieval;
+    [Tooltip("The best way is to fill in a chest with a different key")]
+    [SerializeField] private string keyChest = "";
 
     Animator anim;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
-    private bool isCollected;
+    private bool isCollected = true;
     private float day, hour, minute, second;
 
     private void Start(){
@@ -26,21 +27,26 @@ public class Treasure : MonoBehaviour
     }
 
     private void Update(){
-        UpdateTime();
+        if(isCollected){
+            UpdateTime();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
             if(!isCollected){
                 AddCoin();
-                isCollected = true;
                 anim.SetBool("isCollected", true);
+                SetTime();
             }
         }
     }
 
     void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
+            if(!isCollected){
+                isCollected = true;
+            }
             anim.SetBool("isCollected", false);
         }
     }
@@ -62,6 +68,7 @@ public class Treasure : MonoBehaviour
         hour = timeRetrieval.y;
         minute = timeRetrieval.z;
         second = timeRetrieval.w;
+        UpdateText();
     }
 
     private void UpdateTime(){
@@ -83,6 +90,7 @@ public class Treasure : MonoBehaviour
             hour--;
             minute = 59;
             second = 60;
+            return;
         }
         if(day > 0){
             day--;
@@ -98,6 +106,7 @@ public class Treasure : MonoBehaviour
                 if(minute == 0){
                     if(second == 0){
                         textTime.text = "Ready";
+                        isCollected = false;
                         return;
                     }
                 }
@@ -125,17 +134,10 @@ public class Treasure : MonoBehaviour
 
     // Check hien thi cua tung loai thoi gian
     private string ConsiderText(float number){
-        if(number < 10) return "0" + (int)number;
-        return ((int)number).ToString();
+        return number < 10 ? "0" + (int)number : ((int)number).ToString();
     }
 
     #endregion
 
-    public void SetTimeRetrieval(Vector4 timeRetrieval){
-        this.timeRetrieval = timeRetrieval;
-    }
-
-    public Vector4 GetTimeRetrieval(){
-        return this.timeRetrieval;
-    }
+    
 }

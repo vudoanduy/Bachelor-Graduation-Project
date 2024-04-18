@@ -144,12 +144,12 @@ public class ManageSkin : MonoBehaviour
             manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].ImageSkin);
 
             AppearNotifiBuy();
-            Invoke("DisappearNotifiBuy", 1);
+            Invoke(nameof(DisappearNotifiBuy), 1);
         } else{
             localizeStringEvent.StringReference = stateBuy[1];
 
             AppearNotifiBuy();
-            Invoke("DisappearNotifiBuy", 1);
+            Invoke(nameof(DisappearNotifiBuy), 1);
         }
     }
 

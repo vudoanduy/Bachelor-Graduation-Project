@@ -16,17 +16,6 @@ public class ManageCoin : MonoBehaviour
         }   
     }
 
-    #region TestXu
-
-    private void Update(){
-        if(Input.GetKeyDown(KeyCode.U)){
-            AddCoin(10000);
-        }
-    }
-
-    #endregion
-
-
     #region Interact with Coin
     // Kiem tra xem so xu co du de mua hay khong
     // tra ve true neu du, false neu nguoc lai
