@@ -10,6 +10,7 @@ public class SlimeMini : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerInfo playerInfo;
     PlayerColision playerColision;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -57,7 +58,9 @@ public class SlimeMini : MonoBehaviour
             if(playerColision == null){
                 playerColision = FindObjectOfType<PlayerColision>();
                 playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;

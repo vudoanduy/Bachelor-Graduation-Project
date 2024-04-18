@@ -16,6 +16,7 @@ public class BulletPlant : MonoBehaviour
     public bool IsMove{get{return isMove;} set{isMove = value;}}
 
     PlayerInfo playerInfo;
+    Rigidbody2D rbPlayer;
 
     private float distanceMove = 0; 
 
@@ -33,7 +34,9 @@ public class BulletPlant : MonoBehaviour
         if(other.gameObject.CompareTag("Player")){
             if(playerInfo == null){
                 playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             playerInfo.GetDame(damageBulletPlant);
             other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.left * 10;
             DestroyBullet();

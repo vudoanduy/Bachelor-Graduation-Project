@@ -20,6 +20,7 @@ public class PlantNormal : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerColision playerColision;
     PlayerInfo playerInfo;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -72,7 +73,9 @@ public class PlantNormal : MonoBehaviour
             if(playerColision == null){
                 playerColision = FindObjectOfType<PlayerColision>();
                 playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(plantNormal.IsGetDamage){
                     plantNormal.IsGetDamage = false;

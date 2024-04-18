@@ -30,6 +30,7 @@ public class SlimeBig : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerColision playerColision;
     PlayerInfo playerInfo;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -72,8 +73,9 @@ public class SlimeBig : MonoBehaviour
             if(playerColision == null){
                 playerColision = FindObjectOfType<PlayerColision>();
                 playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             }
-            Debug.Log(playerColision.GetIsHeadEnemy());
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(bigSlime.IsGetDamage){
                     bigSlime.IsGetDamage = false;

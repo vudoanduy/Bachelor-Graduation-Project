@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,7 @@ public class ManageLevel : MonoBehaviour
         }
     }
 
+
     public void JoinLevel(){
         if(btnChangeText == null){
             btnChangeText = FindObjectOfType<BtnChangeText>();
@@ -23,7 +25,13 @@ public class ManageLevel : MonoBehaviour
         }
         nameSceneLoad = setLevelName.GetLevelId().ToString() + "_" + btnChangeText.GetStateLevel();
 
-        Debug.Log(nameSceneLoad);
+        StartCoroutine(LoadLevelScene(nameSceneLoad));
+    }
+
+    IEnumerator LoadLevelScene(string nameSceneLoad){
+        FindObjectOfType<ManageTransitionScene>().Transition(2f);
+        yield return new WaitForSeconds(1);
+
         SceneManager.LoadScene(nameSceneLoad);
     }
 }

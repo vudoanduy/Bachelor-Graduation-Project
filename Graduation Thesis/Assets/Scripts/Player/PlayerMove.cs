@@ -241,11 +241,17 @@ public class PlayerMove : MonoBehaviour
         this.maxJump = defaultMaxJump;
     }
 
-    // Cho nhan vat dung yen
+    // Cho nhan vat dung yen trong 1 khoang thoi gian
     public void IdlePlayer(float timeIdle){
         speed = 0;
         force = 0;
         Invoke(nameof(DefaultAllParameter), timeIdle);
+    }
+
+    // Cho nhan vat dung yen khong gioi han thoi gian
+    public void IdlePlayer(){
+        speed = 0;
+        force = 0;
     }
 
     private void DefaultAllParameter(){

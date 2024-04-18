@@ -3,14 +3,14 @@ using UnityEngine;
 public class InstructionManage : MonoBehaviour
 {
     private void Start(){
-        OffActiveInstruction();
+        OnActiveInstruction();
     }
 
-    private void OffActiveInstruction(){
+    private void OnActiveInstruction(){
         GameObject[] instructions = GameObject.FindGameObjectsWithTag("Instruction");
         
         foreach (GameObject instruction in instructions){
-            instruction.transform.GetChild(0).gameObject.SetActive(false);
+            instruction.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 }

@@ -47,7 +47,8 @@ public class PlayerColision : MonoBehaviour
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Instruction")){
-            other.transform.GetChild(0).gameObject.SetActive(true);
+            LeanTween.scaleX(other.transform.GetChild(0).gameObject, 1, 0.2f).setEase(LeanTweenType.linear);
+            // other.transform.GetChild(0).gameObject.SetActive(true);
         }
         if(other.gameObject.CompareTag("CutScene")){
             ManageCamera manageCamera = FindObjectOfType<ManageCamera>();
@@ -59,7 +60,8 @@ public class PlayerColision : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.CompareTag("Instruction")){
-            other.transform.GetChild(0).gameObject.SetActive(false);
+            LeanTween.scaleX(other.transform.GetChild(0).gameObject, 0, 0.2f).setEase(LeanTweenType.linear);
+            // other.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 
