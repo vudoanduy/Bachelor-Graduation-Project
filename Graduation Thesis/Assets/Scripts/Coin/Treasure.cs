@@ -9,8 +9,9 @@ public class Treasure : MonoBehaviour
     [SerializeField] private int coin = 1000;
     [Tooltip("Chest cooldown time: (days) : (hours) : (minutes) : (seconds)")]
     [SerializeField] private Vector4 timeRetrieval;
-    [Tooltip("The best way is to fill in a chest with a different key")]
-    [SerializeField] private string keyChest = "";
+
+    // [Tooltip("The best way is to fill in a chest with a different key")]
+    // [SerializeField] private string keyChest = "";
 
     Animator anim;
     ManageCoin manageCoin;

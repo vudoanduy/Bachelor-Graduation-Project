@@ -48,7 +48,6 @@ public class PlayerColision : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Instruction")){
             LeanTween.scaleX(other.transform.GetChild(0).gameObject, 1, 0.2f).setEase(LeanTweenType.linear);
-            // other.transform.GetChild(0).gameObject.SetActive(true);
         }
         if(other.gameObject.CompareTag("CutScene")){
             ManageCamera manageCamera = FindObjectOfType<ManageCamera>();
@@ -56,12 +55,15 @@ public class PlayerColision : MonoBehaviour
             FindObjectOfType<PlayerMove>().IdlePlayer(5);
             other.gameObject.SetActive(false);
         }
+        if(other.gameObject.name == "BoundaryDown"){
+            Destroy(this.GetComponent<PlayerMove>());
+            Debug.Log("Nguoi choi bi chet do roi xuong vuc tham");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.CompareTag("Instruction")){
             LeanTween.scaleX(other.transform.GetChild(0).gameObject, 0, 0.2f).setEase(LeanTweenType.linear);
-            // other.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

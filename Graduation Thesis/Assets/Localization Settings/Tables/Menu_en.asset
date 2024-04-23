@@ -36,6 +36,10 @@ MonoBehaviour:
     m_Localized: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 14101397275901952
+    m_Localized: Revival
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

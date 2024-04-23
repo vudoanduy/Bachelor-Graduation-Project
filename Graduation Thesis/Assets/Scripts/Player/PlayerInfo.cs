@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,8 @@ public class PlayerInfo : MonoBehaviour
     ManageSkin manageSkin;
     Animator anim;
 
+    private GameObject revival_btn;
+
     bool isGetDamage = true;
 
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
@@ -30,6 +33,8 @@ public class PlayerInfo : MonoBehaviour
     private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
         anim = this.GetComponent<Animator>();
+        revival_btn = GameObject.Find("Revival_btn");
+        revival_btn.SetActive(false);
         
         timeImmortalItem = manageSkin.ReadTimeImmortalSkin();
         hpSkin = manageSkin.ReadHpSkinCurrent();
@@ -65,13 +70,31 @@ public class PlayerInfo : MonoBehaviour
 
     public void GetDame(int damage){
         if(isGetDamage){
-            StartCoroutine(Immortal(timeImmortalAfterHit));
             this.hpCurrent -= (int)(damage * damageCoefficient);
             if(this.hpCurrent <= 0){
                 this.hpCurrent = 0;
             }
             UpdateHPInfo();
+            if(this.hpCurrent == 0){
+                StartCoroutine(PlayAnimDisappearPlayer());
+            } else {
+                StartCoroutine(PlayAnimAfterGetDamage(timeImmortalAfterHit));
+            }
         }
+    }
+
+    IEnumerator PlayAnimDisappearPlayer(){
+        Rigidbody2D rbPlayer = GetComponent<Rigidbody2D>();
+        
+        Destroy(this.GetComponent<PlayerMove>());
+        anim.Play("DisappearPlayer");
+        rbPlayer.simulated = false;
+        yield return new WaitForSeconds(1.167f);
+
+        this.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
+        revival_btn.SetActive(true);
+        Destroy(this.gameObject);
+        yield break;
     }
 
     #endregion
@@ -154,13 +177,21 @@ public class PlayerInfo : MonoBehaviour
     IEnumerator Immortal(float timeImmortal){
         isGetDamage = false;
         shieldImg.SetActive(true);
-        anim.SetTrigger("isHit");
-        anim.SetBool("is Hit", true);
 
         yield return new WaitForSeconds(timeImmortal);
 
         isGetDamage = true;
         shieldImg.SetActive(false);
+        yield break;
+    }
+
+    IEnumerator PlayAnimAfterGetDamage(float timeImmortal){
+        anim.SetTrigger("isHit");
+        anim.SetBool("is Hit", true);
+
+        StartCoroutine(Immortal(timeImmortal));
+        yield return new WaitForSeconds(timeImmortal);
+
         anim.SetBool("is Hit", false);
         yield break;
     }
