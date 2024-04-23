@@ -35,9 +35,7 @@ public class PlayerMove : MonoBehaviour
     private void Start(){
         SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
-        defaultSpeed = this.speed;
-        defaultForce = this.force;
-        defaultMaxJump = this.maxJump;
+        SetDefaultParameters();
 
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
@@ -209,6 +207,13 @@ public class PlayerMove : MonoBehaviour
     }
 
     #region Change parameters
+    // Cai gia tri mac dinh cho cac thong so
+    public void SetDefaultParameters(){
+        defaultSpeed = this.speed;
+        defaultForce = this.force;
+        defaultMaxJump = this.maxJump;
+    }
+
     // Inc speed
     public void IncreaseSpeed(float times,float timeInc){
         isTurnOnGhost = true;
@@ -255,6 +260,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     private void DefaultAllParameter(){
+        Debug.Log("Hoi phuc lai toc do chay");
         speed = defaultSpeed;
         force = defaultForce;
     }

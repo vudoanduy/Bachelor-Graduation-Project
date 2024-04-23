@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: vi
   m_SharedData: {fileID: 11400000, guid: 71908bc19cc9b6b4bbf9ff57a916f041, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3752435842727018499
   m_TableData:
   - m_Id: 9596010496
     m_Localized: Ban co chac chan thoat tro choi khong?
@@ -30,6 +31,15 @@ MonoBehaviour:
     m_Localized: Co
     m_Metadata:
       m_Items: []
+  - m_Id: 14679082049961984
+    m_Localized: "B\u1EA1n c\xF3 mu\u1ED1n h\u1ED3i sinh v\u1EDBi gi\xE1 {0} xu kh\xF4ng?"
+    m_Metadata:
+      m_Items:
+      - rid: 3752435842727018499
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3752435842727018499
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0080371f8c263400

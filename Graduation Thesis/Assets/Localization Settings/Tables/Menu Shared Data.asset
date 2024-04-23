@@ -31,6 +31,14 @@ MonoBehaviour:
     m_Key: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 14101397275901952
+    m_Key: Revival
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15021755747237888
+    m_Key: Home
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
