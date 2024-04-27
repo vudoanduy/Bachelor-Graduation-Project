@@ -38,10 +38,13 @@ MonoBehaviour:
     m_Localized: Revival
     m_Metadata:
       m_Items: []
+<<<<<<< HEAD
   - m_Id: 15021755747237888
     m_Localized: Home
     m_Metadata:
       m_Items: []
+=======
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   references:
     version: 2
     RefIds: []

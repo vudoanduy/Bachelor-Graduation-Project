@@ -19,6 +19,8 @@ public class PlayerInfo : MonoBehaviour
     ManageSkin manageSkin;
     Animator anim;
 
+    private GameObject revival_btn;
+
     bool isGetDamage = true;
 
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
@@ -31,6 +33,8 @@ public class PlayerInfo : MonoBehaviour
     private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
         anim = this.GetComponent<Animator>();
+        revival_btn = GameObject.Find("Revival_btn");
+        revival_btn.SetActive(false);
         
         timeImmortalItem = manageSkin.ReadTimeImmortalSkin();
         hpSkin = manageSkin.ReadHpSkinCurrent();
@@ -88,7 +92,11 @@ public class PlayerInfo : MonoBehaviour
         yield return new WaitForSeconds(1.167f);
 
         this.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
+<<<<<<< HEAD
         FindObjectOfType<SpawnPlayer>().SetStateRevivalBtn(true);
+=======
+        revival_btn.SetActive(true);
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
         Destroy(this.gameObject);
         yield break;
     }

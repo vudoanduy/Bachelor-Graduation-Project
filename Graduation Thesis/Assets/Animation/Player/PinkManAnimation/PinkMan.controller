@@ -26,10 +26,17 @@ AnimatorStateMachine:
     m_Position: {x: 160, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3061216139783746150}
+<<<<<<< HEAD
     m_Position: {x: 0, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6347566252675383193}
     m_Position: {x: 0, y: 170, z: 0}
+=======
+    m_Position: {x: -300, y: -100, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6347566252675383193}
+    m_Position: {x: -300, y: -40, z: 0}
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -7014749336904548642}
@@ -197,8 +204,12 @@ AnimatorState:
   m_Name: AppearPlayer
   m_Speed: 1
   m_CycleOffset: 0
+<<<<<<< HEAD
   m_Transitions:
   - {fileID: -332038544473961370}
+=======
+  m_Transitions: []
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -239,6 +250,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 --- !u!1101 &-4611045264621072534
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -264,6 +276,8 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+=======
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
 --- !u!1102 &-3061216139783746150
 AnimatorState:
   serializedVersion: 6
@@ -274,8 +288,12 @@ AnimatorState:
   m_Name: DisappearPlayer
   m_Speed: 1
   m_CycleOffset: 0
+<<<<<<< HEAD
   m_Transitions:
   - {fileID: -4611045264621072534}
+=======
+  m_Transitions: []
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
