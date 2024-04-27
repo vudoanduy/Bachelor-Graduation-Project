@@ -10,6 +10,7 @@ public class SlimeMini : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerInfo playerInfo;
     PlayerColision playerColision;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -17,8 +18,7 @@ public class SlimeMini : MonoBehaviour
 
     private void Start(){
         miniSlime = new Slime(this.transform, minCoin, maxCoin){Anim = this.GetComponent<Animator>()};       
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
+
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -55,10 +55,16 @@ public class SlimeMini : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(miniSlime.IsGetDamage){
                     miniSlime.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    StartCoroutine(checkHit.HitDamage(0.625f, playerInfo.GetDamageBase()));
                     if(miniSlime.HP == 0){
                         int coin = miniSlime.RandomCoin(miniSlime.MinCoin, miniSlime.MaxCoin);
 

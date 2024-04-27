@@ -29,7 +29,7 @@ public class SaveManage : MonoBehaviour
 
     public List<int> markSlots = new(){0};
 
-    public int coinCurrent = 10000;
+    public int coinCurrent = 1000;
 
     public int idSkinSelected = 0;
 
@@ -123,7 +123,7 @@ public class SaveManage : MonoBehaviour
     }
 
     public int GetLocaleID(){
-        return this.localeID;
+        return localeID;
     }
 
     #endregion

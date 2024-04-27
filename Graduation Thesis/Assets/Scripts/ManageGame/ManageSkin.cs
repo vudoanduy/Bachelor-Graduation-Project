@@ -144,12 +144,12 @@ public class ManageSkin : MonoBehaviour
             manageBag.AddSlot(this.idSkin, 0, 0, skins[idSkin].ImageSkin);
 
             AppearNotifiBuy();
-            Invoke("DisappearNotifiBuy", 1);
+            Invoke(nameof(DisappearNotifiBuy), 1);
         } else{
             localizeStringEvent.StringReference = stateBuy[1];
 
             AppearNotifiBuy();
-            Invoke("DisappearNotifiBuy", 1);
+            Invoke(nameof(DisappearNotifiBuy), 1);
         }
     }
 
@@ -160,11 +160,15 @@ public class ManageSkin : MonoBehaviour
     }
 
     public void SetPointerSkin(int idSkin){
+        if(pointerSkin == null){
+            pointerSkin = GameObject.Find("PointerSkin");
+        }
+
         idSkinSelected = idSkin;
         SaveManage.Instance.SetIDSkinSelected(idSkinSelected);
 
         if(SceneManager.GetActiveScene().name == "Menu"){
-            pointerSkin.transform.localPosition = skinUnlockedPrefabs[idSkin].transform.localPosition + new Vector3(0, 1.3f, 0);
+            pointerSkin.transform.localPosition = skinUnlockedPrefabs[idSkin].transform.localPosition + Vector3.up * 1.3f ;
         }
 
         if(FindFirstObjectByType<PlayerInfo>() != null){

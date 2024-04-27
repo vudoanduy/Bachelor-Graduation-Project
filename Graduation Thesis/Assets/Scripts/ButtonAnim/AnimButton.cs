@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
-// Xet anim nhanh chong cho cac button khi click vao
+// Xet anim cho cac button khi click vao
 // Khi nguoi choi an giu thi anim hold va tha ra se la anim exit
 
 public class AnimButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [Header("Select Style Button")]
+    [Header("Select Style Button (Only one)")]
     [SerializeField] protected bool isRectangle;
     [SerializeField] protected bool isCircle;
     [SerializeField] protected bool isOptions;

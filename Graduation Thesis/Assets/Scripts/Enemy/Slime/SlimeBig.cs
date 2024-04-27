@@ -30,6 +30,7 @@ public class SlimeBig : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerColision playerColision;
     PlayerInfo playerInfo;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -43,8 +44,6 @@ public class SlimeBig : MonoBehaviour
         checkHit = new(){
             Data = bigSlime
         };
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -71,12 +70,17 @@ public class SlimeBig : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(playerColision.GetIsHeadEnemy());
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(bigSlime.IsGetDamage){
                     bigSlime.IsGetDamage = false;
                     Debug.Log("Quai vat bi mat mau");
-                    StartCoroutine(checkHit.HitDamage(0.625f));
+                    StartCoroutine(checkHit.HitDamage(0.625f, playerInfo.GetDamageBase()));
                     if(bigSlime.HP == 0){
                         int coin = bigSlime.RandomCoin(bigSlime.MinCoin, bigSlime.MaxCoin);
 

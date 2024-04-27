@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,31 +12,38 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-    [Header("HP Bar")]
-    [SerializeField] TextMeshProUGUI hpInfo;
-    [SerializeField] Image hpBar;
     [SerializeField] GameObject shieldImg;
 
+    TextMeshProUGUI hpInfo;
+    Image hpBar;
     ManageSkin manageSkin;
     Animator anim;
+
+    private GameObject revival_btn;
 
     bool isGetDamage = true;
 
     protected int hpBase = 1, hpSkin, hpPlayer, hpCurrent = 0; // hpPlayer = hpBase + hpSkin;
+    protected int damageBase = 1;
     protected int timeImmortalItem, timeImmortalAfterHit = 1;
+
+    private float damageCoefficient = 1;
+    private int defaultDamageBase;
 
     private void Start(){
         manageSkin = GameObject.Find("ManageSkin").GetComponent<ManageSkin>();
         anim = this.GetComponent<Animator>();
+        revival_btn = GameObject.Find("Revival_btn");
+        revival_btn.SetActive(false);
         
         timeImmortalItem = manageSkin.ReadTimeImmortalSkin();
         hpSkin = manageSkin.ReadHpSkinCurrent();
         hpCurrent = this.hpSkin + this.hpBase;
+        defaultDamageBase = damageBase;
 
         UpdateHPPlayer();
         UpdateHPInfo();
     }
-
 
     #region Set Parameters
 
@@ -49,6 +57,11 @@ public class PlayerInfo : MonoBehaviour
         UpdateHPPlayer();
     }
 
+    public void SetDamageBase(int damageBase){
+        this.damageBase = damageBase;
+        this.defaultDamageBase = damageBase;
+    }
+
     #endregion
 
     // Khi nhan dame tu 1 nguon nao do se tru luong hp hien tai va cap nhat gia tri len
@@ -57,13 +70,35 @@ public class PlayerInfo : MonoBehaviour
 
     public void GetDame(int damage){
         if(isGetDamage){
-            StartCoroutine(Immortal(timeImmortalAfterHit));
-            this.hpCurrent -= damage;
+            this.hpCurrent -= (int)(damage * damageCoefficient);
             if(this.hpCurrent <= 0){
                 this.hpCurrent = 0;
             }
             UpdateHPInfo();
+            if(this.hpCurrent == 0){
+                StartCoroutine(PlayAnimDisappearPlayer());
+            } else {
+                StartCoroutine(PlayAnimAfterGetDamage(timeImmortalAfterHit));
+            }
         }
+    }
+
+    IEnumerator PlayAnimDisappearPlayer(){
+        Rigidbody2D rbPlayer = GetComponent<Rigidbody2D>();
+        
+        Destroy(this.GetComponent<PlayerMove>());
+        anim.Play("DisappearPlayer");
+        rbPlayer.simulated = false;
+        yield return new WaitForSeconds(1.167f);
+
+        this.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
+<<<<<<< HEAD
+        FindObjectOfType<SpawnPlayer>().SetStateRevivalBtn(true);
+=======
+        revival_btn.SetActive(true);
+>>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
+        Destroy(this.gameObject);
+        yield break;
     }
 
     #endregion
@@ -80,6 +115,10 @@ public class PlayerInfo : MonoBehaviour
 
     // Neu nguoi choi co cac thao tac thay doi luong hp thi se cap nhat theo gia tri hp do
     public void UpdateHPInfo(){
+        if(hpInfo == null){
+            hpInfo = GameObject.Find("HpInfo").GetComponent<TextMeshProUGUI>();
+            hpBar = GameObject.Find("HPBar").GetComponent<Image>();
+        }
         hpInfo.text = this.hpCurrent + "/" + this.hpPlayer;
         hpBar.fillAmount = (float)this.hpCurrent/(float)this.hpPlayer;
     }
@@ -90,6 +129,10 @@ public class PlayerInfo : MonoBehaviour
 
     public int GetHPPlayer(){
         return this.hpPlayer;
+    }
+
+    public int GetDamageBase(){
+        return this.damageBase;
     }
 
     #endregion
@@ -113,18 +156,46 @@ public class PlayerInfo : MonoBehaviour
     public void UseImmortalItem(){
         StartCoroutine(Immortal(timeImmortalItem));
     }
+    
+    // Giam sat thuong nhan vao
+    public void SetDamageCoefficient(float damageCoefficient,float timeEffect){
+        this.damageCoefficient = damageCoefficient;
+        Invoke(nameof(DefaultDamageCoefficient), timeEffect);
+    }
 
+    public void DefaultDamageCoefficient(){
+        this.damageCoefficient = 1;
+    }
+
+    // Tang damage gay ra
+    public void IncreaseDamageBase(int damage, float timeEffect){
+        this.damageBase += damage;
+        Invoke(nameof(DefaultDamageBase), timeEffect);
+    }
+
+    public void DefaultDamageBase(){
+        this.damageBase = defaultDamageBase;
+    }
+    
     // Goi toi ham bat tu voi thoi gian duoc xet
     IEnumerator Immortal(float timeImmortal){
         isGetDamage = false;
         shieldImg.SetActive(true);
-        anim.SetTrigger("isHit");
-        anim.SetBool("is Hit", true);
 
         yield return new WaitForSeconds(timeImmortal);
 
         isGetDamage = true;
         shieldImg.SetActive(false);
+        yield break;
+    }
+
+    IEnumerator PlayAnimAfterGetDamage(float timeImmortal){
+        anim.SetTrigger("isHit");
+        anim.SetBool("is Hit", true);
+
+        StartCoroutine(Immortal(timeImmortal));
+        yield return new WaitForSeconds(timeImmortal);
+
         anim.SetBool("is Hit", false);
         yield break;
     }

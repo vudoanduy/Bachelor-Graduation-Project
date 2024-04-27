@@ -41,6 +41,7 @@ public class TurtleNormal : MonoBehaviour
     CheckHit<Enemy> checkHit;
     PlayerColision playerColision;
     PlayerInfo playerInfo;
+    Rigidbody2D rbPlayer;
     ManageCoin manageCoin;
     AppearCoins appearCoins;
 
@@ -52,8 +53,6 @@ public class TurtleNormal : MonoBehaviour
         turtleNormal = new Turtle(this.transform, hpTurtle, speedMoveTurtle, damageTurtle, damageSpikeTurtle, minCoin, maxCoin){
             Anim = this.GetComponent<Animator>()
         };
-        playerColision = FindObjectOfType<PlayerColision>();
-        playerInfo = FindObjectOfType<PlayerInfo>();
         manageCoin = FindObjectOfType<ManageCoin>();
         appearCoins = FindObjectOfType<AppearCoins>();
 
@@ -113,10 +112,16 @@ public class TurtleNormal : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player"))
         {
+            if(playerColision == null){
+                playerColision = FindObjectOfType<PlayerColision>();
+                playerInfo = FindObjectOfType<PlayerInfo>();
+                rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+            }
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
             if(playerColision.GetIsHeadEnemy()){
                 if(turtleNormal.IsGetDamage){
                     turtleNormal.IsGetDamage = false;
-                    StartCoroutine(checkHit.HitDamage(0.417f));
+                    StartCoroutine(checkHit.HitDamage(0.417f, playerInfo.GetDamageBase()));
                     if(turtleNormal.HP == 0){
                         int coin = turtleNormal.RandomCoin(turtleNormal.MinCoin, turtleNormal.MaxCoin);
 

@@ -1,30 +1,35 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerColision : MonoBehaviour
 {
     [Header("Layer Mask Check")]
-    [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask coinLayer;
 
     [Header("GameObject Check")]
     [SerializeField] GameObject checkGround;
     [SerializeField] GameObject checkSliding;
+
+    [Header("")]
+    [SerializeField] private float radiusMagnet;
+    [SerializeField] private float speedMagnet;
 
     bool isGround, isSliding, isHeadEnemy;
 
     private void Update(){
         CheckGround();
         CheckSliding();
+        MagnetCoin();
     }
 
     #region Check
     protected void CheckGround(){
-        isGround = Physics2D.OverlapBox(checkGround.transform.position, new Vector2(0.36f, 0.054f), 0, ground);
+        isGround = Physics2D.OverlapBox(checkGround.transform.position, new Vector2(0.36f, 0.054f), 0, groundLayer);
     }
 
     protected void CheckSliding(){
-        isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.12f, 0.72f), 0, ground);
+        isSliding = Physics2D.OverlapBox(checkSliding.transform.position, new Vector2(0.12f, 0.72f), 0, groundLayer);
     }
 
     #endregion
@@ -37,6 +42,29 @@ public class PlayerColision : MonoBehaviour
         {
             StartCoroutine(DelayCheckHead());
         }
+        if(other.gameObject.CompareTag("Coin")){
+            other.gameObject.GetComponent<Coins>().AddCoin();
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Instruction")){
+            LeanTween.scaleX(other.transform.GetChild(0).gameObject, 1, 0.2f).setEase(LeanTweenType.linear);
+        }
+        if(other.gameObject.CompareTag("CutScene")){
+            ManageCamera manageCamera = FindObjectOfType<ManageCamera>();
+            manageCamera.ChangeCams(int.Parse(other.gameObject.name), 0, 5);
+            FindObjectOfType<PlayerMove>().IdlePlayer(5);
+            other.gameObject.SetActive(false);
+        }
+        if(other.gameObject.name == "BoundaryDown"){
+            Destroy(this.GetComponent<PlayerMove>());
+            Debug.Log("Nguoi choi bi chet do roi xuong vuc tham");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.CompareTag("Instruction")){
+            LeanTween.scaleX(other.transform.GetChild(0).gameObject, 0, 0.2f).setEase(LeanTweenType.linear);
+        }
     }
 
     IEnumerator DelayCheckHead(){
@@ -46,6 +74,17 @@ public class PlayerColision : MonoBehaviour
 
         isHeadEnemy = false;
         yield break;
+    }
+
+    // Hut dong xu ve vi tri cua minh trong ban kinh
+    public void MagnetCoin(){
+        Collider2D[] coinCol = Physics2D.OverlapCircleAll(this.gameObject.transform.position, radiusMagnet, coinLayer);
+
+        if(coinCol != null){
+            foreach(Collider2D col in coinCol){
+                col.transform.position = Vector3.MoveTowards(col.transform.position, this.transform.position, Time.deltaTime * speedMagnet);
+            }
+        }
     }
 
     #endregion
