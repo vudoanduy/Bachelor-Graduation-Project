@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ManageCoin : MonoBehaviour
@@ -14,6 +15,12 @@ public class ManageCoin : MonoBehaviour
             Destroy(FindFirstObjectByType<ManageCoin>().gameObject);
             return;
         }   
+    }
+
+    private void Update(){
+        if(Input.GetKeyDown(KeyCode.O)){
+            AddCoin(1000);
+        }
     }
 
     #region Interact with Coin

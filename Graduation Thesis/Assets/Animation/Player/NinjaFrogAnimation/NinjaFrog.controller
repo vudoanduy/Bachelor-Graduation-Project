@@ -264,12 +264,8 @@ AnimatorState:
   m_Name: AppearPlayer
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
   m_Transitions:
   - {fileID: 7320764797426686237}
-=======
-  m_Transitions: []
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -645,17 +641,10 @@ AnimatorStateMachine:
     m_Position: {x: 180, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8573254124079749282}
-<<<<<<< HEAD
     m_Position: {x: 30, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1372236238755046902}
     m_Position: {x: 30, y: 140, z: 0}
-=======
-    m_Position: {x: -270, y: -100, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -1372236238755046902}
-    m_Position: {x: -270, y: -40, z: 0}
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 7378328067191441704}
@@ -678,12 +667,8 @@ AnimatorState:
   m_Name: DisappearPlayer
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
   m_Transitions:
   - {fileID: 7372052468260192533}
-=======
-  m_Transitions: []
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

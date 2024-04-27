@@ -38,7 +38,6 @@ public class SpawnPlayer : MonoBehaviour
     private void Start(){
         SpawnNewPlayer(startPos);
         DefaultCost();
-        SetStateRevivalBtn(false);
     }
 
     public void SpawnNewPlayer(Vector3 spawnPos){
@@ -74,7 +73,8 @@ public class SpawnPlayer : MonoBehaviour
         }
         if(manageCoin.CheckCoin((int)costTotal)){
             StartCoroutine(Revival(2));
-            CalculateCost();
+            SetStateRevivalBtn(false);
+            GameObject.Find("Revival_request").SetActive(false);
         } else {
             GameObject.Find("btn_No").GetComponent<MovePage>().SetPage();
         }
@@ -83,6 +83,8 @@ public class SpawnPlayer : MonoBehaviour
     IEnumerator Revival(float time){
         FindObjectOfType<ManageTransitionScene>().Transition(2); // time close (1) + time pause (1) to trans scene
         yield return new WaitForSeconds(1);
+        manageCoin.SubCoin((int)costTotal);
+        CalculateCost();
 
         SpawnNewPlayer(startPos);
         yield break;
@@ -108,7 +110,14 @@ public class SpawnPlayer : MonoBehaviour
 
     //
     public void SetStateRevivalBtn(bool stateBtn){
-        this.revival_btn.SetActive(stateBtn);
+        // if(!stateBtn){
+        //     if(revival_btn.activeSelf){
+        //         revival_btn.SetActive(stateBtn);
+        //     }
+        // } else {
+        //     revival_btn.SetActive(stateBtn);
+        // }
+        revival_btn.SetActive(stateBtn);
     }
 }
 
