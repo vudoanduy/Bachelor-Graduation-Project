@@ -38,15 +38,13 @@ public class Treasure : MonoBehaviour
                 AddCoin();
                 anim.SetBool("isCollected", true);
                 SetTime();
+                isCollected = true;
             }
         }
     }
 
     void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.CompareTag("Player")){
-            if(!isCollected){
-                isCollected = true;
-            }
             anim.SetBool("isCollected", false);
         }
     }

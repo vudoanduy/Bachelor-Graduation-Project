@@ -66,6 +66,7 @@ public class ManageSkin : MonoBehaviour
         count = nameSkins.Count();
         stateSkins = SaveManage.Instance.GetStateSkins();
         idSkinSelected = SaveManage.Instance.GetIDSkinSelected();
+        Debug.Log("ID Skin Selected loaded:" + idSkinSelected);
 
         skins = new Skin[count];
         manageCoin = GameObject.Find("ManageCoin").GetComponent<ManageCoin>();
@@ -77,6 +78,8 @@ public class ManageSkin : MonoBehaviour
             Destroy(FindFirstObjectByType<ManageSkin>().gameObject);
             return;
         }
+
+        // if(Find)
     }
 
     #region Set Up
@@ -90,13 +93,13 @@ public class ManageSkin : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Menu"){
             for(int i = 0; i < count; i++){
                 if(stateSkins[i] == 1){
-                    UnlockSkin(idSkin);
+                    UnlockSkin(i);
+                    Debug.Log(i);
                 } else {
                     skinUnlocked[i].SetActive(false);
                 }
             }
         }
-
 
         SetPointerSkin(idSkinSelected);
     }
@@ -217,6 +220,8 @@ public class ManageSkin : MonoBehaviour
     }
 
     public int ReadHpSkinCurrent(){
+        Debug.Log(skins[idSkinSelected].HPSkin);
+        Debug.Log(idSkinSelected);
         return skins[idSkinSelected].HPSkin;
     }
 

@@ -27,14 +27,14 @@ public class BtnChangeText : MonoBehaviour
     [Header("Check if u don't want button to loop endlessly")]
     public bool isSetOffButton; 
 
-
     private void Start(){
         idText = 0;
         countText = textChange.Count();
 
         localizeStringEvent = this.GetComponent<LocalizeStringEvent>();
 
-        CheckText();
+        button[0].interactable = false;
+        button[1].interactable = false;
     } 
 
     // Xet dieu kien de thay doi text lap lai hay khong
@@ -77,5 +77,9 @@ public class BtnChangeText : MonoBehaviour
 
     public string GetStateLevel(){
         return stateLevel[idText];
+    }
+
+    public int GetIDStateLevel(){
+        return idText;
     }
 }

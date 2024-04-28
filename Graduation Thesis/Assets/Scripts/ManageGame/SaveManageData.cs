@@ -20,4 +20,8 @@ public class SaveManageData
     public int idSkinSelected = 0;
 
     public int localeID = 0;
+
+    public int idLevelMax = 1;
+
+    public int idStateLevelMax = 0;
 }

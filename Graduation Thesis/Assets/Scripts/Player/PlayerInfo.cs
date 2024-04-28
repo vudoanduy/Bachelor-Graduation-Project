@@ -42,7 +42,6 @@ public class PlayerInfo : MonoBehaviour
         defaultDamageBase = damageBase;
 
         UpdateHPPlayer();
-        UpdateHPInfo();
     }
 
     #region Set Parameters
@@ -62,6 +61,11 @@ public class PlayerInfo : MonoBehaviour
         this.defaultDamageBase = damageBase;
     }
 
+    public void SetHPCurrent(int hpCurrent){
+        this.hpCurrent = hpCurrent;
+        UpdateHPPlayer();
+    }
+
     #endregion
 
     // Khi nhan dame tu 1 nguon nao do se tru luong hp hien tai va cap nhat gia tri len
@@ -76,14 +80,18 @@ public class PlayerInfo : MonoBehaviour
             }
             UpdateHPInfo();
             if(this.hpCurrent == 0){
-                StartCoroutine(PlayAnimDisappearPlayer());
+                PlayAnimDisappearPlayer();
             } else {
                 StartCoroutine(PlayAnimAfterGetDamage(timeImmortalAfterHit));
             }
         }
     }
 
-    IEnumerator PlayAnimDisappearPlayer(){
+    public void PlayAnimDisappearPlayer(){
+        StartCoroutine(PlayAnimDisappear());
+    }
+
+    IEnumerator PlayAnimDisappear(){
         Rigidbody2D rbPlayer = GetComponent<Rigidbody2D>();
         
         Destroy(this.GetComponent<PlayerMove>());

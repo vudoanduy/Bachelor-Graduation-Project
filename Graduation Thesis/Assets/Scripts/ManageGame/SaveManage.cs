@@ -35,6 +35,10 @@ public class SaveManage : MonoBehaviour
 
     public int localeID = 0;
 
+    public int idLevelMax = 1;
+
+    public int idStateLevelMax = 0;
+
     //
 
     private void Awake(){
@@ -90,6 +94,16 @@ public class SaveManage : MonoBehaviour
         SaveGame();
     }
 
+    public void SetIDLevelMax(int idLevelMax){
+        this.idLevelMax = idLevelMax;
+        SaveGame();
+    }
+
+    public void SetIDStateLevelMax(int idStateLevelMax){
+        this.idStateLevelMax = idStateLevelMax;
+        SaveGame();
+    }
+
     #endregion
 
 
@@ -126,6 +140,14 @@ public class SaveManage : MonoBehaviour
         return localeID;
     }
 
+    public int GetIDLevelMax(){
+        return idLevelMax;
+    }
+
+    public int GetIDStateLevelMax(){
+        return idStateLevelMax;
+    }
+
     #endregion
 
     //
@@ -148,6 +170,8 @@ public class SaveManage : MonoBehaviour
             markSlots = obj.markSlots;
             idSkinSelected = obj.idSkinSelected;
             localeID = obj.localeID;
+            idLevelMax = obj.idLevelMax;
+            idStateLevelMax = obj.idStateLevelMax;
         }
     }
 

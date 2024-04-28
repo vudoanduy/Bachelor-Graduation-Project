@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,27 @@ public class Door : MonoBehaviour
             Destroy(other.gameObject.GetComponent<PlayerMove>());
             other.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             StartCoroutine(DisAppearPlayer(other.gameObject));
+
+            string nameSceneCurrent = SceneManager.GetActiveScene().name;
+            string idLevelCurrent = "";
+            string stateLevelCurrent;
+            int i = 0;
+            int idStateLevelCurrent;
+
+            while(IsNumber(Convert.ToChar(nameSceneCurrent.Substring(i, 1)))){
+                idLevelCurrent += nameSceneCurrent.Substring(i, 1);
+                i++;
+            }
+            stateLevelCurrent = nameSceneCurrent[(i + 1)..];
+            if(stateLevelCurrent == "Easy"){
+                idStateLevelCurrent = 0;
+            } else if(stateLevelCurrent == "Medium"){
+                idStateLevelCurrent = 1;
+            } else {
+                idStateLevelCurrent = 2;
+            }
+
+            FindObjectOfType<ManageLevel>().CheckUnlockNewLevel(Convert.ToInt32(idLevelCurrent), idStateLevelCurrent);
         }
     }
 
@@ -40,5 +62,12 @@ public class Door : MonoBehaviour
 
         SceneManager.LoadScene("Menu");
         yield break;
+    }
+
+    private bool IsNumber(char value){
+        if(value >= 48 && value <= 57){
+            return true;
+        }
+        return false;
     }
 }
