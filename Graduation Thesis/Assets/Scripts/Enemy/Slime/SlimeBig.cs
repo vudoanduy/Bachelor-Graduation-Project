@@ -57,7 +57,7 @@ public class SlimeBig : MonoBehaviour
 
     //
     public void SetUpBigSlime(){
-        float direct = UnityEngine.Random.Range(0,1);
+        float direct = UnityEngine.Random.Range(0f,1f);
 
         bigSlime.SetPoint(pointLeft, pointRight);
         bigSlime.DirectionMoveStart(direct);

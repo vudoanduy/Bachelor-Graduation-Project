@@ -56,8 +56,10 @@ public class PlayerColision : MonoBehaviour
             other.gameObject.SetActive(false);
         }
         if(other.gameObject.name == "BoundaryDown"){
-            Destroy(this.GetComponent<PlayerMove>());
-            Debug.Log("Nguoi choi bi chet do roi xuong vuc tham");
+            PlayerInfo playerInfo = GetComponent<PlayerInfo>();
+
+            playerInfo.PlayAnimDisappearPlayer();
+            playerInfo.SetHPCurrent(0);
         }
     }
 
