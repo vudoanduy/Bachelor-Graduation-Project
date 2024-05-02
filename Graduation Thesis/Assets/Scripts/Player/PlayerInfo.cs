@@ -102,8 +102,6 @@ public class PlayerInfo : MonoBehaviour
 
         this.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
         spawnPlayer.SetStateRevivalBtn(true);
-        Destroy(this.gameObject);
-        yield break;
     }
 
     #endregion
