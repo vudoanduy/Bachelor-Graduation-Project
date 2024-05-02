@@ -2228,7 +2228,6 @@ GameObject:
   - component: {fileID: 600052091}
   - component: {fileID: 600052090}
   - component: {fileID: 600052089}
-  - component: {fileID: 600052088}
   m_Layer: 5
   m_Name: btn_Yes
   m_TagString: Untagged
@@ -2256,21 +2255,6 @@ RectTransform:
   m_AnchoredPosition: {x: 189, y: -115}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &600052088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600052086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b2ed2e0a1877504ab67e1c8d31098a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPage: {fileID: 1004181170}
-  targetPage: {fileID: 2058965531}
-  isKeepCurrentPage: 0
 --- !u!114 &600052089
 MonoBehaviour:
   m_ObjectHideFlags: 0
