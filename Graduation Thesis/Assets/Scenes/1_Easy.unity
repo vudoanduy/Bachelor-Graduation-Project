@@ -9258,20 +9258,12 @@ PrefabInstance:
       objectReference: {fileID: 1778781863}
     - target: {fileID: 1256105138416429502, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
       propertyPath: gameObjects.Array.size
-<<<<<<< HEAD
       value: 2
-=======
-      value: 1
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
       objectReference: {fileID: 0}
     - target: {fileID: 1256105138416429502, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
       propertyPath: gameObjects.Array.data[1]
       value: 
-<<<<<<< HEAD
       objectReference: {fileID: 1004181170}
-=======
-      objectReference: {fileID: 1991616671}
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
     - target: {fileID: 1258401353540483335, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9457,14 +9449,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3426857318257166730, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
       insertIndex: -1
-<<<<<<< HEAD
       addedObject: {fileID: 2058965534}
     - targetCorrespondingSourceObject: {fileID: 3426857318257166730, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1004181171}
-=======
-      addedObject: {fileID: 1991616672}
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d78508535d317c4c8795d5323ae00d3, type: 3}
 --- !u!224 &2276134335184602438 stripped

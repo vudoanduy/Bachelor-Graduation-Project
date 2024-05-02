@@ -92,11 +92,7 @@ public class PlayerInfo : MonoBehaviour
         yield return new WaitForSeconds(1.167f);
 
         this.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
-<<<<<<< HEAD
         FindObjectOfType<SpawnPlayer>().SetStateRevivalBtn(true);
-=======
-        revival_btn.SetActive(true);
->>>>>>> b85552c7c69025e2b597fc5c338e56569f5c7ed7
         Destroy(this.gameObject);
         yield break;
     }
