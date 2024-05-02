@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-// Su dung de hien so luong tien nguoi choi nhan duoc khi giet quai bat ki
+// Su dung de hien so luong tien nguoi choi nhan duoc khi giet quai bat ki hoac nhat duoc cai gi do ma cong them xu
 public class AppearCoins : MonoBehaviour
 {
     [SerializeField] GameObject notifiAddCoin;

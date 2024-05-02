@@ -1,4 +1,4 @@
-using System.Linq;
+                                                                                              using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
@@ -20,6 +20,7 @@ public class BtnChangeText : MonoBehaviour
 
     LocalizeStringEvent localizeStringEvent;
 
+    string[] stateLevel = {"Easy", "Medium", "Hard"};
     int idText;
     int countText;
 
@@ -74,5 +75,7 @@ public class BtnChangeText : MonoBehaviour
         CheckText();
     }
 
-    //
+    public string GetStateLevel(){
+        return stateLevel[idText];
+    }
 }

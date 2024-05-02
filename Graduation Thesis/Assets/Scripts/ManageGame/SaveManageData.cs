@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class SaveManageData
@@ -19,5 +20,4 @@ public class SaveManageData
     public int idSkinSelected = 0;
 
     public int localeID = 0;
-
 }

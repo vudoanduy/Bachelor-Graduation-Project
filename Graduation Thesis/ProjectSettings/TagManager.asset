@@ -7,6 +7,13 @@ TagManager:
   - Enemy
   - Ground
   - HeadEnemy
+  - Bullet
+  - Trap
+  - Fruit
+  - Coin
+  - Instruction
+  - VirtualCam
+  - CutScene
   layers:
   - Default
   - TransparentFX
@@ -17,7 +24,7 @@ TagManager:
   - Ground
   - Enemy
   - Player
-  - 
+  - Coin
   - 
   - 
   - 

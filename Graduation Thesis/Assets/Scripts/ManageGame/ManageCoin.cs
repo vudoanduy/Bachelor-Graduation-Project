@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ManageCoin : MonoBehaviour
@@ -10,22 +11,17 @@ public class ManageCoin : MonoBehaviour
 
         FindFirstObjectByType<ChangeTextCoin>().UpdateText();
 
-        if(GameObject.FindFirstObjectByType<ManageCoin>() != this){
-            Destroy(GameObject.FindFirstObjectByType<ManageCoin>().gameObject);
+        if(FindFirstObjectByType<ManageCoin>() != this){
+            Destroy(FindFirstObjectByType<ManageCoin>().gameObject);
             return;
         }   
     }
 
-    #region TestXu
-
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.U)){
-            AddCoin(10000);
+        if(Input.GetKeyDown(KeyCode.O)){
+            AddCoin(1000);
         }
     }
-
-    #endregion
-
 
     #region Interact with Coin
     // Kiem tra xem so xu co du de mua hay khong

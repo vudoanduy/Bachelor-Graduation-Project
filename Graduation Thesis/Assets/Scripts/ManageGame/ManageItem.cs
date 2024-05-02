@@ -69,8 +69,8 @@ public class ManageItem : MonoBehaviour
 
         SetUpItem();
 
-        if(GameObject.FindFirstObjectByType<ManageItem>() != this){
-            Destroy(GameObject.FindFirstObjectByType<ManageItem>().gameObject);
+        if(FindFirstObjectByType<ManageItem>() != this){
+            Destroy(FindFirstObjectByType<ManageItem>().gameObject);
             return;
         }
     }

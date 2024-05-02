@@ -1,44 +1,74 @@
 using Cinemachine;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("Virtual Camera")]
-    [SerializeField] CinemachineVirtualCamera cam2D;
 
     [Header("Set Skin Move")]
     [SerializeField] RuntimeAnimatorController[] playerController;
+    [SerializeField] GameObject ghostResources;
+
+    [Header("Parameters")]
+    [SerializeField] private int speed = 5;
+    [SerializeField] private int force = 10;
+    [SerializeField] private int maxJump = 0;
+    [SerializeField] private int countMaxToSpawnGhost = 6;
 
     Rigidbody2D rb;
     Animator anim;
     PlayerColision playerColision;
+    SpriteRenderer spriteRenderer;
+    ParticleControllers particleControllers;
+    CinemachineVirtualCamera cam2D;
 
     Vector3 scalePlayer;
-
-    [Header("Parameters")]
-    public int speed = 5, force = 10;
-    public int maxJump = 0;
     
     protected int countJump = 0;
 
-    bool prevPressLeft, prevPressRight;
+    private int defaultSpeed, defaultForce, defaultMaxJump;
+    private int countToSpawnGhost = 0;
+    private float countTime = 0;
+    bool prevPressLeft, prevPressRight, isFlip, isTurnOnGhost;
     
     //
     private void Start(){
         SaveManage.Instance.LoadGame();
         scalePlayer = this.transform.localScale;
+        SetDefaultParameters();
 
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         playerColision = this.GetComponent<PlayerColision>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
+        cam2D = GameObject.Find("ManageCamera").transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
+        cam2D.Follow = this.transform;
 
         SetPlayerController(SaveManage.Instance.GetIDSkinSelected());
     }
 
     private void Update(){
+        countTime += Time.deltaTime;
+        if(isTurnOnGhost){
+            countToSpawnGhost++;
+            if(countToSpawnGhost > countMaxToSpawnGhost){
+                GameObject newGhost = Instantiate(ghostResources);
+                newGhost.GetComponent<Ghost>().CreateGhost(spriteRenderer.sprite, this.transform, isFlip);
+                countToSpawnGhost = 0;
+            }
+        }
         CheckRun();
         CheckJump();
         CheckSliding();
+
+        if(Input.GetKeyDown(KeyCode.M)){
+            speed = 0;
+            force = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.N)){
+            speed = defaultSpeed;
+            force = defaultForce;
+        }
     }
 
     // An di chuyen ben nao thi qua ben do
@@ -71,12 +101,14 @@ public class PlayerMove : MonoBehaviour
     }
 
     protected void RunRight(){
+        isFlip = false;
         rb.velocity = new Vector2(speed, rb.velocity.y);
         this.transform.localScale = scalePlayer;
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.4f;
     }
 
     protected void RunLeft(){
+        isFlip = true;
         rb.velocity = new Vector2(-speed, rb.velocity.y);
         this.transform.localScale = new Vector3(-scalePlayer.x, scalePlayer.y, scalePlayer.z);
         cam2D.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = 0.6f;
@@ -119,7 +151,15 @@ public class PlayerMove : MonoBehaviour
     }
 
     protected void Jump(){
-        rb.velocity = new Vector2(rb.velocity.x,force);
+        rb.velocity = new Vector2(rb.velocity.x, force);
+
+        if(particleControllers == null){
+            particleControllers = FindObjectOfType<ParticleControllers>();
+        }
+
+        if(!playerColision.GetIsGround()){
+            particleControllers.JumpParticlePlay();
+        }
     }
 
     protected void DelayCountJump(){
@@ -141,11 +181,18 @@ public class PlayerMove : MonoBehaviour
         bool isSliding = playerColision.GetIsSliding();
 
         if(isSliding){
+            if(particleControllers == null){
+                particleControllers = FindObjectOfType<ParticleControllers>();
+            }
             countJump = 0;
             if(isGround){
                 anim.SetBool("isSliding", false);
             }
             if(!isGround){
+                if(rb.velocity.y < 0 && countTime > 0.1f){
+                    particleControllers.SlidingParticlePlay();
+                    countTime = 0;
+                }
                 anim.SetBool("isSliding", true);
             }
         } else {
@@ -158,4 +205,65 @@ public class PlayerMove : MonoBehaviour
     public void SetPlayerController(int idControl){
         anim.runtimeAnimatorController = playerController[idControl];
     }
+
+    #region Change parameters
+    // Cai gia tri mac dinh cho cac thong so
+    public void SetDefaultParameters(){
+        defaultSpeed = this.speed;
+        defaultForce = this.force;
+        defaultMaxJump = this.maxJump;
+    }
+
+    // Inc speed
+    public void IncreaseSpeed(float times,float timeInc){
+        isTurnOnGhost = true;
+        this.speed = (int)(this.speed * times);
+        Invoke(nameof(DefaultSpeed), timeInc);
+    }
+
+    private void DefaultSpeed(){
+        isTurnOnGhost = false;
+        this.speed = defaultSpeed;
+    }
+
+    // Inc force
+    public void IncreaseForce(float times,float timeInc){
+        this.force = (int)(this.force * times);
+        Invoke(nameof(DefaultForce), timeInc);
+    }
+
+    private void DefaultForce(){
+        this.force = defaultForce;
+    }
+
+    // Inc maxJump
+    public void IncreaseMaxJump(int times,float timeInc){
+        this.maxJump += times;
+        Invoke(nameof(DefaultMaxJump), timeInc);
+    }
+
+    private void DefaultMaxJump(){
+        this.maxJump = defaultMaxJump;
+    }
+
+    // Cho nhan vat dung yen trong 1 khoang thoi gian
+    public void IdlePlayer(float timeIdle){
+        speed = 0;
+        force = 0;
+        Invoke(nameof(DefaultAllParameter), timeIdle);
+    }
+
+    // Cho nhan vat dung yen khong gioi han thoi gian
+    public void IdlePlayer(){
+        speed = 0;
+        force = 0;
+    }
+
+    private void DefaultAllParameter(){
+        Debug.Log("Hoi phuc lai toc do chay");
+        speed = defaultSpeed;
+        force = defaultForce;
+    }
+    #endregion
+
 }
