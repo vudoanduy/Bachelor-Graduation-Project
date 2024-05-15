@@ -1203,13 +1203,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 138324796}
-        m_TargetAssemblyTypeName: MovePage, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: SetUpLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2896,6 +2896,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &366798826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,6 +3089,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5229,6 +5253,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &651567963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6924,6 +6960,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &760195261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7239,6 +7287,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8583,6 +8643,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1055045426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8764,6 +8836,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9119,6 +9203,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9592,6 +9688,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1096945549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9779,6 +9887,8 @@ MonoBehaviour:
   coinCurrent: 10000
   idSkinSelected: 0
   localeID: 0
+  idLevelMax: 1
+  idStateLevelMax: 0
 --- !u!114 &1134906859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10175,6 +10285,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11158,63 +11280,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 15000, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1392863565
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1392863567}
-  - component: {fileID: 1392863566}
-  - component: {fileID: 1392863568}
-  m_Layer: 0
-  m_Name: ManageTimeChest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1392863566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392863565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8c3567ad405434a997f1057c22a0e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1392863567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392863565}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.976044, y: 0.87233675, z: -10.1180525}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1392863568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392863565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f48c199be993e9a46ad8df0d5c2408fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1423746359
 GameObject:
   m_ObjectHideFlags: 0
@@ -11313,6 +11378,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11652,6 +11729,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12032,6 +12121,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13151,6 +13252,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1568456727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13570,6 +13683,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -15593,6 +15718,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1848286096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17215,6 +17352,18 @@ MonoBehaviour:
       - m_Target: {fileID: 679665570}
         m_TargetAssemblyTypeName: BtnChangeText, Assembly-CSharp
         m_MethodName: DefautText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 486522759}
+        m_TargetAssemblyTypeName: ManageLevel, Assembly-CSharp
+        m_MethodName: CheckLevelCurrent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22585,5 +22734,4 @@ SceneRoots:
   - {fileID: 181803783}
   - {fileID: 2582836300295138424}
   - {fileID: 486522760}
-  - {fileID: 1392863567}
   - {fileID: 1464226681}

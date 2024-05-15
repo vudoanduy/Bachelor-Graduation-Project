@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4dc1a1113674162478d4df12a3242b66
+guid: d025a0f4c193059409299e85de0fad16
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hit (16x32)_0
+      name: Checkpoint (No Flag)_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 19
         y: 0
-        width: 16
-        height: 15
+        width: 9
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2d91c8c5ad0d5b49bc0f69927eab201
-      internalID: -1660611085
+      spriteID: 3a283f7491302ea4d8d3111b47df3e7f
+      internalID: -1674935365
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hit (16x32)_0: -1660611085
+      Checkpoint (No Flag)_0: -1674935365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

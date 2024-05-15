@@ -973,7 +973,7 @@ PrefabInstance:
       objectReference: {fileID: 7827470447151488021, guid: 45cd8ed286988b442ad72cbff082faec, type: 3}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_RefCount
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_RefCount
@@ -981,31 +981,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_RefCount
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[3].m_RefCount
-      value: 146
+      value: 149
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[4].m_RefCount
-      value: 668
+      value: 669
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[5].m_RefCount
-      value: 146
+      value: 147
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[6].m_RefCount
-      value: 24
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_RefCount
-      value: 139
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[8].m_RefCount
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4861766091073670715, guid: 5454e90689a3e264b9c933e8aed369de, type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileSpriteIndex
@@ -7845,6 +7845,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snail (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8868,7 +8876,7 @@ Transform:
   m_GameObject: {fileID: 612318628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.116093874, y: -21.6, z: -9.8233795}
+  m_LocalPosition: {x: 0.117617846, y: -21.6, z: -9.8233795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9446,6 +9454,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snail (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9607,6 +9623,10 @@ PrefabInstance:
     - target: {fileID: 2140855998335703609, guid: 568534c6cba2fb044a9283a02bf3162f, type: 3}
       propertyPath: m_Name
       value: Rino
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140855998335703609, guid: 568534c6cba2fb044a9283a02bf3162f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8295555056208931643, guid: 568534c6cba2fb044a9283a02bf3162f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12628,6 +12648,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snail (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14710,6 +14738,14 @@ PrefabInstance:
     - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
       propertyPath: m_Name
       value: Snail
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283797991529709821, guid: 921642ccbe5e92b45a815bf3ffa33ed1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Khi nguoi choi nhat qua kiwi, nguoi choi se duoc tang toc chay tam thoi trong thoi gian cho truoc
+// Khi nguoi choi nhat qua Melon, nguoi choi se duoc tang luc nhay tam thoi trong thoi gian cho truoc
 public class Melon : MonoBehaviour, IFruit
 {
     [Tooltip("Enter the jump force increase in percentage")]

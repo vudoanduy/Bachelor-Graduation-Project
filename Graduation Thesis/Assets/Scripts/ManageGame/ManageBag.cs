@@ -208,7 +208,7 @@ public class ManageBag : MonoBehaviour
     // bam nut su dung trong tui do
     public void UseSlot(){
         if(markSlots[this.idSlot] == 0){
-            manageSkin.SetPointerSkin(posSlots[this.idSlot]);
+            FindObjectOfType<ManageSkin>().SetPointerSkin(posSlots[this.idSlot]);
             if(SceneManager.GetActiveScene().name != "Menu"){
                 FindObjectOfType<PlayerMove>().SetPlayerController(posSlots[this.idSlot]);
                 FindObjectOfType<ChangeIcon>().ChangeIconPlayer(posSlots[this.idSlot]);

@@ -18,6 +18,7 @@ public class ManageLevel : MonoBehaviour
         SaveManage.Instance.LoadGame();
         idLevelMax = SaveManage.Instance.GetIDLevelMax();
         idStateLevelMax = SaveManage.Instance.GetIDStateLevelMax();
+        
         if (FindFirstObjectByType<ManageLevel>() != this)
         {
             Destroy(FindFirstObjectByType<ManageLevel>().gameObject);

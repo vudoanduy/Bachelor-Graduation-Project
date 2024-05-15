@@ -110,14 +110,11 @@ public class SpawnPlayer : MonoBehaviour
 
     //
     public void SetStateRevivalBtn(bool stateBtn){
-        // if(!stateBtn){
-        //     if(revival_btn.activeSelf){
-        //         revival_btn.SetActive(stateBtn);
-        //     }
-        // } else {
-        //     revival_btn.SetActive(stateBtn);
-        // }
         revival_btn.SetActive(stateBtn);
+    }
+
+    public void SetPosSpawnPlayer(Vector3 newPosSpawn){
+        this.startPos = newPosSpawn;
     }
 }
 

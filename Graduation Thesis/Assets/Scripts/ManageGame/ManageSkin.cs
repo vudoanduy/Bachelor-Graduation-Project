@@ -79,7 +79,7 @@ public class ManageSkin : MonoBehaviour
             return;
         }
 
-        // if(Find)
+        // isFirst = true;
     }
 
     #region Set Up

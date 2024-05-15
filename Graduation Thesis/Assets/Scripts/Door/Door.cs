@@ -46,10 +46,12 @@ public class Door : MonoBehaviour
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1);
         yield return new WaitForSeconds(0.5f);
 
+        // keo nguoi choi vao trung tam cua
         LeanTween.move(player, this.transform.position, 0.5f);
         yield return new WaitUntil(() => player.transform.position == this.transform.position);
         yield return new WaitForSeconds(0.5f);
 
+        // Thu nho nguoi choi
         LeanTween.scale(player, Vector2.zero, 1f);
         yield return new WaitUntil(() => player.transform.localScale.x == 0);
         yield return new WaitForSeconds(0.5f);
