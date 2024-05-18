@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// 
 public class CheckHit<T> where T: Enemy
 {
     private T data;
