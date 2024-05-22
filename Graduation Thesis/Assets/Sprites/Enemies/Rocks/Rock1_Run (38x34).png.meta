@@ -39,7 +39,7 @@ TextureImporter:
       213: 1207629505254439147
     second: Rock1_Run (38x34)_11
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -393,9 +393,9 @@ TextureImporter:
       name: Rock1_Run (38x34)_11
       rect:
         serializedVersion: 2
-        x: 455
+        x: 494
         y: 0
-        width: 77
+        width: 38
         height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -419,7 +419,7 @@ TextureImporter:
         width: 38
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -427,6 +427,27 @@ TextureImporter:
       bones: []
       spriteID: 8a369f248b00f9a468d215849517d31e
       internalID: 357863463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock1_Run (38x34)_13
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 0
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 492d582c592a82b4294cad0ba6c10427
+      internalID: 1682415721
       vertices: []
       indices: 
       edges: []
@@ -447,6 +468,7 @@ TextureImporter:
       Rock1_Run (38x34)_10: 2343870059448117283
       Rock1_Run (38x34)_11: 1207629505254439147
       Rock1_Run (38x34)_12: 357863463
+      Rock1_Run (38x34)_13: 1682415721
       Rock1_Run (38x34)_2: 3703273359453623547
       Rock1_Run (38x34)_3: -9001522325175290534
       Rock1_Run (38x34)_4: -8183051303927691493
