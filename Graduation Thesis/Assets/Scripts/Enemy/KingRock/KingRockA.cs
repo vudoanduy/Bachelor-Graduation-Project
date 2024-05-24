@@ -94,14 +94,13 @@ public class KingRockNormal : MonoBehaviour
                 rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             }
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, 30);
-            
+
             if(playerColision.GetIsHeadEnemy()){
                 if(kingRockNormal.IsGetDamage){
                     kingRockNormal.IsGetDamage = false;
                     StartCoroutine(checkHit.HitDamage(0.1f, playerInfo.GetDamageBase()));
                     if(kingRockNormal.HP == 0){
                         int coin = kingRockNormal.RandomCoin(kingRockNormal.MinCoin, kingRockNormal.MaxCoin);
-
                         manageCoin.AddCoin(coin);
                         appearCoins.AppearNotifi(coin, this.transform);
 
