@@ -20,12 +20,15 @@ public class BtnChangeText : MonoBehaviour
 
     LocalizeStringEvent localizeStringEvent;
 
-    string[] stateLevel = {"Easy", "Medium", "Hard"};
+    [Header("Check if u don't want button to loop endlessly")]
+    public bool isSetOffButton;
+    [Header("Check if u only use 1 btn")]
+    [SerializeField] private bool isOnlyOneButton;
+
+    readonly string[] stateLevel = {"Easy", "Medium", "Hard"};
     int idText;
     int countText;
 
-    [Header("Check if u don't want button to loop endlessly")]
-    public bool isSetOffButton; 
 
     private void Start(){
         idText = 0;
@@ -33,8 +36,10 @@ public class BtnChangeText : MonoBehaviour
 
         localizeStringEvent = this.GetComponent<LocalizeStringEvent>();
 
-        button[0].interactable = false;
-        button[1].interactable = false;
+        if(!isOnlyOneButton){
+            button[0].interactable = false;
+            button[1].interactable = false;
+        }
     } 
 
     // Xet dieu kien de thay doi text lap lai hay khong

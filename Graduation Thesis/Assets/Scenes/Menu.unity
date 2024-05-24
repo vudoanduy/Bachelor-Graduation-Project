@@ -5769,6 +5769,7 @@ MonoBehaviour:
   - {fileID: 1636462451}
   - {fileID: 1096945548}
   isSetOffButton: 1
+  isOnlyOneButton: 0
   references:
     version: 2
     RefIds: []
@@ -21500,6 +21501,10 @@ PrefabInstance:
       propertyPath: targetPage
       value: 
       objectReference: {fileID: 2123035813}
+    - target: {fileID: 6376084880581523381, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: isOnlyOneButton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6640816039359274926, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
       propertyPath: m_Name
       value: Menu/Setting
@@ -21512,6 +21517,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1875227221}
+    - target: {fileID: 7609831053586941784, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 191888850944
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609831053586941784, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:215f961a2432b5a41839c80fc266a95d
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678982168631152477, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 191888850944
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678982168631152477, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:215f961a2432b5a41839c80fc266a95d
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102914493254163038, guid: fea493b9a43fa1e41af75b880496372d, type: 3}
+      propertyPath: isOnlyOneButton
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
