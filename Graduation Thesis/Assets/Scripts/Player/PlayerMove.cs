@@ -1,5 +1,6 @@
 using Cinemachine;
 using ExitGames.Client.Photon.StructWrapping;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -60,15 +61,6 @@ public class PlayerMove : MonoBehaviour
         CheckRun();
         CheckJump();
         CheckSliding();
-
-        if(Input.GetKeyDown(KeyCode.M)){
-            speed = 0;
-            force = 0;
-        }
-        if(Input.GetKeyDown(KeyCode.N)){
-            speed = defaultSpeed;
-            force = defaultForce;
-        }
     }
 
     // An di chuyen ben nao thi qua ben do

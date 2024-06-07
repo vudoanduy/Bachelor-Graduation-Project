@@ -22,7 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dbdd8f22ceef09c459dc6e2115245ca4
     m_Address: Menu_Shop_en

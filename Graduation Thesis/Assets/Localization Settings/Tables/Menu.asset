@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Menu
   m_EditorClassIdentifier: 
   m_SharedTableData: {fileID: 11400000, guid: fdbff923d2649334885c9cf37f229f12, type: 2}
-  m_Tables: []
+  m_Tables:
+  - {fileID: 11400000, guid: 4f65d21a3a784c14bb6cae3ba2f4ae9c, type: 2}
+  - {fileID: 11400000, guid: 95565d99a9c51d44ebcc6c3778905514, type: 2}
   m_Extensions: []
   m_Group: String Table
   references:

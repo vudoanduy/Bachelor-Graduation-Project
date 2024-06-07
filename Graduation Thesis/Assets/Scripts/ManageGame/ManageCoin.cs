@@ -18,9 +18,9 @@ public class ManageCoin : MonoBehaviour
     }
 
     private void Update(){
-        // if(Input.GetKeyDown(KeyCode.O)){
-        //     AddCoin(1000);
-        // }
+        if(Input.GetKeyDown(KeyCode.O)){
+            AddCoin(1000);
+        }
     }
 
     #region Interact with Coin

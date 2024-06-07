@@ -17,12 +17,16 @@ public class Switch : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player")){
             if(!isOn){
-                StartCoroutine(CutSceneMoveBridge());
+                CutSceneMoveBridge();
             }
         }
     }
 
-    IEnumerator CutSceneMoveBridge(){
+    public void CutSceneMoveBridge(){
+        StartCoroutine(CutScene());
+    }
+
+    IEnumerator CutScene(){
         isOn = true;
         switchOn.SetActive(true);
         switchOff.SetActive(false);

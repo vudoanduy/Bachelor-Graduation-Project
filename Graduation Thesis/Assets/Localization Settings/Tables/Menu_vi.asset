@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: "Quay v\u1EC1"
     m_Metadata:
       m_Items: []
+  - m_Id: 30275400109621248
+    m_Localized: "Ph\xF2ng chat"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Home
     m_Metadata:
       m_Items: []
+  - m_Id: 30275400109621248
+    m_Localized: Room Chat
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

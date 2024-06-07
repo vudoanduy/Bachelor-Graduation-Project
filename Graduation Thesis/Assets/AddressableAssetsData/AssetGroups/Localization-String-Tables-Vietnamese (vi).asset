@@ -22,7 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-vi
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f73314f6d93a0d245bd0e9b9e6f7a621
     m_Address: Menu_Shop_vi

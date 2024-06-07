@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: Home
     m_Metadata:
       m_Items: []
+  - m_Id: 30275400109621248
+    m_Key: Room Chat
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

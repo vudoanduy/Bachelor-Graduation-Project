@@ -4,21 +4,26 @@ public class KingRockMovement : MonoBehaviour
 {
     KingRockNormal kingRockNormal;
 
+    Animator anim;
     Vector3 scaleKingRock;
     Rigidbody2D rbKingRock;
 
     private float speedMoveKingRock;
+    private bool isMove = true;
 
     private void Start(){
         kingRockNormal = this.GetComponent<KingRockNormal>();
         rbKingRock = this.GetComponent<Rigidbody2D>();
+        anim = this.GetComponent<Animator>();
 
         scaleKingRock = this.transform.localScale;
         speedMoveKingRock = kingRockNormal.GetMoveSpeedKingRock();
     }
 
     private void Update(){
-        MoveOfPhaseOne();
+        if(isMove){
+            MoveOfPhaseOne();
+        }
     }
 
     private void MoveOfPhaseOne(){
@@ -30,4 +35,12 @@ public class KingRockMovement : MonoBehaviour
         speedMoveKingRock *= -1;
         this.transform.localScale = scaleKingRock;
     }
+
+    #region Set & Get
+    public void SetBoolIsMove(bool isMove){
+        this.isMove = isMove;
+        anim.SetBool("isMove", isMove);
+    }
+
+    #endregion
 }

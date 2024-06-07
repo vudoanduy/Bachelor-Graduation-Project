@@ -130,6 +130,9 @@ public class PlayerInfo : MonoBehaviour
     #endregion
 
     #region Get Info
+    public int GetHpCurrent(){
+        return this.hpCurrent;
+    }
 
     public int GetHPPlayer(){
         return this.hpPlayer;

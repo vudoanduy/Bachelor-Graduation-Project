@@ -163,7 +163,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DuyDC.BachelorGraduationProject
-    Standalone: com.DefaultCompany.2DProject
+    Standalone: com.DuyDC.Bachelor-Graduation-Project
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -235,6 +235,7 @@ PlayerSettings:
   iOSMetalForceHardShadows: 0
   metalEditorSupport: 1
   metalAPIValidation: 1
+  metalCompileShaderBinary: 0
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
   appleDeveloperTeamID: 
